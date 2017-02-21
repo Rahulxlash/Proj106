@@ -26,6 +26,7 @@ public class create_user_activity extends AppCompatActivity {
             }
         });
     }
+
   public class ImageAdapter extends BaseAdapter {
     private Context mcontext;
       public ImageAdapter(Context c) {
@@ -55,4 +56,5 @@ public class create_user_activity extends AppCompatActivity {
             R.drawable.prof_ico_6 };
 
   }
+
 }

@@ -12,11 +12,30 @@
         <item name="android:windowBackground">@color/windowBackground</item>
     </style>
 
-<style name="title">
-    <item name="android:fontFamily">cursive</item>
-    <item name="android:textSize">40sp</item>
-    <item name="android:textColor">@color/textColorPrimary</item>
-</style>
+    <style name="title">
+        <item name="android:fontFamily">serif-monospace</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="label">
+        <item name="android:fontFamily">serif-monospace</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/labelColor</item>
+    </style>
+
+    <style name="text_input">
+        <item name="android:fontFamily">casual</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/inputtext</item>
+    </style>
+    <style name="button_profile">
+        <item name="android:fontFamily">serif-monospace</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/button</item>
+
+    </style>
 
 
 </resources>

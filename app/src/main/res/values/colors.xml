@@ -3,7 +3,12 @@
     <color name="colorPrimary">#607D8B</color>
     <color name="colorPrimaryDark">#455A64</color>
     <color name="colorAccent">#FF5722</color>
-    <color name="textColorPrimary">#E1F5FE</color>
+    <color name="textColorPrimary">#fcfbfb</color>
     <color name="textColor">#fff</color>
     <color name="windowBackground">#90A4AE</color>
+    <color name="labelColor">#f1eeee</color>
+    <color name="inputtext">#ffffff</color>
+    <color name="blue">#709aca</color>
+    <color name="transparent">#f2ecec</color>
+    <color name="button">#5c6e74</color>
 </resources>

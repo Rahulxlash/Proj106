@@ -48,8 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
-
-        if (Profile.getCurrentProfile().getId().isEmpty()) {
+        if (Profile.getCurrentProfile() == null) {
             loginButton = (LoginButton) findViewById(R.id.login_button);
 
             loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -71,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
 //                info.setText("Login attempt failed.");
                 }
             });
-        }else{
+        } else {
             Intent intent = new Intent(mContext, create_user_activity.class);
             startActivity(intent);
         }

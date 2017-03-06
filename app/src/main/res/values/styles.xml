@@ -14,25 +14,25 @@
 
     <style name="title">
         <item name="android:fontFamily">serif-monospace</item>
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">100sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/textColorPrimary</item>
     </style>
 
     <style name="label">
-        <item name="android:fontFamily">serif-monospace</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@string/user_name</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/labelColor</item>
     </style>
 
     <style name="text_input">
-        <item name="android:fontFamily">casual</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@string/user_name</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/inputtext</item>
     </style>
     <style name="button_profile">
-        <item name="android:fontFamily">serif-monospace</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@string/user_name</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/button</item>
 
     </style>

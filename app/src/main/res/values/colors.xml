@@ -3,9 +3,9 @@
     <color name="colorPrimary">#607D8B</color>
     <color name="colorPrimaryDark">#455A64</color>
     <color name="colorAccent">#FF5722</color>
-    <color name="textColorPrimary">#fcfbfb</color>
+    <color name="textColorPrimary">#e523e4eb</color>
     <color name="textColor">#fff</color>
-    <color name="windowBackground">#90A4AE</color>
+    <color name="windowBackground">#bf022e30</color>
     <color name="labelColor">#f1eeee</color>
     <color name="inputtext">#ffffff</color>
     <color name="blue">#709aca</color>

@@ -1,5 +1,7 @@
 package REST.Service;
 
+import REST.Model.User;
+import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
@@ -10,6 +12,6 @@ import retrofit.http.Path;
 public interface AuthService {
 
     @GET("/user/getByFBId/{value}")
-    public void getUserByFBId(@Path("id") Integer FbId);
+    public void getUserByFBId(@Path("value") Integer FbId, Callback<User> callback);
 
 }

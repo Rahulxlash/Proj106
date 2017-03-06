@@ -7,22 +7,52 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class create_user_activity extends AppCompatActivity {
+import static com.cricketta.league.R.id.editText;
 
+public class create_user_activity extends AppCompatActivity {
+    private Button btnCreateUser;
+    private EditText txtUserName;
+    private int selectedImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user_activity);
+        btnCreateUser = (Button)findViewById(R.id.btn_create_profile);
+        txtUserName = (EditText)findViewById(editText);
+        selectedImage = -1;
+        btnCreateUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = "";
+
+                if(txtUserName.getText().toString().equals("") )
+                {
+                     msg = "Please enter Username";
+                }
+                if(selectedImage == -1)
+                {
+                    msg = msg + (msg.equals("")?"Please select profile icon":", Please select profile icon");
+                }
+                if(msg!="") {
+                    Toast toast = Toast.makeText(create_user_activity.this, msg, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        });
+
         GridView gridView = (GridView)findViewById(R.id.gridView);
         gridView.setAdapter(new ImageAdapter(this));
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id ){
-                Toast.makeText(create_user_activity.this, " " + position, Toast.LENGTH_SHORT).show();
+                selectedImage = position;
+
             }
         });
     }
@@ -54,6 +84,7 @@ public class create_user_activity extends AppCompatActivity {
             R.drawable.prof_ico_4,
             R.drawable.prof_ico_5,
             R.drawable.prof_ico_6 };
+
 
   }
 

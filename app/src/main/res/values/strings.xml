@@ -6,4 +6,10 @@
     <string name="create_profile">create profile</string>
     <string name="minLengthUserName">Minimum 6 characters required.</string>
     <string name="user_name_duplicate">This User name is not available.</string>
+    <string name="title_activity_main_">Cricketta</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

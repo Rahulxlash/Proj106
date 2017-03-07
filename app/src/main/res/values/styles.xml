@@ -24,7 +24,11 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/labelColor</item>
     </style>
-
+    <style name="labelError">
+        <item name="android:fontFamily">@string/user_name</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#f94b4b</item>
+    </style>
     <style name="text_input">
         <item name="android:fontFamily">@string/user_name</item>
         <item name="android:textSize">15sp</item>

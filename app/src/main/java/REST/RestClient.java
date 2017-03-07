@@ -12,7 +12,7 @@ import retrofit.converter.GsonConverter;
  */
 
 public class RestClient {
-    private static final String BASE_URL = "http://iris-csg-653/Cricketta.API/api/";
+    private static final String BASE_URL = "http://192.168.1.104/Cricketta.API/api/";
     private AuthService authService;
 
     public RestClient() {

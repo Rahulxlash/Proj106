@@ -4,4 +4,6 @@
     <string name="user_name">User name</string>
     <string name="select_profile_icon">Select Profile Icon</string>
     <string name="create_profile">create profile</string>
+    <string name="minLengthUserName">Minimum 6 characters required.</string>
+    <string name="user_name_duplicate">This User name is not available.</string>
 </resources>

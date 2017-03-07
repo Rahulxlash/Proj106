@@ -14,4 +14,6 @@ public interface AuthService {
     @GET("/user/getByFBId/{value}")
     public void getUserByFBId(@Path("value") Integer FbId, Callback<User> callback);
 
+    @GET("/user/getByUserName/{value}")
+    public void getUserByUserName(@Path("value") String UserName, Callback<User> callback);
 }

@@ -28,12 +28,19 @@ import com.facebook.login.widget.LoginButton;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class LoginActivity extends AppCompatActivity {
+import REST.Model.User;
+import REST.RestClient;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
+public class LoginActivity extends BaseActivity {
     private TextView info;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     Context mContext;
     TextView tv1;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -51,8 +58,8 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
-        tv1=(TextView)findViewById(R.id.title);
-        Typeface face= Typeface.createFromAsset(getAssets(), "MarioNett.ttf");
+        tv1 = (TextView) findViewById(R.id.title);
+        Typeface face = Typeface.createFromAsset(getAssets(), "MarioNett.ttf");
         tv1.setTypeface(face);
         if (Profile.getCurrentProfile() == null) {
             loginButton = (LoginButton) findViewById(R.id.login_button);
@@ -60,29 +67,44 @@ public class LoginActivity extends AppCompatActivity {
             loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
-                    Toast toast = Toast.makeText(mContext, loginResult.getAccessToken().getUserId(), Toast.LENGTH_SHORT);
-                    toast.show();
-                    Intent intent = new Intent(mContext, create_user_activity.class);
-                    startActivity(intent);
+                    showToast(loginResult.getAccessToken().getUserId());
+                    isUserRegistered(loginResult.getAccessToken().getUserId());
                 }
 
                 @Override
                 public void onCancel() {
-//                info.setText("Login attempt canceled.");
-                    Toast toast = Toast.makeText(mContext, "Login cancelled by user.", Toast.LENGTH_SHORT);
-                    toast.show();
+                    showToast("Login Cancelled.");
                 }
 
                 @Override
                 public void onError(FacebookException e) {
-//                info.setText("Login attempt failed.");
-                    Toast toast = Toast.makeText(mContext, "Error in logging in to the application.", Toast.LENGTH_SHORT);
-                    toast.show();
+                    showToast("Login attempt failed.");
                 }
             });
         } else {
-            Intent intent = new Intent(mContext, create_user_activity.class);
-            startActivity(intent);
+            Log.d("retroUID",Profile.getCurrentProfile().getId());
+            isUserRegistered(Profile.getCurrentProfile().getId());
         }
+    }
+
+    private void isUserRegistered(String userId) {
+        RestClient client = new RestClient();
+        client.AuthService().getUserByFBId(userId, new Callback<User>() {
+            @Override
+            public void success(User user, Response response) {
+                if (user == null) {
+                    Intent intent = new Intent(mContext, create_user_activity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(mContext, Main_Activity.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                showToast("Error validating User");
+            }
+        });
     }
 }

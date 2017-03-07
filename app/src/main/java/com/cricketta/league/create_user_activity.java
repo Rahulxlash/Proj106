@@ -1,6 +1,7 @@
 package com.cricketta.league;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.Profile;
+
 import REST.Model.User;
 import REST.RestClient;
 import pl.droidsonroids.gif.GifTextView;
@@ -34,6 +37,7 @@ public class create_user_activity extends BaseActivity {
     private int selectedImage;
     private GifTextView gifView;
     private TextView minLength;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class create_user_activity extends BaseActivity {
         txtUserName = (EditText) findViewById(editText);
         gifView = (GifTextView) findViewById(R.id.spinnerIco);
         minLength = (TextView)findViewById(R.id.minlength);
+        mContext = this;
         selectedImage = -1;
 
         txtUserName.addTextChangedListener(new TextWatcher() {
@@ -109,15 +114,18 @@ public class create_user_activity extends BaseActivity {
                 }
 
                 RestClient client = new RestClient();
-                client.AuthService().getUserByFBId(122323434, new Callback<User>() {
+                client.AuthService().createUser(txtUserName.getText().toString(), Profile.getCurrentProfile().getId(), selectedImage, new Callback<User>() {
                     @Override
                     public void success(User user, Response response) {
-                        Log.d("Retro", response.getBody().toString());
+                        Log.d("retro", "User Registered" + Profile.getCurrentProfile().getId());
+                        Intent intent = new Intent(mContext, Main_Activity.class);
+                        startActivity(intent);
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
                         Log.d("Retro", error.getMessage());
+                        showToast("Error Registering User.");
                     }
                 });
             }

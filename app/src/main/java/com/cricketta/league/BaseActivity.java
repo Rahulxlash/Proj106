@@ -9,6 +9,12 @@ import android.widget.Toast;
  */
 
 public class BaseActivity extends AppCompatActivity {
+    private static final String USER_NAME = "USER_NAME";
+    private static final String USER_ID = "USER_ID";
+    private static final String FACEBOOK_ID = "FACEBOOK_ID";
+    private static final String PROFILE_IMAGE = "PROFILE_IMAGE";
+
+
     public void showToast(String message)
     {
         Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);

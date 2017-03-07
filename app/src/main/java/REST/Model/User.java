@@ -8,7 +8,7 @@ import org.parceler.Parcel;
 @Parcel
 public class User {
     private Integer userId;
-    private Integer facebookId;
+    private String facebookId;
     private String userName;
     private Integer profileImage;
 }

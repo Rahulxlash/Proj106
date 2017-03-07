@@ -2,7 +2,10 @@ package REST.Service;
 
 import REST.Model.User;
 import retrofit.Callback;
+import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Path;
 
 /**
@@ -12,8 +15,13 @@ import retrofit.http.Path;
 public interface AuthService {
 
     @GET("/user/getByFBId/{value}")
-    public void getUserByFBId(@Path("value") Integer FbId, Callback<User> callback);
+    public void getUserByFBId(@Path("value") String FbId, Callback<User> callback);
 
     @GET("/user/getByUserName/{value}")
     public void getUserByUserName(@Path("value") String UserName, Callback<User> callback);
+
+    @FormUrlEncoded
+    @POST("/user/")
+    public void createUser(@Field("UserName") String UserName, @Field("FacebookId") String FacebookId, @Field("ProfileImage") int ProfileImage, Callback<User> callback);
+
 }

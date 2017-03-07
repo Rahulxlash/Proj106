@@ -11,4 +11,24 @@ public class User {
     private String facebookId;
     private String userName;
     private Integer profileImage;
+
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    public String getFacebookId()
+    {
+        return facebookId;
+    }
+
+    public int getProfileImage()
+    {
+        return profileImage;
+    }
+
+    public int getUserId()
+    {
+        return  userId;
+    }
 }

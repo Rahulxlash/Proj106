@@ -17,11 +17,6 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import static android.support.v7.widget.AppCompatDrawableManager.get;
-import static com.cricketta.league.BaseActivity.FACEBOOK_ID;
-import static com.cricketta.league.BaseActivity.MyPref;
-import static com.cricketta.league.BaseActivity.PROFILE_IMAGE;
-
 public class Main_Activity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView user_information;
@@ -33,7 +28,6 @@ public class Main_Activity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_);
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -121,9 +115,11 @@ public class Main_Activity extends BaseActivity
     }
 
     private void setProfileImage(View view) {
+        user_information = (TextView)view.findViewById(R.id.txtUserName);
+        user_information.setText(UserName);
+
         ImgVwProfileImage = (ImageView) view.findViewById(R.id.profileImage);
-        user_information = (TextView) view.findViewById(R.id.txtUserName);
-        user_information.setText(UserName.toString());
+
         switch (ProfileImage) {
             case "0":
                 ImgVwProfileImage.setImageResource(R.drawable.prof_ico_1);

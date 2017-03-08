@@ -2,6 +2,7 @@ package com.cricketta.league;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -96,6 +97,13 @@ public class LoginActivity extends BaseActivity {
                     Intent intent = new Intent(mContext, create_user_activity.class);
                     startActivity(intent);
                 } else {
+                    SharedPreferences sharedpreferences = getSharedPreferences(MyPref, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString(FACEBOOK_ID, user.getFacebookId());
+                    editor.putInt(USER_ID, user.getUserId());
+                    editor.putString(USER_NAME, user.getUserName());
+                    editor.putString(PROFILE_IMAGE, Integer.toString(user.getProfileImage()));
+                    editor.commit();
                     Intent intent = new Intent(mContext, Main_Activity.class);
                     startActivity(intent);
                 }
@@ -103,6 +111,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void failure(RetrofitError error) {
+                Log.e("retro",error.getMessage());
                 showToast("Error validating User");
             }
         });

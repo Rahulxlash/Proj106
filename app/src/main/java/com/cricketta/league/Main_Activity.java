@@ -1,5 +1,7 @@
 package com.cricketta.league;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,14 +14,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
-public class Main_Activity extends AppCompatActivity
+import static android.support.v7.widget.AppCompatDrawableManager.get;
+import static com.cricketta.league.BaseActivity.FACEBOOK_ID;
+import static com.cricketta.league.BaseActivity.MyPref;
+import static com.cricketta.league.BaseActivity.PROFILE_IMAGE;
+
+public class Main_Activity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+private TextView user_information;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_);
+        SharedPreferences mySharedpreprence = getSharedPreferences(MyPref, Context.MODE_PRIVATE);
+        String facebookId = mySharedpreprence.getString(FACEBOOK_ID,"");
+        int user_id = mySharedpreprence.getInt(USER_ID,0);
+        String user_name = mySharedpreprence.getString(USER_NAME,"");
+        String profile_image = mySharedpreprence.getString(PROFILE_IMAGE,"");
+        user_information = (TextView)findViewById(R.id.user_information);
+        user_information.setText(facebookId);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,6 +56,7 @@ public class Main_Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -98,4 +115,6 @@ public class Main_Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
+

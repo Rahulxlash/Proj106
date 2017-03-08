@@ -2,6 +2,7 @@ package com.cricketta.league;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+import static com.cricketta.league.R.id.activity_create_user_activity;
 import static com.cricketta.league.R.id.editText;
 import static com.cricketta.league.R.id.minlength;
 
@@ -177,5 +179,10 @@ public class create_user_activity extends BaseActivity {
 
 
     }
+    public void setBtnCreateUser(View View)
+    {
 
+
+
+    }
 }

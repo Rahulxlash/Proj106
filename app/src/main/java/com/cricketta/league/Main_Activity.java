@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import static android.support.v7.widget.AppCompatDrawableManager.get;
@@ -24,18 +25,14 @@ import static com.cricketta.league.BaseActivity.PROFILE_IMAGE;
 public class Main_Activity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView user_information;
+    private ImageView ImgVwProfileImage;
+    private String UserName, ProfileImage, FacebookId;
+    private int User_Id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_);
-        SharedPreferences mySharedpreprence = getSharedPreferences(MyPref, Context.MODE_PRIVATE);
-        String facebookId = mySharedpreprence.getString(FACEBOOK_ID, "");
-        int user_id = mySharedpreprence.getInt(USER_ID, 0);
-        String user_name = mySharedpreprence.getString(USER_NAME, "");
-        String profile_image = mySharedpreprence.getString(PROFILE_IMAGE, "");
-        user_information = (TextView) findViewById(R.id.user_information);
-        user_information.setText(facebookId);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,7 +54,8 @@ public class Main_Activity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        getPreferences();
+        setProfileImage(navigationView.getHeaderView(0));
     }
 
     @Override
@@ -117,5 +115,38 @@ public class Main_Activity extends BaseActivity
         return true;
     }
 
+    private void getPreferences() {
+        SharedPreferences mySharedpreprence = getSharedPreferences(MyPref, Context.MODE_PRIVATE);
+        FacebookId = mySharedpreprence.getString(FACEBOOK_ID, "");
+        User_Id = mySharedpreprence.getInt(USER_ID, 0);
+        UserName = mySharedpreprence.getString(USER_NAME, "");
+        ProfileImage = mySharedpreprence.getString(PROFILE_IMAGE, "");
+    }
+
+    private void setProfileImage(View view) {
+        ImgVwProfileImage = (ImageView) view.findViewById(R.id.profileImage);
+        user_information = (TextView)view.findViewById(R.id.txtUserName);
+        user_information.setText(UserName.toString());
+        switch (ProfileImage) {
+            case "0":
+                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_1);
+                break;
+            case "1":
+                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_2);
+                break;
+            case "2":
+                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_3);
+                break;
+            case "3":
+                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_4);
+                break;
+            case "4":
+                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_5);
+                break;
+            case "5":
+                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_6);
+                break;
+        }
+    }
 }
 

@@ -23,17 +23,18 @@ import static com.cricketta.league.BaseActivity.PROFILE_IMAGE;
 
 public class Main_Activity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-private TextView user_information;
+    private TextView user_information;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_);
         SharedPreferences mySharedpreprence = getSharedPreferences(MyPref, Context.MODE_PRIVATE);
-        String facebookId = mySharedpreprence.getString(FACEBOOK_ID,"");
-        int user_id = mySharedpreprence.getInt(USER_ID,0);
-        String user_name = mySharedpreprence.getString(USER_NAME,"");
-        String profile_image = mySharedpreprence.getString(PROFILE_IMAGE,"");
-        user_information = (TextView)findViewById(R.id.user_information);
+        String facebookId = mySharedpreprence.getString(FACEBOOK_ID, "");
+        int user_id = mySharedpreprence.getInt(USER_ID, 0);
+        String user_name = mySharedpreprence.getString(USER_NAME, "");
+        String profile_image = mySharedpreprence.getString(PROFILE_IMAGE, "");
+        user_information = (TextView) findViewById(R.id.user_information);
         user_information.setText(facebookId);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

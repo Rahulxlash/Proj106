@@ -34,6 +34,7 @@ public class Main_Activity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_);
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -96,17 +97,13 @@ public class Main_Activity extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.my_league) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.competitor) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.analysis) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.uptournament) {
 
         }
 
@@ -125,7 +122,7 @@ public class Main_Activity extends BaseActivity
 
     private void setProfileImage(View view) {
         ImgVwProfileImage = (ImageView) view.findViewById(R.id.profileImage);
-        user_information = (TextView)view.findViewById(R.id.txtUserName);
+        user_information = (TextView) view.findViewById(R.id.txtUserName);
         user_information.setText(UserName.toString());
         switch (ProfileImage) {
             case "0":

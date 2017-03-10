@@ -17,8 +17,8 @@
         android:id="@+id/fragment_frag_league_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.cricketta.league.frag_league_list"
-        tools:layout="@layout/fragment_frag_league_list">
+        android:name="com.cricketta.league.fragment.frag_league_list"
+        >
 
     </fragment>
 </RelativeLayout>

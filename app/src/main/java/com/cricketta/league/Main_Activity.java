@@ -33,6 +33,7 @@ public class Main_Activity extends BaseActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //fab.setImageResource(R.drawable.plus_outline);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,16 +92,21 @@ public class Main_Activity extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.my_league) {
+        if (id == R.id.home) {
             // Handle the camera action
-        } else if (id == R.id.competitor) {
+        }else if (id == R.id.my_league) {
+
+        }else if (id == R.id.competitor) {
 
         } else if (id == R.id.analysis) {
 
         } else if (id == R.id.uptournament) {
 
-        }
+        }else if (id == R.id.settings) {
 
+        }else if (id == R.id.logout) {
+
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

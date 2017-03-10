@@ -3,6 +3,11 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/home"
+            android:icon="@drawable/home_outline"
+            android:title="Home" />
+
+        <item
             android:id="@+id/my_league"
             android:icon="@drawable/trophy"
             android:title="My League" />
@@ -18,6 +23,14 @@
             android:id="@+id/uptournament"
             android:icon="@drawable/tennis"
             android:title="Upcoming Tournament" />
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/wrench"
+            android:title="Setting" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/power"
+            android:title="Logout" />
 
     </group>
 

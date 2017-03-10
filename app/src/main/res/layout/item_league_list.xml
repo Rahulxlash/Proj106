@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="league"
+            type="REST.Model.League" />
+    </data>
+
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="5dp"-->
+        <!--card_view:cardCornerRadius="2dp"-->
+        <!--card_view:contentPadding="10dp">-->
+
+
+
+
+                <LinearLayout
+                    android:id="@+id/lkjhh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="ID"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/country_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.valueOf(league.getName())}"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+    <!--</android.support.v7.widget.CardView>-->
+</layout>

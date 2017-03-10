@@ -14,10 +14,10 @@ import retrofit.http.Path;
 
 public interface AuthService {
 
-    @GET("/user/getByFBId/{value}")
+    @GET("/user/{value}/getByFBId")
     public void getUserByFBId(@Path("value") String FbId, Callback<User> callback);
 
-    @GET("/user/getByUserName/{value}")
+    @GET("/user/{value}/getByUserName")
     public void getUserByUserName(@Path("value") String UserName, Callback<User> callback);
 
     @FormUrlEncoded

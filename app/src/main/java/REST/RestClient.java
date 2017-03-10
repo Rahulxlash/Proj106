@@ -3,7 +3,9 @@ package REST;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import REST.Model.League;
 import REST.Service.AuthService;
+import REST.Service.LeagueService;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
 
@@ -14,6 +16,7 @@ import retrofit.converter.GsonConverter;
 public class RestClient {
     private static final String BASE_URL = "http://192.168.1.109/Cricketta.API/api/";
     private AuthService authService;
+    private LeagueService leagueService;
 
     public RestClient() {
         Gson gson = new GsonBuilder().setDateFormat("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'")
@@ -24,9 +27,13 @@ public class RestClient {
                 .setConverter(new GsonConverter(gson))
                 .build();
         authService = restAdapter.create(AuthService.class);
+        leagueService = restAdapter.create(LeagueService.class);
     }
+
+
 
     public AuthService AuthService() {
         return authService;
     }
+    public LeagueService LeagueService(){return  leagueService;}
 }

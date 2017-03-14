@@ -3,6 +3,7 @@ package com.cricketta.league;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,7 +19,11 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
+import com.squareup.picasso.Picasso;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class Main_Activity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -54,7 +59,11 @@ public class Main_Activity extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         getPreferences();
-        setProfileImage(navigationView.getHeaderView(0));
+        //setProfileImage(navigationView.getHeaderView(0));
+        Uri imageUri = Profile.getCurrentProfile().getProfilePictureUri(400, 400);
+        ImgVwProfileImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.profileImage);
+
+        Picasso.with(this).load(imageUri).transform(new CropCircleTransformation()).into(ImgVwProfileImage);
     }
 
     @Override

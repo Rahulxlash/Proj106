@@ -42,19 +42,21 @@ public class frag_league_list extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.league_recycler);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
-//
-//        leagues = new ArrayList<>();
-//        adapter = new LeagueViewAdapter(leagues);
-//        recyclerView.setAdapter(adapter);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frag_league_list, container, false);
+        View view =  inflater.inflate(R.layout.fragment_frag_league_list, container, false);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.league_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        leagues = new ArrayList<>();
+        adapter = new LeagueViewAdapter(leagues);
+        recyclerView.setAdapter(adapter);
+        return view;
     }
 
     @Override

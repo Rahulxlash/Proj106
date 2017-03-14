@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.Typeface;
 import android.support.annotation.BoolRes;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -28,6 +29,11 @@ import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.auth.api.*;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -39,7 +45,9 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements
+        View.OnClickListener,
+        GoogleApiClient.OnConnectionFailedListener {
     private TextView info;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
@@ -89,6 +97,16 @@ public class LoginActivity extends BaseActivity {
             Log.d("retroUID",Profile.getCurrentProfile().getId());
             isUserRegistered(Profile.getCurrentProfile().getId());
         }
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        GoogleApiClient mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_WIDE);
     }
 
     private void isUserRegistered(String userId) {
@@ -119,5 +137,15 @@ public class LoginActivity extends BaseActivity {
                 showToast("Error validating User");
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }

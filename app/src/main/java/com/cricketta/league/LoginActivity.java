@@ -12,8 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,11 +25,13 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 import REST.Model.User;
 import REST.RestClient;
@@ -62,27 +66,26 @@ public class LoginActivity extends BaseActivity {
         tv1 = (TextView) findViewById(R.id.title);
         Typeface face = Typeface.createFromAsset(getAssets(), "MarioNett.ttf");
         tv1.setTypeface(face);
-        if (Profile.getCurrentProfile() == null) {
-            loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton = (LoginButton) findViewById(R.id.login_button);
 
-            loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                @Override
-                public void onSuccess(LoginResult loginResult) {
-                    showToast(loginResult.getAccessToken().getUserId());
-                    isUserRegistered(loginResult.getAccessToken().getUserId());
-                }
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                //showToast(loginResult.getAccessToken().getUserId());
+                isUserRegistered(loginResult.getAccessToken().getUserId());
+            }
 
-                @Override
-                public void onCancel() {
-                    showToast("Login Cancelled.");
-                }
+            @Override
+            public void onCancel() {
+                showToast("Login Cancelled.");
+            }
 
-                @Override
-                public void onError(FacebookException e) {
-                    showToast("Login attempt failed.");
-                }
-            });
-        } else {
+            @Override
+            public void onError(FacebookException e) {
+                showToast("Login attempt failed.");
+            }
+        });
+        if (Profile.getCurrentProfile() != null) {
             Log.d("retroUID",Profile.getCurrentProfile().getId());
             isUserRegistered(Profile.getCurrentProfile().getId());
         }
@@ -103,15 +106,16 @@ public class LoginActivity extends BaseActivity {
                     editor.putInt(USER_ID, user.getUserId());
                     editor.putString(USER_NAME, user.getUserName());
                     editor.putString(PROFILE_IMAGE, Integer.toString(user.getProfileImage()));
-                    editor.commit();
+                    editor.apply();
                     Intent intent = new Intent(mContext, Main_Activity.class);
                     startActivity(intent);
                 }
+                finish();
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Log.e("retro",error.getMessage());
+                Log.e("retro", error.getMessage());
                 showToast("Error validating User");
             }
         });

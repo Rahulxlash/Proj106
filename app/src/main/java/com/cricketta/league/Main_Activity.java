@@ -1,6 +1,7 @@
 package com.cricketta.league;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.facebook.login.LoginManager;
 
 public class Main_Activity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -94,18 +97,21 @@ public class Main_Activity extends BaseActivity
 
         if (id == R.id.home) {
             // Handle the camera action
-        }else if (id == R.id.my_league) {
+        } else if (id == R.id.my_league) {
 
-        }else if (id == R.id.competitor) {
+        } else if (id == R.id.competitor) {
 
         } else if (id == R.id.analysis) {
 
         } else if (id == R.id.uptournament) {
 
-        }else if (id == R.id.settings) {
+        } else if (id == R.id.settings) {
 
-        }else if (id == R.id.logout) {
-
+        } else if (id == R.id.logout) {
+            LoginManager.getInstance().logOut();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -121,7 +127,7 @@ public class Main_Activity extends BaseActivity
     }
 
     private void setProfileImage(View view) {
-        user_information = (TextView)view.findViewById(R.id.txtUserName);
+        user_information = (TextView) view.findViewById(R.id.txtUserName);
         user_information.setText(UserName);
 
         ImgVwProfileImage = (ImageView) view.findViewById(R.id.profileImage);

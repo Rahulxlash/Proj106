@@ -116,23 +116,7 @@ public class create_user_activity extends BaseActivity {
                     return;
                 }
 
-                RestClient client = new RestClient();
 
-
-                client.AuthService().createUser(txtUserName.getText().toString(), Profile.getCurrentProfile().getId(), selectedImage, new Callback<User>() {
-                    @Override
-                    public void success(User user, Response response) {
-                        Log.d("retro", "User Registered" + Profile.getCurrentProfile().getId());
-                        Intent intent = new Intent(mContext, Main_Activity.class);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Log.d("Retro", error.getMessage());
-                        showToast("Error Registering User.");
-                    }
-                });
             }
         });
 

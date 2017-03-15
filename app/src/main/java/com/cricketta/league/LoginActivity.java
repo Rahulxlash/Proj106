@@ -91,8 +91,25 @@ public class LoginActivity extends BaseActivity implements
             @Override
             public void success(User user, Response response) {
                 if (user == null) {
-                    Intent intent = new Intent(mContext, create_user_activity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(mContext, create_user_activity.class);
+//                    startActivity(intent);
+                    getUserData();
+                    RestClient client = new RestClient();
+                    client.AuthService().createUser(mstrUserName, mstrThirdPartyId, 0, new Callback<User>() {
+                        @Override
+                        public void success(User user, Response response) {
+                            Log.d("retro", "User Registered" + Profile.getCurrentProfile().getId());
+                            saveUserData(user.getFacebookId(), user.getUserName(), user.getUserId(), user.getProfileImage());
+                            Intent intent = new Intent(mContext, Main_Activity.class);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Log.d("Retro", error.getMessage());
+                            showToast("Error Registering User.");
+                        }
+                    });
                 } else {
                     Intent intent = new Intent(mContext, Main_Activity.class);
                     saveUserData(user.getFacebookId(), user.getUserName(), user.getUserId(), user.getProfileImage());
@@ -111,7 +128,6 @@ public class LoginActivity extends BaseActivity implements
 
     private void SetupFacebookLogin() {
         loginButton = (LoginButton) findViewById(R.id.login_button);
-
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override

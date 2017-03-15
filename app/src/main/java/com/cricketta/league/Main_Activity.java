@@ -59,13 +59,7 @@ public class Main_Activity extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         getUserData();
-        //setProfileImage(navigationView.getHeaderView(0));
-        Uri imageUri = Profile.getCurrentProfile().getProfilePictureUri(400, 400);
-        ImgVwProfileImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.profileImage);
-
-        Picasso.with(this).load(imageUri).transform(new CropCircleTransformation()).into(ImgVwProfileImage);
-        user_information = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txtUserName);
-        user_information.setText(mstrUserName);
+        setProfileImage(navigationView.getHeaderView(0));
     }
 
     @Override
@@ -131,29 +125,34 @@ public class Main_Activity extends BaseActivity
 
     private void setProfileImage(View view) {
 
-
+        Uri imageUri = Profile.getCurrentProfile().getProfilePictureUri(400, 400);
         ImgVwProfileImage = (ImageView) view.findViewById(R.id.profileImage);
 
-        switch (ProfileImage) {
-            case "0":
-                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_1);
-                break;
-            case "1":
-                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_2);
-                break;
-            case "2":
-                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_3);
-                break;
-            case "3":
-                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_4);
-                break;
-            case "4":
-                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_5);
-                break;
-            case "5":
-                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_6);
-                break;
-        }
+        Picasso.with(this).load(imageUri).transform(new CropCircleTransformation()).into(ImgVwProfileImage);
+        user_information = (TextView) view.findViewById(R.id.txtUserName);
+        user_information.setText(mstrUserName);
+//        ImgVwProfileImage = (ImageView) view.findViewById(R.id.profileImage);
+//
+//        switch (ProfileImage) {
+//            case "0":
+//                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_1);
+//                break;
+//            case "1":
+//                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_2);
+//                break;
+//            case "2":
+//                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_3);
+//                break;
+//            case "3":
+//                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_4);
+//                break;
+//            case "4":
+//                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_5);
+//                break;
+//            case "5":
+//                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_6);
+//                break;
+//        }
     }
 }
 

@@ -73,7 +73,7 @@ public class LoginActivity extends BaseActivity implements
 
 
         tv1 = (TextView) findViewById(R.id.title);
-        Typeface face = Typeface.createFromAsset(getAssets(), "MarioNett.ttf");
+        Typeface face = Typeface.createFromAsset(getAssets(), "waltographUI.ttf");
         tv1.setTypeface(face);
 
         if (Profile.getCurrentProfile() != null) {

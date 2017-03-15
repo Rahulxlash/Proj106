@@ -58,7 +58,7 @@ public class Main_Activity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        getPreferences();
+        getUserData();
         //setProfileImage(navigationView.getHeaderView(0));
         Uri imageUri = Profile.getCurrentProfile().getProfilePictureUri(400, 400);
         ImgVwProfileImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.profileImage);
@@ -125,14 +125,6 @@ public class Main_Activity extends BaseActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void getPreferences() {
-        SharedPreferences mySharedpreprence = getSharedPreferences(MyPref, Context.MODE_PRIVATE);
-        FacebookId = mySharedpreprence.getString(FACEBOOK_ID, "");
-        User_Id = mySharedpreprence.getInt(USER_ID, 0);
-        UserName = mySharedpreprence.getString(USER_NAME, "");
-        ProfileImage = mySharedpreprence.getString(PROFILE_IMAGE, "");
     }
 
     private void setProfileImage(View view) {

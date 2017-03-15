@@ -37,7 +37,6 @@ public class LoginActivity extends BaseActivity implements
         View.OnClickListener,
         GoogleApiClient.OnConnectionFailedListener {
 
-
     private static final int RC_SIGN_IN = 106;
     private Context mContext;
     private TextView tv1;
@@ -45,7 +44,6 @@ public class LoginActivity extends BaseActivity implements
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private GoogleApiClient mGoogleApiClient;
-    private String mstrUserId;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -61,25 +59,29 @@ public class LoginActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
-
-        SetupFacebookLogin();
-        SetupGoogleLogin();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
+
+        SetupFacebookLogin();
+        SetupGoogleLogin();
+        getUserData();
+
+
         tv1 = (TextView) findViewById(R.id.title);
         Typeface face = Typeface.createFromAsset(getAssets(), "MarioNett.ttf");
         tv1.setTypeface(face);
 
         if (Profile.getCurrentProfile() != null) {
-            Log.d("retroUID", Profile.getCurrentProfile().getId());
-            isUserRegistered(mstrUserId);
+            isUserRegistered(mstrThirdPartyId);
         }
 
         if (mGoogleApiClient.isConnected() && mGoogleApiClient != null) {
-            isUserRegistered(mstrUserId);
+            isUserRegistered(mstrThirdPartyId);
         }
     }
 
@@ -90,17 +92,10 @@ public class LoginActivity extends BaseActivity implements
             public void success(User user, Response response) {
                 if (user == null) {
                     Intent intent = new Intent(mContext, create_user_activity.class);
-                    intent.putExtra("UserId", mstrUserId);
                     startActivity(intent);
                 } else {
-                    SharedPreferences sharedpreferences = getSharedPreferences(MyPref, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedpreferences.edit();
-                    editor.putString(FACEBOOK_ID, user.getFacebookId());
-                    editor.putInt(USER_ID, user.getUserId());
-                    editor.putString(USER_NAME, user.getUserName());
-                    editor.putString(PROFILE_IMAGE, Integer.toString(user.getProfileImage()));
-                    editor.apply();
                     Intent intent = new Intent(mContext, Main_Activity.class);
+                    saveUserData(user.getFacebookId(), user.getUserName(), user.getUserId(), user.getProfileImage());
                     startActivity(intent);
                 }
                 finish();
@@ -115,16 +110,15 @@ public class LoginActivity extends BaseActivity implements
     }
 
     private void SetupFacebookLogin() {
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
+
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 //showToast(loginResult.getAccessToken().getUserId());
-                mstrUserId = loginResult.getAccessToken().getUserId();
-                isUserRegistered(mstrUserId);
+                saveUserData(loginResult.getAccessToken().getUserId(), Profile.getCurrentProfile().getName(), 0, 0);
+                isUserRegistered(loginResult.getAccessToken().getUserId());
             }
 
             @Override
@@ -170,9 +164,11 @@ public class LoginActivity extends BaseActivity implements
         Log.d("retro", "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             GoogleSignInAccount acct = result.getSignInAccount();
+            saveUserData(acct.getId(), acct.getDisplayName(), 0, 0);
             isUserRegistered(acct.getId());
         }
     }
+
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {

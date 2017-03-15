@@ -1,6 +1,8 @@
 package com.cricketta.league;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -14,11 +16,32 @@ public class BaseActivity extends AppCompatActivity {
     public static final String USER_ID = "USER_ID";
     public static final String FACEBOOK_ID = "FACEBOOK_ID";
     public static final String PROFILE_IMAGE = "PROFILE_IMAGE";
+    public int mintUserId;
+    public String mstrUserName;
+    public String mstrThirdPartyId;
+    public int ProfileImage;
 
 
-    public void showToast(String message)
-    {
+    public void showToast(String message) {
         Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    public void saveUserData(String ThirdPartyId, String UserName, int UserId, int ProfileImage) {
+        SharedPreferences sharedpreferences = getSharedPreferences(MyPref, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(FACEBOOK_ID, ThirdPartyId);
+        editor.putInt(USER_ID, UserId);
+        editor.putString(USER_NAME, UserName);
+        editor.putInt(PROFILE_IMAGE, ProfileImage);
+        editor.apply();
+    }
+
+    public void getUserData() {
+        SharedPreferences mySharedpreprence = getSharedPreferences(MyPref, Context.MODE_PRIVATE);
+        mstrThirdPartyId = mySharedpreprence.getString(FACEBOOK_ID, "");
+        mintUserId = mySharedpreprence.getInt(USER_ID, 0);
+        mstrUserName = mySharedpreprence.getString(USER_NAME, "");
+        //ProfileImage = mySharedpreprence.getInt(PROFILE_IMAGE, 0);
     }
 }

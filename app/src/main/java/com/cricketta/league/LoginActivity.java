@@ -95,11 +95,11 @@ public class LoginActivity extends BaseActivity implements
 //                    startActivity(intent);
                     getUserData();
                     RestClient client = new RestClient();
-                    client.AuthService().createUser(mstrUserName, mstrThirdPartyId, 0, new Callback<User>() {
+                    client.AuthService().createUser(mstrUserName, mstrThirdPartyId, ProfileImage, new Callback<User>() {
                         @Override
                         public void success(User user, Response response) {
-                            Log.d("retro", "User Registered" + Profile.getCurrentProfile().getId());
-                            saveUserData(user.getFacebookId(), user.getUserName(), user.getUserId(), user.getProfileImage());
+                            //Log.d("retro", "User Registered" + Profile.getCurrentProfile().getId());
+                            saveUserData(user.getFacebookId(), user.getUserName(), user.getUserId(), user.getProfileImage(), mstrPhotoUrl);
                             Intent intent = new Intent(mContext, Main_Activity.class);
                             startActivity(intent);
                         }
@@ -112,7 +112,7 @@ public class LoginActivity extends BaseActivity implements
                     });
                 } else {
                     Intent intent = new Intent(mContext, Main_Activity.class);
-                    saveUserData(user.getFacebookId(), user.getUserName(), user.getUserId(), user.getProfileImage());
+                    saveUserData(user.getFacebookId(), user.getUserName(), user.getUserId(), user.getProfileImage(), mstrPhotoUrl);
                     startActivity(intent);
                 }
                 finish();
@@ -133,7 +133,7 @@ public class LoginActivity extends BaseActivity implements
             @Override
             public void onSuccess(LoginResult loginResult) {
                 //showToast(loginResult.getAccessToken().getUserId());
-                saveUserData(loginResult.getAccessToken().getUserId(), Profile.getCurrentProfile().getName(), 0, 0);
+                saveUserData(loginResult.getAccessToken().getUserId(), Profile.getCurrentProfile().getName(), 0, 0, "");
                 isUserRegistered(loginResult.getAccessToken().getUserId());
             }
 
@@ -152,6 +152,7 @@ public class LoginActivity extends BaseActivity implements
     private void SetupGoogleLogin() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestProfile()
                 .build();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
@@ -180,7 +181,12 @@ public class LoginActivity extends BaseActivity implements
         Log.d("retro", "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             GoogleSignInAccount acct = result.getSignInAccount();
-            saveUserData(acct.getId(), acct.getDisplayName(), 0, 0);
+            String mstrPhtUrl;
+            if (acct.getPhotoUrl() == null)
+                mstrPhtUrl = "";
+            else
+                mstrPhtUrl = acct.getPhotoUrl().toString();
+            saveUserData(acct.getId(), acct.getDisplayName(), 0, 1, mstrPhtUrl);
             isUserRegistered(acct.getId());
         }
     }

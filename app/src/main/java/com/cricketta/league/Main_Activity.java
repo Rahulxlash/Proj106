@@ -29,8 +29,6 @@ public class Main_Activity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private TextView user_information;
     private ImageView ImgVwProfileImage;
-    private String UserName, ProfileImage, FacebookId;
-    private int User_Id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,35 +122,16 @@ public class Main_Activity extends BaseActivity
     }
 
     private void setProfileImage(View view) {
-
-        Uri imageUri = Profile.getCurrentProfile().getProfilePictureUri(400, 400);
         ImgVwProfileImage = (ImageView) view.findViewById(R.id.profileImage);
-
-        Picasso.with(this).load(imageUri).transform(new CropCircleTransformation()).into(ImgVwProfileImage);
+        if (ProfileImage == 0) {//Facebook Id
+            Uri imageUri = Profile.getCurrentProfile().getProfilePictureUri(400, 400);
+            Picasso.with(this).load(imageUri).transform(new CropCircleTransformation()).into(ImgVwProfileImage);
+        } else { //Google Id
+            if (mstrPhotoUrl != "")
+                Picasso.with(this).load(mstrPhotoUrl).transform(new CropCircleTransformation()).into(ImgVwProfileImage);
+        }
         user_information = (TextView) view.findViewById(R.id.txtUserName);
         user_information.setText(mstrUserName);
-//        ImgVwProfileImage = (ImageView) view.findViewById(R.id.profileImage);
-//
-//        switch (ProfileImage) {
-//            case "0":
-//                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_1);
-//                break;
-//            case "1":
-//                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_2);
-//                break;
-//            case "2":
-//                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_3);
-//                break;
-//            case "3":
-//                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_4);
-//                break;
-//            case "4":
-//                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_5);
-//                break;
-//            case "5":
-//                ImgVwProfileImage.setImageResource(R.drawable.prof_ico_6);
-//                break;
-//        }
     }
 }
 

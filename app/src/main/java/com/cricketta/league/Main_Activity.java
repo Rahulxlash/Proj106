@@ -64,6 +64,8 @@ public class Main_Activity extends BaseActivity
         ImgVwProfileImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.profileImage);
 
         Picasso.with(this).load(imageUri).transform(new CropCircleTransformation()).into(ImgVwProfileImage);
+        user_information = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txtUserName);
+        user_information.setText(mstrUserName);
     }
 
     @Override
@@ -128,8 +130,7 @@ public class Main_Activity extends BaseActivity
     }
 
     private void setProfileImage(View view) {
-        user_information = (TextView) view.findViewById(R.id.txtUserName);
-        user_information.setText(UserName);
+
 
         ImgVwProfileImage = (ImageView) view.findViewById(R.id.profileImage);
 

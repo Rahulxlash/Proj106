@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.Profile;
+import com.google.android.gms.auth.GoogleAuthUtil;
 
 import REST.Model.User;
 import REST.RestClient;
@@ -116,6 +117,8 @@ public class create_user_activity extends BaseActivity {
                 }
 
                 RestClient client = new RestClient();
+
+
                 client.AuthService().createUser(txtUserName.getText().toString(), Profile.getCurrentProfile().getId(), selectedImage, new Callback<User>() {
                     @Override
                     public void success(User user, Response response) {
@@ -144,8 +147,20 @@ public class create_user_activity extends BaseActivity {
         });
     }
 
+    public void setBtnCreateUser(View View) {
+
+
+    }
+
     public class ImageAdapter extends BaseAdapter {
         private Context mcontext;
+        private Integer[] mThumbIds = {
+                R.drawable.prof_ico_1,
+                R.drawable.prof_ico_2,
+                R.drawable.prof_ico_3,
+                R.drawable.prof_ico_4,
+                R.drawable.prof_ico_5,
+                R.drawable.prof_ico_6};
 
         public ImageAdapter(Context c) {
             mcontext = c;
@@ -168,20 +183,6 @@ public class create_user_activity extends BaseActivity {
             imageView.setImageResource(mThumbIds[position]);
             return imageView;
         }
-
-        private Integer[] mThumbIds = {
-                R.drawable.prof_ico_1,
-                R.drawable.prof_ico_2,
-                R.drawable.prof_ico_3,
-                R.drawable.prof_ico_4,
-                R.drawable.prof_ico_5,
-                R.drawable.prof_ico_6};
-
-
-    }
-    public void setBtnCreateUser(View View)
-    {
-
 
 
     }

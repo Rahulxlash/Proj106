@@ -3,30 +3,20 @@ package com.cricketta.league;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.graphics.Typeface;
-import android.support.annotation.BoolRes;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -36,10 +26,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.auth.api.*;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 import REST.Model.User;
 import REST.RestClient;
@@ -53,12 +39,13 @@ public class LoginActivity extends BaseActivity implements
 
 
     private static final int RC_SIGN_IN = 106;
-    Context mContext;
-    TextView tv1;
+    private Context mContext;
+    private TextView tv1;
     private TextView info;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private GoogleApiClient mGoogleApiClient;
+    private String mstrUserId;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -68,7 +55,6 @@ public class LoginActivity extends BaseActivity implements
             handleSignInResult(result);
         }
         callbackManager.onActivityResult(requestCode, resultCode, data);
-
     }
 
     @Override
@@ -76,8 +62,9 @@ public class LoginActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         mContext = this;
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        callbackManager = CallbackManager.Factory.create();
+        SetupFacebookLogin();
+        SetupGoogleLogin();
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -85,40 +72,15 @@ public class LoginActivity extends BaseActivity implements
         tv1 = (TextView) findViewById(R.id.title);
         Typeface face = Typeface.createFromAsset(getAssets(), "MarioNett.ttf");
         tv1.setTypeface(face);
-        loginButton = (LoginButton) findViewById(R.id.login_button);
 
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                //showToast(loginResult.getAccessToken().getUserId());
-                isUserRegistered(loginResult.getAccessToken().getUserId());
-            }
-
-            @Override
-            public void onCancel() {
-                showToast("Login Cancelled.");
-            }
-
-            @Override
-            public void onError(FacebookException e) {
-                showToast("Login attempt failed.");
-            }
-        });
         if (Profile.getCurrentProfile() != null) {
-            Log.d("retroUID",Profile.getCurrentProfile().getId());
-            isUserRegistered(Profile.getCurrentProfile().getId());
+            Log.d("retroUID", Profile.getCurrentProfile().getId());
+            isUserRegistered(mstrUserId);
         }
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_WIDE);
-        findViewById(R.id.sign_in_button).setOnClickListener(this);
+        if (mGoogleApiClient.isConnected() && mGoogleApiClient != null) {
+            isUserRegistered(mstrUserId);
+        }
     }
 
     private void isUserRegistered(String userId) {
@@ -128,6 +90,7 @@ public class LoginActivity extends BaseActivity implements
             public void success(User user, Response response) {
                 if (user == null) {
                     Intent intent = new Intent(mContext, create_user_activity.class);
+                    intent.putExtra("UserId", mstrUserId);
                     startActivity(intent);
                 } else {
                     SharedPreferences sharedpreferences = getSharedPreferences(MyPref, Context.MODE_PRIVATE);
@@ -151,13 +114,50 @@ public class LoginActivity extends BaseActivity implements
         });
     }
 
+    private void SetupFacebookLogin() {
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                //showToast(loginResult.getAccessToken().getUserId());
+                mstrUserId = loginResult.getAccessToken().getUserId();
+                isUserRegistered(mstrUserId);
+            }
+
+            @Override
+            public void onCancel() {
+                showToast("Login Cancelled.");
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+                showToast("Login attempt failed.");
+            }
+        });
+    }
+
+    private void SetupGoogleLogin() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_WIDE);
+        findViewById(R.id.sign_in_button).setOnClickListener(this);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sign_in_button:
                 signIn();
                 break;
-            // ...
         }
     }
 
@@ -169,13 +169,8 @@ public class LoginActivity extends BaseActivity implements
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d("retro", "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
-            // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
-            //updateUI(true);
-        } else {
-            // Signed out, show unauthenticated UI.
-            //updateUI(false);
+            isUserRegistered(acct.getId());
         }
     }
 

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "896350383767",
+    "project_id": "firebase-cricketta"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896350383767:android:51d20200faf45db6",
+        "android_client_info": {
+          "package_name": "com.cricketta.league"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "896350383767-ha39nmfvppsedicpcko6qqk7jld5ro6g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cricketta.league",
+            "certificate_hash": "dced5614ac55b8268ef157554dccba8c5c81aa27"
+          }
+        },
+        {
+          "client_id": "896350383767-8ujll8gatk4i24agsmndjqspkd3knn96.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN-lNOd4jUsjusYFBa28AqimCo7ade8q0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

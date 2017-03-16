@@ -14,13 +14,13 @@ import retrofit.converter.GsonConverter;
  */
 
 public class RestClient {
-    //private static final String BASE_URL = "http://api.cricketta.com/api/";
-    private static final String BASE_URL = "http://192.168.1.109/cricketta.api/api/";
+    private static final String BASE_URL = "http://api.cricketta.com/api/";
+    //private static final String BASE_URL = "http://192.168.1.109/cricketta.api/api/";
     private AuthService authService;
     private LeagueService leagueService;
 
     public RestClient() {
-        Gson gson = new GsonBuilder().setDateFormat("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'")
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .create();
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setLogLevel(RestAdapter.LogLevel.FULL)

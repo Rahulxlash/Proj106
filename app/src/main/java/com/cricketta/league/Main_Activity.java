@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -21,15 +22,33 @@ import android.widget.TextView;
 
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class Main_Activity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        GoogleApiClient.OnConnectionFailedListener {
     private TextView user_information;
     private ImageView ImgVwProfileImage;
 
+    @Override
+    protected void onStart() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        Common.mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        Common.mGoogleApiClient.connect();
+        super.onStart();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,14 +130,35 @@ public class Main_Activity extends BaseActivity
         } else if (id == R.id.settings) {
 
         } else if (id == R.id.logout) {
-            LoginManager.getInstance().logOut();
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+            if (ProfileImage == 0)
+                SignOutFaacebook();
+            else
+                signOutGoogle();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void SignOutFaacebook() {
+        LoginManager.getInstance().logOut();
+        Intent intent = new Intent(Main_Activity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void signOutGoogle() {
+
+        Auth.GoogleSignInApi.signOut(Common.mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        //Common.mGoogleApiClient.disconnect();
+                        Intent intent = new Intent(Main_Activity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
     }
 
     private void setProfileImage(View view) {
@@ -132,6 +172,11 @@ public class Main_Activity extends BaseActivity
         }
         user_information = (TextView) view.findViewById(R.id.txtUserName);
         user_information.setText(mstrUserName);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }
 

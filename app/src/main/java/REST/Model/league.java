@@ -10,17 +10,31 @@ import java.util.jar.Attributes;
  */
 @Parcel
 public class League {
-    private int LeagueId;
-    private String Name;
-    private int Competitor;
-    private int TournamentId;
-    private boolean Accepted;
-    private int Creator;
-    private Date CreateDate;
+    private int leagueId;
+    private String name;
+    private int competitor;
+    private int tournamentId;
+    private boolean accepted;
+    private int creator;
+    private Date createDate;
 
-    public int getLeagueId(){return LeagueId;}
-    public String getName() {return Name;}
-    public int getCompetitor() {return Competitor;}
-    public int getTournamentId() {return TournamentId;}
-    public int getCreator() {return Creator;}
+    public int getLeagueId() {
+        return leagueId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCompetitor() {
+        return competitor;
+    }
+
+    public int getTournamentId() {
+        return tournamentId;
+    }
+
+    public int getCreator() {
+        return creator;
+    }
 }

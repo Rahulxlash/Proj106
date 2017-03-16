@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,19 +50,23 @@ public class frag_league_list extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_frag_league_list, container, false);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.league_recycler);
+        View view = inflater.inflate(R.layout.fragment_frag_league_list, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.league_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
 
         leagues = new ArrayList<>();
-        adapter = new LeagueViewAdapter(leagues);
-        recyclerView.setAdapter(adapter);
+        getUserLeagues();
+
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+
+    }
+
+    private void getUserLeagues() {
         SharedPreferences mySharedpreprence = getActivity().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE);
         int User_Id = mySharedpreprence.getInt("USER_ID", 0);
         RestClient restClient = new RestClient();
@@ -69,11 +74,13 @@ public class frag_league_list extends Fragment {
             @Override
             public void success(ArrayList<League> league, Response response) {
                 leagues = league;
+                adapter = new LeagueViewAdapter(leagues);
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
             public void failure(RetrofitError error) {
-
+                Log.d("retro", error.getBody().toString());
             }
         });
     }

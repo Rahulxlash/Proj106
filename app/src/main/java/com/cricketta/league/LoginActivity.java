@@ -17,6 +17,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -26,6 +27,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.auth.api.*;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 
 import REST.Model.User;
 import REST.RestClient;
@@ -43,7 +46,12 @@ public class LoginActivity extends BaseActivity implements
     private TextView info;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
-    private GoogleApiClient mGoogleApiClient;
+
+//    @Override
+//    protected void onStart() {
+//        Common.mGoogleApiClient.connect();
+//        super.onStart();
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -71,7 +79,6 @@ public class LoginActivity extends BaseActivity implements
         SetupGoogleLogin();
         getUserData();
 
-
         tv1 = (TextView) findViewById(R.id.title);
         Typeface face = Typeface.createFromAsset(getAssets(), "waltographUI.ttf");
         tv1.setTypeface(face);
@@ -80,14 +87,17 @@ public class LoginActivity extends BaseActivity implements
             isUserRegistered(mstrThirdPartyId);
         }
 
-        if (mGoogleApiClient.isConnected() && mGoogleApiClient != null) {
-            isUserRegistered(mstrThirdPartyId);
+        OptionalPendingResult<GoogleSignInResult> pendingResult = Auth.GoogleSignInApi.silentSignIn(Common.mGoogleApiClient);
+        if (pendingResult != null) {
+            handleGooglePendingResult(pendingResult);
+        } else {
+            //no result from silent login. Possibly display the login page again
         }
     }
 
     private void isUserRegistered(String userId) {
         RestClient client = new RestClient();
-        client.AuthService().getUserByFBId(userId, new Callback<User>() {
+        client.AuthService().getUserByFBId(userId.trim(), new Callback<User>() {
             @Override
             public void success(User user, Response response) {
                 if (user == null) {
@@ -132,8 +142,22 @@ public class LoginActivity extends BaseActivity implements
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                ProfileTracker profileTracker = new ProfileTracker() {
+                    @Override
+                    protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                        this.stopTracking();
+                        Profile.setCurrentProfile(currentProfile);
+                        if (currentProfile != null) {
+                            String strId = Profile.getCurrentProfile().getId();
+                            showToast(strId);
+                            saveUserData(strId, Profile.getCurrentProfile().getName(), 0, 0, "");
+                            isUserRegistered(strId);
+                        }
+                    }
+                };
+                profileTracker.startTracking();
                 //showToast(loginResult.getAccessToken().getUserId());
-                saveUserData(loginResult.getAccessToken().getUserId(), Profile.getCurrentProfile().getName(), 0, 0, "");
+
                 isUserRegistered(loginResult.getAccessToken().getUserId());
             }
 
@@ -154,7 +178,7 @@ public class LoginActivity extends BaseActivity implements
                 .requestEmail()
                 .requestProfile()
                 .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        Common.mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
@@ -163,6 +187,31 @@ public class LoginActivity extends BaseActivity implements
         findViewById(R.id.sign_in_button).setOnClickListener(this);
     }
 
+    private void handleGooglePendingResult(OptionalPendingResult<GoogleSignInResult> pendingResult) {
+        if (pendingResult.isDone()) {
+            // There's immediate result available.
+            GoogleSignInResult signInResult = pendingResult.get();
+            onSilentSignInCompleted(signInResult);
+        } else {
+            // There's no immediate result ready,  waits for the async callback.
+            pendingResult.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                @Override
+                public void onResult(@NonNull GoogleSignInResult signInResult) {
+                    onSilentSignInCompleted(signInResult);
+                }
+            });
+        }
+    }
+
+    private void onSilentSignInCompleted(GoogleSignInResult signInResult) {
+        GoogleSignInAccount signInAccount = signInResult.getSignInAccount();
+        if (signInAccount != null) {
+            // you have a valid sign in account. Skip the login.
+            isUserRegistered(mstrThirdPartyId);
+        } else {
+            // you don't have a valid sign in account. Eventually display the login page again
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -173,7 +222,7 @@ public class LoginActivity extends BaseActivity implements
     }
 
     private void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(Common.mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
@@ -190,7 +239,6 @@ public class LoginActivity extends BaseActivity implements
             isUserRegistered(acct.getId());
         }
     }
-
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {

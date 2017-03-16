@@ -1,24 +1,22 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frm_league_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.cricketta.league.fragment.frag_league_list">
 
-    <TextView
-        android:id="@+id/rhaul_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="rahul sharma" />
-
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/league_recycler"
+        android:id="@+id/league_creat"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
     </android.support.v7.widget.RecyclerView>
 
+    <TextView
+        android:id="@+id/MyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="anuj sharma" />
 
 </FrameLayout>

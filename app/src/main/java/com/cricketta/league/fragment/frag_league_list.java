@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cricketta.league.BaseActivity;
 import com.cricketta.league.R;
 
 import org.parceler.transfuse.annotations.OnCreate;
@@ -54,7 +55,7 @@ public class frag_league_list extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.league_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
 
-        leagues = new ArrayList<>();
+        //leagues = new ArrayList<>();
         getUserLeagues();
 
         return view;
@@ -67,6 +68,7 @@ public class frag_league_list extends Fragment {
     }
 
     private void getUserLeagues() {
+        ((BaseActivity) getActivity()).showDialog("");
         SharedPreferences mySharedpreprence = getActivity().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE);
         int User_Id = mySharedpreprence.getInt("USER_ID", 0);
         RestClient restClient = new RestClient();
@@ -76,10 +78,12 @@ public class frag_league_list extends Fragment {
                 leagues = league;
                 adapter = new LeagueViewAdapter(leagues);
                 recyclerView.setAdapter(adapter);
+                ((BaseActivity) getActivity()).hideDialog();
             }
 
             @Override
             public void failure(RetrofitError error) {
+                ((BaseActivity) getActivity()).hideDialog();
                 Log.d("retro", error.getBody().toString());
             }
         });

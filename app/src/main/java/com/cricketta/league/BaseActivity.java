@@ -1,6 +1,7 @@
 package com.cricketta.league;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,7 @@ public class BaseActivity extends AppCompatActivity {
     public String mstrThirdPartyId;
     public int ProfileImage;
     public String mstrPhotoUrl;
-
+    public ProgressDialog mProgressDialog;
 
     public void showToast(String message) {
         Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
@@ -47,5 +48,21 @@ public class BaseActivity extends AppCompatActivity {
         mstrUserName = mySharedpreprence.getString(USER_NAME, "");
         ProfileImage = mySharedpreprence.getInt(PROFILE_IMAGE, 0);
         mstrPhotoUrl = mySharedpreprence.getString(PHOTO_URL, "");
+    }
+
+    public void showDialog(String message) {
+
+        if (mProgressDialog != null && !mProgressDialog.isShowing()) {
+            mProgressDialog.setMessage(message);
+            mProgressDialog.show();
+        }
+    }
+
+    public void hideDialog() {
+
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.setMessage("");
+            mProgressDialog.dismiss();
+        }
     }
 }

@@ -12,4 +12,5 @@
     <color name="transparent">#f2ecec</color>
     <color name="button">#5c6e74</color>
     <color name="actionbar">#01181c</color>
+    <color name="cardcolor">#72b68f</color>
 </resources>

@@ -30,9 +30,6 @@ public class RestClient {
         authService = restAdapter.create(AuthService.class);
         leagueService = restAdapter.create(LeagueService.class);
     }
-
-
-
     public AuthService AuthService() {
         return authService;
     }

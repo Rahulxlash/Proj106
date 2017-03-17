@@ -37,4 +37,8 @@ public class League {
     public int getCreator() {
         return creator;
     }
+
+    public char getLeagueTitle() {
+        return name.toUpperCase().charAt(0);
+    }
 }

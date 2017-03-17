@@ -75,8 +75,10 @@ public class Main_Activity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        showDialog("Loading");
         getUserData();
         setProfileImage(navigationView.getHeaderView(0));
+        hideDialog();
     }
 
     @Override

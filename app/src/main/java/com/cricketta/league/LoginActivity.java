@@ -97,18 +97,17 @@ public class LoginActivity extends BaseActivity implements
 
     private void isUserRegistered(String userId) {
         RestClient client = new RestClient();
+        showDialog("Loading");
         client.AuthService().getUserByFBId(userId.trim(), new Callback<User>() {
             @Override
             public void success(User user, Response response) {
                 if (user == null) {
-//                    Intent intent = new Intent(mContext, create_user_activity.class);
-//                    startActivity(intent);
                     getUserData();
                     RestClient client = new RestClient();
                     client.AuthService().createUser(mstrUserName, mstrThirdPartyId, ProfileImage, new Callback<User>() {
                         @Override
                         public void success(User user, Response response) {
-                            //Log.d("retro", "User Registered" + Profile.getCurrentProfile().getId());
+                            hideDialog();
                             saveUserData(user.getFacebookId(), user.getUserName(), user.getUserId(), user.getProfileImage(), mstrPhotoUrl);
                             Intent intent = new Intent(mContext, Main_Activity.class);
                             startActivity(intent);
@@ -116,11 +115,13 @@ public class LoginActivity extends BaseActivity implements
 
                         @Override
                         public void failure(RetrofitError error) {
+                            hideDialog();
                             Log.d("Retro", error.getMessage());
                             showToast("Error Registering User.");
                         }
                     });
                 } else {
+                    hideDialog();
                     Intent intent = new Intent(mContext, Main_Activity.class);
                     saveUserData(user.getFacebookId(), user.getUserName(), user.getUserId(), user.getProfileImage(), mstrPhotoUrl);
                     startActivity(intent);
@@ -130,6 +131,7 @@ public class LoginActivity extends BaseActivity implements
 
             @Override
             public void failure(RetrofitError error) {
+                hideDialog();
                 Log.e("retro", error.getMessage());
                 showToast("Error validating User");
             }

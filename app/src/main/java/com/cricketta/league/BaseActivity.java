@@ -4,8 +4,12 @@ package com.cricketta.league;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+
+import org.parceler.transfuse.annotations.OnCreate;
 
 /**
  * Created by rahul.sharma01 on 3/7/2017.
@@ -28,6 +32,12 @@ public class BaseActivity extends AppCompatActivity {
     public void showToast(String message) {
         Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mProgressDialog = new ProgressDialog(this);
     }
 
     public void saveUserData(String ThirdPartyId, String UserName, int UserId, int ProfileImage, String photoUrl) {

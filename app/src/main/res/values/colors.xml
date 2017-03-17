@@ -12,5 +12,7 @@
     <color name="transparent">#f2ecec</color>
     <color name="button">#5c6e74</color>
     <color name="actionbar">#01181c</color>
-    <color name="cardcolor">#8da0b6</color>
+    <color name="cardcolor">#d9d56a</color>
+    <color name="cardcolorWin">#94dc7c</color>
+    <color name="cardcolorLoss">#fd9d88</color>
 </resources>

@@ -3,11 +3,15 @@ package com.cricketta.league.fragment;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cricketta.league.BaseActivity;
 import com.cricketta.league.R;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -18,11 +22,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+import REST.Adapter.FBUserAdapter;
+import REST.Adapter.LeagueViewAdapter;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SelectCompetitor_frag extends Fragment {
-
+    private RecyclerView recyclerView;
+    private FBUserAdapter adapter;
 
     public SelectCompetitor_frag() {
         // Required empty public constructor
@@ -32,72 +44,35 @@ public class SelectCompetitor_frag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-//        GraphRequest.newMeRequest(
-//                AccessToken.getCurrentAccessToken(),
-//                new GraphRequest.GraphJSONObjectCallback() {
-//                    public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
-//                        try {
-//                            JSONArray jsonArrayFriends = jsonObject.getJSONObject("friendlist").getJSONArray("data");
-//                            JSONObject friendlistObject = jsonArrayFriends.getJSONObject(0);
-//                            String friendListID = friendlistObject.getString("id");
-//                            myNewGraphReq(friendListID);
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-//        ).executeAsync();
+        View view = inflater.inflate(R.layout.fragment_select_competitor_frag, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.fb_user_recycler);
 
-//        new GraphRequest(
-//                AccessToken.getCurrentAccessToken(),
-//                "/" + AccessToken.getCurrentAccessToken().getUserId() + "/invitable_friends",
-//                null,
-//                HttpMethod.GET,
-//                new GraphRequest.Callback() {
-//                    public void onCompleted(GraphResponse response) {
-//            /* handle the result */
-//                        Log.d("retro",response.getJSONObject().toString());
-//                    }
-//                }
-//        ).executeAsync();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        ((BaseActivity) getActivity()).showDialog("Loading");
         GraphRequest request = GraphRequest.newMyFriendsRequest(
                 AccessToken.getCurrentAccessToken(),
                 new GraphRequest.GraphJSONArrayCallback() {
                     @Override
                     public void onCompleted(JSONArray array, GraphResponse response) {
                         // Insert your code here
+                        adapter = new FBUserAdapter(array);
+                        recyclerView.setAdapter(adapter);
+                        ((BaseActivity) getActivity()).hideDialog();
                         Log.d("retro", response.getJSONObject().toString());
                     }
                 });
+        Set<String> fields = new HashSet<String>();
+        String[] requiredFields = new String[]{"id", "name", "picture",
+                "installed"};
+        fields.addAll(Arrays.asList(requiredFields));
 
+        Bundle parameters = request.getParameters();
+        parameters.putString("fields", TextUtils.join(",", fields));
+        request.setParameters(parameters);
         request.executeAsync();
 
-        return inflater.inflate(R.layout.fragment_select_competitor_frag, container, false);
+        return view;
     }
 
-    private void myNewGraphReq(String friendlistId) {
-        final String graphPath = "/" + friendlistId + "/members/";
-        //AccesToken token = ;
-        GraphRequest request = new GraphRequest(AccessToken.getCurrentAccessToken(), graphPath, null, HttpMethod.GET, new GraphRequest.Callback() {
-            @Override
-            public void onCompleted(GraphResponse graphResponse) {
-                JSONObject object = graphResponse.getJSONObject();
-                try {
-                    JSONArray arrayOfUsersInFriendList = object.getJSONArray("data");
-                /* Do something with the user list */
-                /* ex: get first user in list, "name" */
-                    JSONObject user = arrayOfUsersInFriendList.getJSONObject(0);
-                    String usersName = user.getString("name");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        Bundle param = new Bundle();
-        param.putString("fields", "name");
-        request.setParameters(param);
-        request.executeAsync();
-    }
 }

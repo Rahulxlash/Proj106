@@ -112,7 +112,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_marginTop="10dp"
-                            android:src="@drawable/run_white"
+                            android:src="@drawable/cricket_bat_white2"
                             app:srcCompat="@drawable/prof_ico_2" />
 
                         <TextView
@@ -130,7 +130,7 @@
                             android:layout_height="20dp"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
-                            android:src="@drawable/wicket_white"
+                            android:src="@drawable/cricket_wicket_white"
                             app:srcCompat="@drawable/prof_ico_2" />
 
                         <TextView
@@ -164,7 +164,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_marginTop="10dp"
-                            android:src="@drawable/run_black"
+                            android:src="@drawable/cricket_bat_black2"
                             app:srcCompat="@drawable/prof_ico_2" />
 
                         <TextView
@@ -182,7 +182,7 @@
                             android:layout_height="20dp"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
-                            android:src="@drawable/wicket_black"
+                            android:src="@drawable/cricket_wicket_black"
                             app:srcCompat="@drawable/prof_ico_2" />
 
                         <TextView

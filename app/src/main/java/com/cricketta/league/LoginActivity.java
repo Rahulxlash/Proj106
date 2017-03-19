@@ -30,6 +30,8 @@ import com.google.android.gms.auth.api.*;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 
+import java.util.Arrays;
+
 import REST.Model.User;
 import REST.RestClient;
 import retrofit.Callback;
@@ -134,6 +136,7 @@ public class LoginActivity extends BaseActivity implements
 
     private void SetupFacebookLogin() {
         loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions(Arrays.asList("user_friends"));
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override

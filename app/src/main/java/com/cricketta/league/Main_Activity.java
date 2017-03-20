@@ -192,5 +192,10 @@ public class Main_Activity extends BaseActivity
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+
+    }
 }
 

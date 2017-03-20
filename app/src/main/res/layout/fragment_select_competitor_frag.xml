@@ -5,10 +5,27 @@
     android:background="#22353e"
     tools:context="com.cricketta.league.fragment.SelectCompetitor_frag">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/fb_user_recycler"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/create_league"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@color/blue"
+            android:text="Creat New League"
+            android:textAlignment="center" />
+
+
+        <android.support.v7.widget.RecyclerView
+        android:id="@+id/fb_user_recycler"
+        android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/create_league">
     </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
 
 </FrameLayout>

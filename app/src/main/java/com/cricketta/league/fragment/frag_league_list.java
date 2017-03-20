@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cricketta.league.BaseActivity;
+import com.cricketta.league.Main_Activity;
 import com.cricketta.league.R;
 
 import org.parceler.transfuse.annotations.OnCreate;
@@ -88,4 +89,20 @@ public class frag_league_list extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((Main_Activity) getActivity())
+                .setActionBarTitle("Home");
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser)
+            ((Main_Activity) getActivity())
+                    .setActionBarTitle("Home");
+    }
 }
+

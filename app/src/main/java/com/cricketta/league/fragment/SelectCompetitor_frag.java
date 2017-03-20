@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cricketta.league.BaseActivity;
+import com.cricketta.league.Main_Activity;
 import com.cricketta.league.R;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -44,6 +45,8 @@ public class SelectCompetitor_frag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         View view = inflater.inflate(R.layout.fragment_select_competitor_frag, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.fb_user_recycler);
 
@@ -75,4 +78,18 @@ public class SelectCompetitor_frag extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((Main_Activity) getActivity())
+                .setActionBarTitle("Create League");
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser)
+            ((Main_Activity) getActivity())
+                    .setActionBarTitle("Create League");
+    }
 }

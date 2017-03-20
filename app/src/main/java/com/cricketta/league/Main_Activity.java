@@ -70,6 +70,8 @@ public class Main_Activity extends BaseActivity
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction transaction = fm.beginTransaction();
                 SelectCompetitor_frag frag = new SelectCompetitor_frag();
+                transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+
                 transaction.replace(R.id.fragment_frag_league_list, frag);
                 transaction.addToBackStack(null);
                 transaction.commit();

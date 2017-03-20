@@ -2,10 +2,9 @@ package com.cricketta.league;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -20,13 +19,12 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.auth.api.*;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 
@@ -148,7 +146,7 @@ public class LoginActivity extends BaseActivity implements
                         Profile.setCurrentProfile(currentProfile);
                         if (currentProfile != null) {
                             String strId = Profile.getCurrentProfile().getId();
-                            showToast(strId);
+                            //showToast(strId);
                             saveUserData(strId, Profile.getCurrentProfile().getName(), 0, 0, "");
                             isUserRegistered(strId);
                         }

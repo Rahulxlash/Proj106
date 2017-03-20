@@ -1,13 +1,22 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/DialogFragment"
     tools:context="com.cricketta.league.fragment.CreateLeague_dlg">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="365dp">
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="383dp"
+            android:layout_height="30dp"
+            android:background="#946198d7"
+            android:text="Create League"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+    </LinearLayout>
 </FrameLayout>

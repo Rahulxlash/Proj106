@@ -45,7 +45,7 @@ public class FBUserAdapter extends RecyclerView.Adapter<FBUserAdapter.FBUserView
         try {
             holder.Name.setText(array.getJSONObject(position).getString("name"));
             String imgUrl = array.getJSONObject(position).getJSONObject("picture").getJSONObject("data").getString("url");
-            Picasso.with(context).load(imgUrl).transform(new CropCircleTransformation()).into(holder.img);
+            Picasso.with(context).load(imgUrl).into(holder.img);
             //holder.PhoneNumber.setText(arrayList.get(position));
         } catch (JSONException e) {
         }

@@ -71,7 +71,9 @@ public class Main_Activity extends BaseActivity
                 FragmentTransaction transaction = fm.beginTransaction();
                 SelectCompetitor_frag frag = new SelectCompetitor_frag();
                 transaction.replace(R.id.fragment_frag_league_list, frag);
+                transaction.addToBackStack(null);
                 transaction.commit();
+
             }
         });
 

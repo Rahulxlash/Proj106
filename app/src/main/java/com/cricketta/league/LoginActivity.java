@@ -72,7 +72,7 @@ public class LoginActivity extends BaseActivity implements
         setContentView(R.layout.activity_login);
 
         SetupFacebookLogin();
-        SetupGoogleLogin();
+        //SetupGoogleLogin();
         getUserData();
 
         tv1 = (TextView) findViewById(R.id.title);
@@ -83,12 +83,12 @@ public class LoginActivity extends BaseActivity implements
             isUserRegistered(mstrThirdPartyId);
         }
 
-        OptionalPendingResult<GoogleSignInResult> pendingResult = Auth.GoogleSignInApi.silentSignIn(Common.mGoogleApiClient);
-        if (pendingResult != null) {
-            handleGooglePendingResult(pendingResult);
-        } else {
-            //no result from silent login. Possibly display the login page again
-        }
+//        OptionalPendingResult<GoogleSignInResult> pendingResult = Auth.GoogleSignInApi.silentSignIn(Common.mGoogleApiClient);
+//        if (pendingResult != null) {
+//            handleGooglePendingResult(pendingResult);
+//        } else {
+//            //no result from silent login. Possibly display the login page again
+//        }
     }
 
     private void isUserRegistered(String userId) {
@@ -181,9 +181,9 @@ public class LoginActivity extends BaseActivity implements
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_WIDE);
-        findViewById(R.id.sign_in_button).setOnClickListener(this);
+//        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+//        signInButton.setSize(SignInButton.SIZE_WIDE);
+//        findViewById(R.id.sign_in_button).setOnClickListener(this);
     }
 
     private void handleGooglePendingResult(OptionalPendingResult<GoogleSignInResult> pendingResult) {
@@ -213,11 +213,11 @@ public class LoginActivity extends BaseActivity implements
     }
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.sign_in_button:
-                signIn();
-                break;
-        }
+//        switch (v.getId()) {
+//            case R.id.sign_in_button:
+//                signIn();
+//                break;
+//        }
     }
 
     private void signIn() {

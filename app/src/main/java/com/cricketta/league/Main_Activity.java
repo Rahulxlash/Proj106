@@ -43,13 +43,13 @@ public class Main_Activity extends BaseActivity
 
     @Override
     protected void onStart() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        Common.mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        Common.mGoogleApiClient.connect();
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestEmail()
+//                .build();
+//        Common.mGoogleApiClient = new GoogleApiClient.Builder(this)
+//                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+//                .build();
+//        Common.mGoogleApiClient.connect();
         super.onStart();
     }
     @Override

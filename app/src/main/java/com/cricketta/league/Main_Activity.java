@@ -1,8 +1,8 @@
 package com.cricketta.league;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -68,19 +68,13 @@ public class Main_Activity extends BaseActivity
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
 
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
                 SelectCompetitor_frag frag = new SelectCompetitor_frag();
-                transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-
-                transaction.replace(R.id.fragment_frag_league_list, frag);
-                transaction.addToBackStack("Create League");
-                transaction.commit();
-
+                showFragment(frag, "CreateLeague");
             }
         });
 
 
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
@@ -102,12 +96,8 @@ public class Main_Activity extends BaseActivity
                 }
             }
         });
-
         frag_league_list fragLeagueList = new frag_league_list();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.fragment_frag_league_list, fragLeagueList);
-        transaction.addToBackStack("Home");
-        transaction.commit();
+        showFragment(fragLeagueList, "Home");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -121,6 +111,13 @@ public class Main_Activity extends BaseActivity
         getUserData();
         setProfileImage(navigationView.getHeaderView(0));
         hideDialog();
+    }
+
+    public void showFragment(Fragment fragment, String tag) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.fragment_frag_league_list, fragment);
+        transaction.addToBackStack(tag);
+        transaction.commit();
     }
 
     @Override

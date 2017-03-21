@@ -1,7 +1,7 @@
 package com.cricketta.league.fragment;
 
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cricketta.league.BaseActivity;
+import com.cricketta.league.Listener.LeagueListener;
+import com.cricketta.league.Main_Activity;
 import com.cricketta.league.R;
 
 import java.util.ArrayList;
@@ -51,7 +53,21 @@ public class frag_league_list extends Fragment {
         View view = inflater.inflate(R.layout.fragment_frag_league_list, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.league_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.addOnItemTouchListener(
+                new LeagueListener(getActivity(), recyclerView, new LeagueListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        leagues.get(position);
+                        LeagueDetails_frag frag = new LeagueDetails_frag();
+                        ((Main_Activity) getActivity()).showFragment(frag, "LeagueDetail");
+                    }
 
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+
+                    }
+                })
+        );
         //leagues = new ArrayList<>();
         getUserLeagues();
 

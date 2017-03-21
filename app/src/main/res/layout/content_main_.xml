@@ -13,12 +13,16 @@
     tools:context="com.cricketta.league.Main_Activity"
     tools:showIn="@layout/app_bar_main_">
 
-    <fragment
-        android:id="@+id/fragment_frag_league_list"
-        android:name="com.cricketta.league.fragment.frag_league_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_frag_league_list">
+    <!--<fragment-->
+    <!--android:id="@+id/fragment_frag_league_list"-->
+    <!--android:name="com.cricketta.league.fragment.frag_league_list"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:layout="@layout/fragment_frag_league_list">-->
 
-    </fragment>
+    <!--</fragment>-->
+    <FrameLayout
+        android:id="@+id/fragment_frag_league_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>

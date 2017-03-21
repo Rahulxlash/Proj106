@@ -1,16 +1,17 @@
 package com.cricketta.league;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -36,6 +37,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 public class Main_Activity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         GoogleApiClient.OnConnectionFailedListener {
+    public ActionBar actionBar;
     private TextView user_information;
     private ImageView ImgVwProfileImage;
     private FragmentManager fragmentManager;
@@ -60,6 +62,7 @@ public class Main_Activity extends BaseActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
         fab = (FloatingActionButton) findViewById(R.id.fab);
         //fab.setImageResource(R.drawable.plus_outline);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -96,8 +99,12 @@ public class Main_Activity extends BaseActivity
                 }
             }
         });
-        frag_league_list fragLeagueList = new frag_league_list();
-        showFragment(fragLeagueList, "Home");
+        if (savedInstanceState == null) {
+            //do your stuff
+            frag_league_list fragLeagueList = new frag_league_list();
+            showFragment(fragLeagueList, "Home");
+        }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

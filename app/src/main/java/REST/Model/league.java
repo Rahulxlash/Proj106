@@ -3,6 +3,8 @@ package REST.Model;
 import android.databinding.BindingAdapter;
 import android.view.View;
 
+import com.cricketta.league.R;
+
 import org.parceler.Parcel;
 
 import java.util.Date;
@@ -70,6 +72,16 @@ public class League {
 
     public boolean showAccept() {
         return accepted == false && isMyLeague == false;
+    }
+
+    public int getCardColor() {
+
+        if (!accepted)
+            return R.color.cardcolor;
+        if (points > 0)
+            return R.color.cardcolorWin;
+        else
+            return R.color.cardcolorLoss;
     }
 
     public boolean showPending() {

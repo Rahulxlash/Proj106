@@ -1,8 +1,8 @@
 package com.cricketta.league.fragment;
 
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -12,23 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cricketta.league.BaseActivity;
-import com.cricketta.league.Main_Activity;
 import com.cricketta.league.R;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import REST.Adapter.FBUserAdapter;
-import REST.Adapter.LeagueViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,20 +71,5 @@ public class SelectCompetitor_frag extends Fragment {
         request.executeAsync();
 
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((Main_Activity) getActivity())
-                .setActionBarTitle("Create League");
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser)
-            ((Main_Activity) getActivity())
-                    .setActionBarTitle("Create League");
     }
 }

@@ -1,11 +1,11 @@
 package com.cricketta.league.fragment;
 
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,13 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cricketta.league.BaseActivity;
-import com.cricketta.league.Main_Activity;
 import com.cricketta.league.R;
 
-import org.parceler.transfuse.annotations.OnCreate;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import REST.Adapter.LeagueViewAdapter;
 import REST.Model.League;
@@ -88,21 +84,6 @@ public class frag_league_list extends Fragment {
                 Log.d("retro", error.getBody().toString());
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((Main_Activity) getActivity())
-                .setActionBarTitle("Home");
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser)
-            ((Main_Activity) getActivity())
-                    .setActionBarTitle("Home");
     }
 }
 

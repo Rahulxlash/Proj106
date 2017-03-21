@@ -68,4 +68,11 @@ public class League {
         return points;
     }
 
+    public boolean showAccept() {
+        return accepted == false && isMyLeague == false;
+    }
+
+    public boolean showPending() {
+        return accepted == false && isMyLeague == true;
+    }
 }

@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.cricketta.league.R" />
+        <import type="android.view.View" />
 
         <variable
             name="league"
@@ -200,24 +200,47 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_below="@+id/textLay"-->
-                <!--android:layout_marginTop="15dp"-->
-                <!--android:gravity="center_horizontal"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:visibility="@{league}">-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textLay"
+                    android:layout_marginTop="15dp"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:visibility="@{league.showPending()? View.VISIBLE: View.INVISIBLE}">
 
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textColor="@color/cardcolorLoss"-->
-                <!--android:text="Challange not accepted"-->
-                <!--/>-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="Challange Pending"
+                        android:textColor="#ce0606" />
 
-                <!--</LinearLayout>-->
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textLay"
+                    android:layout_marginTop="15dp"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:visibility="@{league.showAccept()? View.VISIBLE: View.INVISIBLE}">
+
+                    <Button
+                        android:id="@+id/btnAcceptChallange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/thumbs_up"
+                        android:text="Accept" />
+
+                    <Button
+                        android:id="@+id/btnDeclineChallange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/thumbs_down"
+                        android:text="Decline" />
+                </LinearLayout>
                 <TextView
                     android:id="@+id/pointsLabel"
                     android:layout_width="wrap_content"

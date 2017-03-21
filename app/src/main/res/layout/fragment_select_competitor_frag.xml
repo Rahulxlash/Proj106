@@ -9,22 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/create_league"
+        <EditText
+            android:id="@+id/League_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:background="@color/blue"
-            android:text="Creat New League"
-            android:textAlignment="center" />
-
+            android:hint="League Name"
+            android:textColor="#1facb1"
+            android:textColorHint="#a6ffffff" />
 
         <android.support.v7.widget.RecyclerView
-        android:id="@+id/fb_user_recycler"
-        android:layout_width="match_parent"
+            android:id="@+id/fb_user_recycler"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/create_league">
-    </android.support.v7.widget.RecyclerView>
+            android:layout_below="@+id/League_name"></android.support.v7.widget.RecyclerView>
 
     </RelativeLayout>
 

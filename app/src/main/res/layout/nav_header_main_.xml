@@ -4,30 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
     android:background="@color/colorPrimary"
-    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-        <ImageView
-            android:id="@+id/profileImage"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:paddingTop="@dimen/nav_header_vertical_spacing"
-            app:srcCompat="@drawable/prof_ico_2"
-            android:layout_gravity="center_vertical|center_horizontal" />
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        app:srcCompat="@drawable/prof_ico_2" />
 
     <TextView
         android:id="@+id/txtUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:text="Rahul Sharma"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
-        android:textColor="@color/textColorPrimary"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="20dp" />
+        android:textColor="@color/textColorPrimary" />
 
 </LinearLayout>

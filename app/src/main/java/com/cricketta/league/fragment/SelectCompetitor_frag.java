@@ -36,12 +36,9 @@ public class SelectCompetitor_frag extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         View view = inflater.inflate(R.layout.fragment_select_competitor_frag, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.fb_user_recycler);
 

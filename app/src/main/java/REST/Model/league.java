@@ -1,9 +1,11 @@
 package REST.Model;
 
+import android.databinding.BindingAdapter;
+import android.view.View;
+
 import org.parceler.Parcel;
 
 import java.util.Date;
-import java.util.jar.Attributes;
 
 /**
  * Created by Anuj on 3/10/2017.
@@ -17,6 +19,14 @@ public class League {
     private boolean accepted;
     private int creator;
     private Date createDate;
+    private String competitorName;
+    private boolean isMyLeague;
+    private int points;
+
+    @BindingAdapter("android:visibility")
+    public static void setVisibility(View view, League model) {
+        view.setVisibility(model.Accepted() ? View.VISIBLE : View.INVISIBLE);
+    }
 
     public int getLeagueId() {
         return leagueId;
@@ -38,7 +48,24 @@ public class League {
         return creator;
     }
 
+    public boolean Accepted() {
+        return accepted;
+    }
+
     public char getLeagueTitle() {
         return name.toUpperCase().charAt(0);
     }
+
+    public String getCompetitorName() {
+        return competitorName;
+    }
+
+    public boolean getIsMyLeague() {
+        return isMyLeague;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
 }

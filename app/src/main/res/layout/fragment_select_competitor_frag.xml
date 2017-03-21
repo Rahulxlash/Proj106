@@ -13,6 +13,7 @@
             android:id="@+id/League_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="League Name"
             android:textColor="#1facb1"
             android:textColorHint="#a6ffffff" />
@@ -21,7 +22,9 @@
             android:id="@+id/fb_user_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/League_name"></android.support.v7.widget.RecyclerView>
+            android:layout_below="@+id/League_name">
+
+        </android.support.v7.widget.RecyclerView>
 
     </RelativeLayout>
 

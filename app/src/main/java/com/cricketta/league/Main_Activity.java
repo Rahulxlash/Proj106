@@ -208,14 +208,14 @@ public class Main_Activity extends BaseActivity
     private void setProfileImage(View view) {
         ImgVwProfileImage = (ImageView) view.findViewById(R.id.profileImage);
         if (ProfileImage == 0) {//Facebook Id
-            Uri imageUri = Profile.getCurrentProfile().getProfilePictureUri(400, 400);
+            Uri imageUri = Profile.getCurrentProfile().getProfilePictureUri(200, 200);
             Picasso.with(this).load(imageUri).transform(new CropCircleTransformation()).into(ImgVwProfileImage);
         } else { //Google Id
             if (mstrPhotoUrl != "")
                 Picasso.with(this).load(mstrPhotoUrl).transform(new CropCircleTransformation()).into(ImgVwProfileImage);
         }
         user_information = (TextView) view.findViewById(R.id.txtUserName);
-        user_information.setText(mstrUserName);
+        user_information.setText(mstrUserName.trim());
     }
 
     @Override

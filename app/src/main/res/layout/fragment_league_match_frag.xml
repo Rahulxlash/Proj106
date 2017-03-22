@@ -5,7 +5,6 @@
     android:background="#22353e"
     tools:context="com.cricketta.league.fragment.LeagueMatch_frag">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"

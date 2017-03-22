@@ -30,7 +30,7 @@ dependencies {
     // If you want to use the GPU Filters
 
 
-    compile 'com.google.android.gms:play-services-auth:10.0.1'
+    compile 'com.google.android.gms:play-services-auth:9.8.0'
     compile 'com.facebook.android:facebook-android-sdk:4.5.0'
     compile 'com.squareup.retrofit:retrofit:1.6.1'
     compile 'com.squareup.picasso:picasso:2.5.2'

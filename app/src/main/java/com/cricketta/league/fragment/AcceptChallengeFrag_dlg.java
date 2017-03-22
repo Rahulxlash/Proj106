@@ -14,8 +14,6 @@ import android.widget.TextView;
 import com.cricketta.league.Main_Activity;
 import com.cricketta.league.R;
 
-import java.util.jar.Attributes;
-
 import REST.Model.League;
 import REST.RestClient;
 import retrofit.Callback;
@@ -54,7 +52,7 @@ public class AcceptChallengeFrag_dlg extends DialogFragment {
                     public void success(League league, Response response) {
                         FragmentManager manager = getFragmentManager();
                         frag_league_list frag = (frag_league_list) getFragmentManager().findFragmentByTag("Home");
-                        frag.getUserLeagues();
+                        frag.getUserLeagues(true);
                         getDialog().dismiss();
                         ((Main_Activity) getActivity()).showToast("League Accepted.");
                     }
@@ -77,7 +75,7 @@ public class AcceptChallengeFrag_dlg extends DialogFragment {
                     public void success(League league, Response response) {
                         FragmentManager manager = getFragmentManager();
                         frag_league_list frag = (frag_league_list) getFragmentManager().findFragmentByTag("Home");
-                        frag.getUserLeagues();
+                        frag.getUserLeagues(true);
                         getDialog().dismiss();
                         ((Main_Activity) getActivity()).showToast("League Rejected.");
                     }

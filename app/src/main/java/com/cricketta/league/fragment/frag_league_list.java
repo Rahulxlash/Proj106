@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -72,7 +72,7 @@ public class frag_league_list extends Fragment {
                             dialogFragment.show(fm, "AcceptChallenge");
                         } else {
                             LeagueDetails_frag frag = new LeagueDetails_frag();
-                            ((Main_Activity) getActivity()).showFragment(frag, "LeagueDetail");
+                            ((Main_Activity) getActivity()).showFragment(frag, "LeagueDetail", true);
                         }
                     }
 

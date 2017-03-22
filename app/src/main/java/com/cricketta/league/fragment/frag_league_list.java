@@ -1,11 +1,11 @@
 package com.cricketta.league.fragment;
 
 
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -80,7 +80,7 @@ public class frag_league_list extends Fragment {
 
     }
 
-    private void getUserLeagues() {
+    public void getUserLeagues() {
         ((BaseActivity) getActivity()).showDialog("");
         SharedPreferences mySharedpreprence = getActivity().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE);
         int User_Id = mySharedpreprence.getInt("USER_ID", 0);

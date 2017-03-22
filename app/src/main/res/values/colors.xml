@@ -13,6 +13,7 @@
     <color name="button">#5c6e74</color>
     <color name="actionbar">#01181c</color>
     <color name="cardcolor">#fade29</color>
+    <color name="cardcolorReject">#8edbff</color>
     <color name="cardcolorWin">#94dc7c</color>
     <color name="cardcolorLoss">#fd9d88</color>
     <color name="DialogFragment">#698d9c</color>

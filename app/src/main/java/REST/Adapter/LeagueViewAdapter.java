@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cricketta.league.R;
-import com.cricketta.league.databinding.ItemLeagueListBinding;
 
 import java.util.List;
 
@@ -18,7 +17,8 @@ import REST.ViewHolder.LeagueViewHolder;
  * Created by Anuj on 3/10/2017.
  */
 
-public class LeagueViewAdapter extends  RecyclerView.Adapter<LeagueViewHolder> {
+public class LeagueViewAdapter extends RecyclerView.Adapter<LeagueViewHolder> {
+    public int Position;
     private List<League> users;
 
     public LeagueViewAdapter(List<League> users) {
@@ -30,12 +30,11 @@ public class LeagueViewAdapter extends  RecyclerView.Adapter<LeagueViewHolder> {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View statusContainer = inflater.inflate(R.layout.item_league_list, parent, false);
-
         return new LeagueViewHolder(statusContainer);
     }
 
     @Override
-    public void onBindViewHolder(LeagueViewHolder holder, int position) {
+    public void onBindViewHolder(final LeagueViewHolder holder, int position) {
         League status = users.get(position);
         holder.bind(status);
     }

@@ -1,6 +1,7 @@
 package REST.Adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -39,7 +40,27 @@ public class FBUserAdapter extends RecyclerView.Adapter<FBUserAdapter.FBUserView
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.card_facebook_user, parent, false);
-        FBUserViewHolder holder = new FBUserViewHolder(view);
+        final FBUserViewHolder holder = new FBUserViewHolder(view);
+        holder.btn_Challange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    String FBId = array.getJSONObject(holder.getAdapterPosition()).getString("id");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("FBId", FBId);
+                    FragmentManager manager = ((Main_Activity) context).getSupportFragmentManager();
+                    FragmentTransaction ft = manager.beginTransaction();
+                    Fragment prev = manager.findFragmentByTag("dialog");
+                    if (prev != null) {
+                        ft.remove(prev);
+                    }
+                    CreateLeague_dlg newFragment = new CreateLeague_dlg();
+                    newFragment.setArguments(bundle);
+                    newFragment.show(ft, "dialog");
+                } catch (JSONException e) {
+                }
+            }
+        });
         return holder;
     }
 
@@ -49,36 +70,16 @@ public class FBUserAdapter extends RecyclerView.Adapter<FBUserAdapter.FBUserView
             holder.Name.setText(array.getJSONObject(position).getString("name"));
             String imgUrl = array.getJSONObject(position).getJSONObject("picture").getJSONObject("data").getString("url");
             Picasso.with(context).load(imgUrl).placeholder(R.drawable.prof_ico_1).into(holder.img);
-            holder.btn_Challange.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    FragmentManager manager = ((Main_Activity) context).getSupportFragmentManager();
-                    FragmentTransaction ft = manager.beginTransaction();
-                    Fragment prev = manager.findFragmentByTag("dialog");
-                    if (prev != null) {
-                        ft.remove(prev);
-                    }
-                    //ft.addToBackStack(null);
-
-                    // Create and show the dialog.
-                    CreateLeague_dlg newFragment = new CreateLeague_dlg();
-                    newFragment.show(ft, "dialog");
-                }
-            });
-            //holder.PhoneNumber.setText(arrayList.get(position));
         } catch (JSONException e) {
         }
     }
 
     @Override
     public int getItemCount() {
-
         return array.length();
     }
 
     class FBUserViewHolder extends RecyclerView.ViewHolder {
-
         TextView Name;
         Button btn_Challange;
         ImageView img;

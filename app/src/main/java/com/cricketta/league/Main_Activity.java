@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -125,7 +124,7 @@ public class Main_Activity extends BaseActivity
 
     public void showFragment(Fragment fragment, String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.fragment_frag_league_list, fragment);
+        transaction.add(R.id.fragment_frag_league_list, fragment, tag);
         transaction.addToBackStack(tag);
         transaction.commit();
     }

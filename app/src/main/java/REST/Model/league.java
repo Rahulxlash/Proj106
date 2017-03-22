@@ -18,7 +18,7 @@ public class League {
     private String name;
     private int competitor;
     private int tournamentId;
-    private boolean accepted;
+    private int accepted;
     private int creator;
     private Date createDate;
     private String competitorName;
@@ -51,7 +51,7 @@ public class League {
     }
 
     public boolean Accepted() {
-        return accepted;
+        return accepted != 0;
     }
 
     public char getLeagueTitle() {
@@ -71,13 +71,15 @@ public class League {
     }
 
     public boolean showAccept() {
-        return accepted == false && isMyLeague == false;
+        return accepted == 0 && isMyLeague == false;
     }
 
     public int getCardColor() {
 
-        if (!accepted)
+        if (accepted == 0)
             return R.color.cardcolor;
+        if (accepted == 2)
+            return R.color.cardcolorReject;
         if (points > 0)
             return R.color.cardcolorWin;
         else
@@ -85,6 +87,6 @@ public class League {
     }
 
     public boolean showPending() {
-        return accepted == false && isMyLeague == true;
+        return accepted == 0 && isMyLeague == true;
     }
 }

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.cricketta.league.BaseActivity;
 import com.cricketta.league.Listener.LeagueListener;
@@ -49,12 +50,14 @@ public class frag_league_list extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_frag_league_list, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.league_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerView.addOnItemTouchListener(
                 new LeagueListener(getActivity(), recyclerView, new LeagueListener.OnItemClickListener() {
+
                     @Override
                     public void onItemClick(View view, int position) {
                         leagues.get(position);
@@ -72,7 +75,10 @@ public class frag_league_list extends Fragment {
         getUserLeagues();
 
         return view;
+
+
     }
+
 
     @Override
     public void onStart() {
@@ -101,5 +107,17 @@ public class frag_league_list extends Fragment {
             }
         });
     }
+
+//    public void onClick(View v) {
+//        switch (v.getId()) {
+//            case R.id.btnAcceptChallange:
+//                Toast.makeText(this.getActivity(), "Challange Accepted", Toast.LENGTH_LONG).show();
+//                break;
+//            case R.id.btnDeclineChallange:
+//                Toast.makeText(this.getActivity(), "challange Declined", Toast.LENGTH_LONG).show();
+//                break;
+//        }
+//    }
 }
+
 

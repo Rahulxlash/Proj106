@@ -72,7 +72,7 @@ public class CreateLeague_dlg extends DialogFragment {
                         FragmentManager manager = getFragmentManager();
                         manager.popBackStack();
                         frag_league_list frag = (frag_league_list) getFragmentManager().findFragmentByTag("Home");
-                        frag.getUserLeagues();
+                        frag.getUserLeagues(true);
                         getDialog().dismiss();
                         ((Main_Activity) getActivity()).showToast("League Created");
                     }
@@ -83,8 +83,6 @@ public class CreateLeague_dlg extends DialogFragment {
                         ((Main_Activity) getActivity()).showToast("League creation failed");
                     }
                 });
-
-
             }
         });
 

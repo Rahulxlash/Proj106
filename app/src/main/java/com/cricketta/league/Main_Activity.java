@@ -73,7 +73,7 @@ public class Main_Activity extends BaseActivity
 //                        .setAction("Action", null).show();
 
                 SelectCompetitor_frag frag = new SelectCompetitor_frag();
-                showFragment(frag, "CreateLeague");
+                showFragment(frag, "CreateLeague", true);
 
             }
         });
@@ -104,7 +104,7 @@ public class Main_Activity extends BaseActivity
         if (savedInstanceState == null) {
             //do your stuff
             frag_league_list fragLeagueList = new frag_league_list();
-            showFragment(fragLeagueList, "Home");
+            showFragment(fragLeagueList, "Home", false);
         }
 
 
@@ -122,9 +122,10 @@ public class Main_Activity extends BaseActivity
         hideDialog();
     }
 
-    public void showFragment(Fragment fragment, String tag) {
+    public void showFragment(Fragment fragment, String tag, boolean addToStack) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.fragment_frag_league_list, fragment, tag);
+        if (addToStack)
         transaction.addToBackStack(tag);
         transaction.commit();
     }

@@ -89,4 +89,8 @@ public class League {
     public boolean showPending() {
         return accepted == 0 && isMyLeague == true;
     }
+
+    public boolean showChallange() {
+        return accepted == 0 && isMyLeague == false;
+    }
 }

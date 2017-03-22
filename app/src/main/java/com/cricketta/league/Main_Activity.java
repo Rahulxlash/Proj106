@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -60,6 +61,7 @@ public class Main_Activity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_);
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -73,6 +75,7 @@ public class Main_Activity extends BaseActivity
 
                 SelectCompetitor_frag frag = new SelectCompetitor_frag();
                 showFragment(frag, "CreateLeague");
+
             }
         });
 
@@ -84,6 +87,7 @@ public class Main_Activity extends BaseActivity
                 Fragment fr = fragmentManager.findFragmentById(R.id.fragment_frag_league_list);
                 if (fr != null) {
                     Log.e("fragment=", fr.getClass().getSimpleName());
+                    fab.setVisibility(View.INVISIBLE);
                     switch (fr.getClass().getSimpleName()) {
                         case "frag_league_list":
                             setActionBarTitle("Home");
@@ -91,7 +95,6 @@ public class Main_Activity extends BaseActivity
                             break;
                         case "SelectCompetitor_frag":
                             setActionBarTitle("Create League");
-                            fab.setVisibility(View.INVISIBLE);
                             break;
                         default:
                             setActionBarTitle("Cricketta");
@@ -231,5 +234,7 @@ public class Main_Activity extends BaseActivity
         getSupportActionBar().setTitle(title);
 
     }
+
 }
+
 

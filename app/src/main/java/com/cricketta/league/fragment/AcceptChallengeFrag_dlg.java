@@ -89,7 +89,7 @@ public class AcceptChallengeFrag_dlg extends DialogFragment {
         });
         TextView textView = (TextView) rootView.findViewById(R.id.title_accept_league);
         textView.setText(Title);
-        getDialog().setTitle("Simple Dialog");
+
         return rootView;
     }
 

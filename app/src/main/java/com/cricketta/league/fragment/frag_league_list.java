@@ -6,13 +6,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.cricketta.league.BaseActivity;
 import com.cricketta.league.Listener.LeagueListener;
@@ -35,7 +35,7 @@ public class frag_league_list extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<League> leagues;
     private LeagueViewAdapter adapter;
-
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public frag_league_list() {
         // Required empty public constructor
@@ -62,7 +62,7 @@ public class frag_league_list extends Fragment {
                     public void onItemClick(View view, int position) {
                         leagues.get(position);
                         LeagueDetails_frag frag = new LeagueDetails_frag();
-                        ((Main_Activity) getActivity()).showFragment(frag, "LeagueDetail");
+                        ((Main_Activity) getActivity()).showFragment(frag, "LeagueDetail", true);
                     }
 
                     @Override
@@ -71,8 +71,16 @@ public class frag_league_list extends Fragment {
                     }
                 })
         );
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                getUserLeagues(false);
+            }
+        });
         //leagues = new ArrayList<>();
-        getUserLeagues();
+        getUserLeagues(true);
 
         return view;
 
@@ -86,8 +94,9 @@ public class frag_league_list extends Fragment {
 
     }
 
-    public void getUserLeagues() {
-        ((BaseActivity) getActivity()).showDialog("");
+    public void getUserLeagues(boolean showProgress) {
+        if (showProgress)
+            ((BaseActivity) getActivity()).showDialog("");
         SharedPreferences mySharedpreprence = getActivity().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE);
         int User_Id = mySharedpreprence.getInt("USER_ID", 0);
         RestClient restClient = new RestClient();
@@ -97,27 +106,26 @@ public class frag_league_list extends Fragment {
                 leagues = league;
                 adapter = new LeagueViewAdapter(leagues);
                 recyclerView.setAdapter(adapter);
+                onItemsLoadComplete();
                 ((BaseActivity) getActivity()).hideDialog();
             }
 
             @Override
             public void failure(RetrofitError error) {
+                onItemsLoadComplete();
                 ((BaseActivity) getActivity()).hideDialog();
                 Log.d("retro", error.getBody().toString());
             }
         });
     }
 
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.btnAcceptChallange:
-//                Toast.makeText(this.getActivity(), "Challange Accepted", Toast.LENGTH_LONG).show();
-//                break;
-//            case R.id.btnDeclineChallange:
-//                Toast.makeText(this.getActivity(), "challange Declined", Toast.LENGTH_LONG).show();
-//                break;
-//        }
-//    }
+    void onItemsLoadComplete() {
+        // Update the adapter and notify data set changed
+        // ...
+
+        // Stop refresh animation
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
 }
 
 

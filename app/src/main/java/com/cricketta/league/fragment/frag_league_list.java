@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,6 +21,7 @@ import com.cricketta.league.Main_Activity;
 import com.cricketta.league.R;
 
 import java.util.ArrayList;
+import java.util.jar.Attributes;
 
 import REST.Adapter.LeagueViewAdapter;
 import REST.Model.League;
@@ -60,9 +62,19 @@ public class frag_league_list extends Fragment {
 
                     @Override
                     public void onItemClick(View view, int position) {
-                        leagues.get(position);
-                        LeagueDetails_frag frag = new LeagueDetails_frag();
-                        ((Main_Activity) getActivity()).showFragment(frag, "LeagueDetail");
+                        League league = leagues.get(position);
+                        if (league.Accepted() == false && league.getIsMyLeague() == false) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name", league.getName());
+                            bundle.putInt("id", league.getLeagueId());
+                            FragmentManager fm = getFragmentManager();
+                            AcceptChallengeFrag_dlg dialogFragment = new AcceptChallengeFrag_dlg();
+                            dialogFragment.setArguments(bundle);
+                            dialogFragment.show(fm, "AcceptChallenge");
+                        } else {
+                            LeagueDetails_frag frag = new LeagueDetails_frag();
+                            ((Main_Activity) getActivity()).showFragment(frag, "LeagueDetail");
+                        }
                     }
 
                     @Override

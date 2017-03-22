@@ -22,4 +22,9 @@ public interface LeagueService {
     @POST("/league/")
     public void createLeague(@Field("Name") String Name, @Field("Creator") int CreatorId, @Field("Competitor") String CompetitorId, Callback<League> callback);
 
+    @POST("/league/{leagueId}/Accept")
+    public void AcceptChallange(@Path("leagueId") int LeagueId, Callback<League> callback);
+
+    @POST("/league/{leagueId}/Reject")
+    public void RejectChallange(@Path("leagueId") int LeagueId, Callback<League> callback);
 }

@@ -1,6 +1,9 @@
 package REST.Adapter;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +12,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cricketta.league.Main_Activity;
 import com.cricketta.league.R;
+import com.cricketta.league.fragment.CreateLeague_dlg;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by rahul.sharma01 on 3/19/2017.
@@ -46,6 +49,23 @@ public class FBUserAdapter extends RecyclerView.Adapter<FBUserAdapter.FBUserView
             holder.Name.setText(array.getJSONObject(position).getString("name"));
             String imgUrl = array.getJSONObject(position).getJSONObject("picture").getJSONObject("data").getString("url");
             Picasso.with(context).load(imgUrl).placeholder(R.drawable.prof_ico_1).into(holder.img);
+            holder.btn_Challange.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    FragmentManager manager = ((Main_Activity) context).getSupportFragmentManager();
+                    FragmentTransaction ft = manager.beginTransaction();
+                    Fragment prev = manager.findFragmentByTag("dialog");
+                    if (prev != null) {
+                        ft.remove(prev);
+                    }
+                    //ft.addToBackStack(null);
+
+                    // Create and show the dialog.
+                    CreateLeague_dlg newFragment = new CreateLeague_dlg();
+                    newFragment.show(ft, "dialog");
+                }
+            });
             //holder.PhoneNumber.setText(arrayList.get(position));
         } catch (JSONException e) {
         }
@@ -69,14 +89,6 @@ public class FBUserAdapter extends RecyclerView.Adapter<FBUserAdapter.FBUserView
             img = (ImageView) itemView.findViewById(R.id.img_user);
             Name = (TextView) itemView.findViewById(R.id.txt_FBUserName);
             btn_Challange = (Button) itemView.findViewById(R.id.btn_Challange);
-
-            btn_Challange.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //OnClick
-                }
-            });
-
         }
 
     }

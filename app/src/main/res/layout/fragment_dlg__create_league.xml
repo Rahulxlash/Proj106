@@ -1,0 +1,45 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="com.cricketta.league.fragment.CreateLeague_dlg">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <EditText
+            android:id="@+id/League_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="League Name"
+            android:lines="1"
+            android:textColor="#1facb1"
+            android:textColorHint="#a6b3aeae" />
+
+        <TextView
+            android:id="@+id/txtWarning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please enter league name"
+            android:textColor="#ff0000"
+            android:textSize="15sp"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btn_CreateLeague"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Create League" />
+
+    </LinearLayout>
+
+
+</FrameLayout>

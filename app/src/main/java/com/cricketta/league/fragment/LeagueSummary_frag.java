@@ -14,7 +14,7 @@ import com.cricketta.league.R;
  */
 public class LeagueSummary_frag extends Fragment {
 
-
+    String Tile;
     public LeagueSummary_frag() {
         // Required empty public constructor
     }

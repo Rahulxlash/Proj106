@@ -70,7 +70,8 @@ public class frag_league_list extends Fragment {
                             AcceptChallengeFrag_dlg dialogFragment = new AcceptChallengeFrag_dlg();
                             dialogFragment.setArguments(bundle);
                             dialogFragment.show(fm, "AcceptChallenge");
-                        } else {
+                        }
+                        if (league.Accepted() == true) {
                             LeagueDetails_frag frag = new LeagueDetails_frag();
                             ((Main_Activity) getActivity()).showFragment(frag, "LeagueDetail", true);
                         }

@@ -1,16 +1,94 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#22353e"
+    android:orientation="vertical"
     tools:context="com.cricketta.league.fragment.LeagueSummary_frag">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text=""
-        android:textColor="#d2ffffff" />
+        android:layout_height="100dp">
 
-</FrameLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:padding="10dp"
+            android:text="League name"
+            android:textColor="#ffffff"
+            android:textSize="30dp" />
+
+
+        <ImageView
+            android:id="@+id/img_user"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="bottom"
+            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/prof_ico_1" />
+
+        <ImageView
+            android:id="@+id/creater_points_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            app:srcCompat="@drawable/points" />
+
+        <TextView
+            android:id="@+id/challenger_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignTop="@+id/creater_points_image"
+            android:layout_marginStart="14dp"
+            android:layout_toEndOf="@+id/creater_points_image"
+            android:text="my points"
+            android:textColor="#ffff" />
+
+
+        <ImageView
+            android:id="@+id/competitor_point_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="18dp"
+            android:layout_toStartOf="@+id/competitor_point"
+            app:srcCompat="@drawable/points" />
+
+        <TextView
+            android:id="@+id/competitor_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/img_user"
+            android:layout_alignTop="@+id/creater_points_image"
+            android:text="competitor point"
+            android:textColor="#ffff" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

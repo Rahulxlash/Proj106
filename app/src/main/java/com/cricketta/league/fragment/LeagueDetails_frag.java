@@ -1,11 +1,14 @@
 package com.cricketta.league.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.os.CancellationSignal;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,10 @@ import com.cricketta.league.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import REST.Model.League;
+
+import static com.android.databinding.library.baseAdapters.BR.league;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -24,10 +31,11 @@ public class LeagueDetails_frag extends Fragment {
     //private FragmentTabHost mTabHost;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
+    private ArrayList<League> leagues;
     public LeagueDetails_frag() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +52,8 @@ public class LeagueDetails_frag extends Fragment {
         tabLayout.getTabAt(1).setIcon(R.drawable.league_matches);
         tabLayout.getTabAt(2).setIcon(R.drawable.league_setting);
         return view;
+
+
     }
 
     private void setupViewPager(ViewPager viewPager) {

@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import REST.Adapter.MatchViewAdapter;
 import REST.Model.League;
 import REST.RestClient;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -31,9 +32,10 @@ public class LeagueSummary_frag extends Fragment {
     RecyclerView league_summmary;
     MatchViewAdapter adapter;
     private int leagueId;
-    private TextView txtLeagueName, txtCreatorPoint, txtCompetitorPoint;
+    private TextView txtLeagueName, txtCreatorPoint, txtCompetitorPoint, txtMyPoints, txtCompName;
     private ImageView img_user;
     private SwipeRefreshLayout mSwipeRefreshLayout;
+
     public LeagueSummary_frag() {
         // Required empty public constructor
     }
@@ -47,6 +49,8 @@ public class LeagueSummary_frag extends Fragment {
         txtLeagueName = (TextView) rootView.findViewById(R.id.txtLeagueName);
         txtCreatorPoint = (TextView) rootView.findViewById(R.id.challenger_point);
         txtCompetitorPoint = (TextView) rootView.findViewById(R.id.competitor_point);
+        txtMyPoints = (TextView) rootView.findViewById(R.id.txtMyPoints);
+        txtCompName = (TextView) rootView.findViewById(R.id.txtCompName);
         img_user = (ImageView) rootView.findViewById(R.id.img_user);
         league_summmary = (RecyclerView) rootView.findViewById(R.id.league_summmary);
         league_summmary.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -81,7 +85,10 @@ public class LeagueSummary_frag extends Fragment {
                 txtLeagueName.setText(league.getName());
                 txtCreatorPoint.setText(Integer.toString(league.getCreatorPoints()));
                 txtCompetitorPoint.setText(Integer.toString(league.getCompetitorPoints()));
-                Picasso.with(getActivity()).load("https://graph.facebook.com/" + league.getCompFBId() + "/picture?type=normal").placeholder(R.drawable.prof_ico_1).into(img_user);
+                txtMyPoints.setText(Integer.toString(league.getPoints()));
+                txtCompName.setText(league.getCompetitorName());
+
+                Picasso.with(getActivity()).load("https://graph.facebook.com/" + league.getCompFBId() + "/picture?type=normal").transform(new CropCircleTransformation()).placeholder(R.drawable.prof_ico_1).into(img_user);
                 adapter = new MatchViewAdapter(league.getSummaryMatches());
                 league_summmary.setAdapter(adapter);
                 onItemsLoadComplete();

@@ -17,8 +17,9 @@
 
         <ImageView
             android:id="@+id/img_user"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/prof_ico_1" />
 
         <TextView
@@ -62,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text=""
+                android:text="Me"
                 android:textColor="#1adade"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -87,6 +88,7 @@
                 android:textColor="#ffff" />
 
             <TextView
+                android:id="@+id/txtCompName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"

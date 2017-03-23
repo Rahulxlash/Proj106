@@ -5,12 +5,11 @@
     android:background="#22353e"
     tools:context="com.cricketta.league.fragment.LeagueMatch_frag">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/league_match"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text=""
-        android:textColor="#d2ffffff" />
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>

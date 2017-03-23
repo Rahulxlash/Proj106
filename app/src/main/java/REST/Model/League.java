@@ -7,6 +7,7 @@ import com.cricketta.league.R;
 
 import org.parceler.Parcel;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -26,6 +27,7 @@ public class League {
     private int points;
     private int creatorPoints;
     private int competitorPoints;
+    private ArrayList<LeagueMatch> summaryMatches;
 
     @BindingAdapter("android:visibility")
     public static void setVisibility(View view, League model) {

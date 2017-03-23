@@ -66,14 +66,17 @@ public class frag_league_list extends Fragment {
                             Bundle bundle = new Bundle();
                             bundle.putString("name", league.getName());
                             bundle.putInt("id", league.getLeagueId());
-
                             FragmentManager fm = getFragmentManager();
                             AcceptChallengeFrag_dlg dialogFragment = new AcceptChallengeFrag_dlg();
                             dialogFragment.setArguments(bundle);
                             dialogFragment.show(fm, "AcceptChallenge");
                         }
                         if (league.Accepted() == true) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name", league.getName());
+                            bundle.putInt("leagueId", league.getLeagueId());
                             LeagueDetails_frag frag = new LeagueDetails_frag();
+                            frag.setArguments(bundle);
                             ((Main_Activity) getActivity()).showFragment(frag, "LeagueDetail", true);
                         }
                     }

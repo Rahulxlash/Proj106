@@ -57,10 +57,22 @@ public class LeagueDetails_frag extends Fragment {
     }
 
     private void setupViewPager(ViewPager viewPager) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("leagueId", getArguments().getInt("leagueId"));
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFragment(new LeagueSummary_frag(), "");
-        adapter.addFragment(new LeagueMatch_frag(), "");
-        adapter.addFragment(new LeagueSetting_frag(), "");
+
+        LeagueSummary_frag fragSum = new LeagueSummary_frag();
+        fragSum.setArguments(bundle);
+        LeagueMatch_frag fragmat = new LeagueMatch_frag();
+        fragmat.setArguments(bundle);
+        LeagueSetting_frag fragset = new LeagueSetting_frag();
+        fragset.setArguments(bundle);
+
+        adapter.addFragment(fragSum, "");
+        adapter.addFragment(fragmat, "");
+        adapter.addFragment(fragset, "");
+
         viewPager.setAdapter(adapter);
     }
 

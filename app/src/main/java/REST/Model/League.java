@@ -27,6 +27,7 @@ public class League {
     private int points;
     private int creatorPoints;
     private int competitorPoints;
+    private String competitorFBId;
     private ArrayList<LeagueMatch> summaryMatches;
 
     @BindingAdapter("android:visibility")
@@ -104,5 +105,13 @@ public class League {
 
     public int getCompetitorPoints() {
         return competitorPoints;
+    }
+
+    public String getCompFBId() {
+        return competitorFBId;
+    }
+
+    public ArrayList<LeagueMatch> getSummaryMatches() {
+        return summaryMatches;
     }
 }

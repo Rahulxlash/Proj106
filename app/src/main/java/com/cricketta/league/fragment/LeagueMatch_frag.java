@@ -12,22 +12,15 @@ import android.view.ViewGroup;
 
 import com.cricketta.league.Main_Activity;
 import com.cricketta.league.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import REST.Adapter.MatchViewAdapter;
-import REST.Model.League;
 import REST.Model.LeagueMatch;
 import REST.RestClient;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-
-import static com.android.databinding.library.baseAdapters.BR.league;
-import static com.cricketta.league.R.id.img_user;
-import static com.cricketta.league.R.id.league_match;
-import static com.cricketta.league.R.id.league_recycler;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,8 +41,8 @@ public class LeagueMatch_frag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_league_match_frag, container, false);
-
-        league_match = (RecyclerView) rootView.findViewById(R.id.league_summmary);
+        leagueId = getArguments().getInt("leagueId");
+        league_match = (RecyclerView) rootView.findViewById(R.id.league_match);
         league_match.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout_match);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -59,13 +52,14 @@ public class LeagueMatch_frag extends Fragment {
                 getLeagueMatches();
             }
         });
+        getLeagueMatches();
         return rootView;
     }
 
     public void getLeagueMatches() {
         int userId = ((Main_Activity) getActivity()).mintUserId;
         RestClient client = new RestClient();
-        client.LeagueService().getLeagueMatches(leagueId, new Callback<ArrayList<LeagueMatch>>() {
+        client.LeagueService().getLeagueMatches(leagueId, userId, new Callback<ArrayList<LeagueMatch>>() {
             @Override
             public void success(ArrayList<LeagueMatch> leagueMatches, Response response) {
                 adapter = new MatchViewAdapter(leagueMatches);

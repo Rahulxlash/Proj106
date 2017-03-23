@@ -22,8 +22,8 @@ public interface LeagueService {
     @GET("/league/{value}/summary/{userId}")
     public void getLeagueSummary(@Path("value") int leagueId, @Path("userId") int userId, Callback<League> callback);
 
-    @GET("/league/{value}/matches")
-    public void getLeagueMatches(@Path("value") int leagueId, Callback<ArrayList<LeagueMatch>> callback);
+    @GET("/league/{value}/matches/{userId}")
+    public void getLeagueMatches(@Path("value") int leagueId, @Path("userId") int userId, Callback<ArrayList<LeagueMatch>> callback);
 
     @FormUrlEncoded
     @POST("/league/")

@@ -24,6 +24,8 @@ public class League {
     private String competitorName;
     private boolean isMyLeague;
     private int points;
+    private int creatorPoints;
+    private int competitorPoints;
 
     @BindingAdapter("android:visibility")
     public static void setVisibility(View view, League model) {
@@ -92,5 +94,13 @@ public class League {
 
     public boolean showChallange() {
         return accepted == 0 && isMyLeague == false;
+    }
+
+    public int getCreatorPoints() {
+        return creatorPoints;
+    }
+
+    public int getCompetitorPoints() {
+        return competitorPoints;
     }
 }

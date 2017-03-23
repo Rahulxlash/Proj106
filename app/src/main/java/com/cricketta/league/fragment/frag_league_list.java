@@ -66,6 +66,7 @@ public class frag_league_list extends Fragment {
                             Bundle bundle = new Bundle();
                             bundle.putString("name", league.getName());
                             bundle.putInt("id", league.getLeagueId());
+
                             FragmentManager fm = getFragmentManager();
                             AcceptChallengeFrag_dlg dialogFragment = new AcceptChallengeFrag_dlg();
                             dialogFragment.setArguments(bundle);

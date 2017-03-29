@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/windowBackground"
+    tools:context="com.cricketta.league.fragment.Request_Toss_dlg">
+
+
+    <TextView
+        android:id="@+id/Requesttoss"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:background="#3e4143"
+        android:paddingTop="5dp"
+        android:text="Toss Pending"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/TossButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Requesttoss"
+        android:layout_margin="5dp"
+        android:background="#3884cf"
+        android:text="Request for toss" />
+</RelativeLayout>
+
+
+
+
+
+

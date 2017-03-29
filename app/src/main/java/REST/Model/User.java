@@ -7,10 +7,10 @@ import org.parceler.Parcel;
  */
 @Parcel
 public class User {
-    private Integer userId;
-    private String facebookId;
-    private String userName;
-    private Integer profileImage;
+    public Integer userId;
+    public String facebookId;
+    public String userName;
+    public Integer profileImage;
 
     public String getUserName()
     {

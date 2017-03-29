@@ -10,6 +10,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.cricketta.league.Utils.CricApplication;
+
 /**
  * Created by rahul.sharma01 on 3/7/2017.
  */
@@ -82,4 +84,17 @@ public class BaseActivity extends AppCompatActivity {
         mFirebaseToken = mySharedpreprence.getString(FIREBASE_TOKEN, "");
         return mFirebaseToken;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CricApplication.activityResumed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        CricApplication.activityPaused();
+    }
+
 }

@@ -15,20 +15,20 @@ import java.util.Date;
  */
 @Parcel
 public class League {
-    private int leagueId;
-    private String name;
-    private int competitor;
-    private int tournamentId;
-    private int accepted;
-    private int creator;
-    private Date createDate;
-    private String competitorName;
-    private boolean isMyLeague;
-    private int points;
-    private int creatorPoints;
-    private int competitorPoints;
-    private String competitorFBId;
-    private ArrayList<LeagueMatch> summaryMatches;
+    public int leagueId;
+    public String name;
+    public int competitor;
+    public int tournamentId;
+    public int accepted;
+    public int creator;
+    public Date createDate;
+    public String competitorName;
+    public boolean isMyLeague;
+    public int points;
+    public int creatorPoints;
+    public int competitorPoints;
+    public String competitorFBId;
+    public ArrayList<LeagueMatch> summaryMatches;
 
     @BindingAdapter("android:visibility")
     public static void setVisibility(View view, League model) {

@@ -27,7 +27,7 @@ public class LeagueMatch {
     public int creatorWicket;
     public int competitorRun;
     public int competitorWicket;
-
+    public int tossRequestedBy;
 
     public String getTeams() {
         return teamName1.trim() + "-" + teamName2.trim();

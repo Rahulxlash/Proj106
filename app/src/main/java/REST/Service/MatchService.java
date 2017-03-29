@@ -2,6 +2,7 @@ package REST.Service;
 
 import REST.Model.LeagueMatch;
 import retrofit.Callback;
+import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
 
@@ -10,6 +11,9 @@ import retrofit.http.Path;
  */
 
 public interface MatchService {
+
+    @GET("/LeagueMatch/{matchId}")
+    public void getMatch(@Path("matchId") int matchId, Callback<LeagueMatch> callback);
 
     @POST("/LeagueMatch/{MatchId}/RequestToss/{UserId}")
     public void RequestToss(@Path("MatchId") int MatchId, @Path("UserId") int UserId, Callback<LeagueMatch> callback);

@@ -80,7 +80,6 @@ public class LoginActivity extends BaseActivity implements
         if (Profile.getCurrentProfile() != null) {
             isUserRegistered(mstrThirdPartyId);
         }
-
 //        OptionalPendingResult<GoogleSignInResult> pendingResult = Auth.GoogleSignInApi.silentSignIn(Common.mGoogleApiClient);
 //        if (pendingResult != null) {
 //            handleGooglePendingResult(pendingResult);
@@ -103,6 +102,7 @@ public class LoginActivity extends BaseActivity implements
                         public void success(User user, Response response) {
                             hideDialog();
                             saveUserData(user.getFacebookId(), user.getUserName(), user.getUserId(), user.getProfileImage(), mstrPhotoUrl);
+                            RegisterDevicetoUser(user.getUserId());
                             Intent intent = new Intent(mContext, Main_Activity.class);
                             startActivity(intent);
                         }
@@ -117,6 +117,7 @@ public class LoginActivity extends BaseActivity implements
                 } else {
                     hideDialog();
                     Intent intent = new Intent(mContext, Main_Activity.class);
+                    RegisterDevicetoUser(user.getUserId());
                     saveUserData(user.getFacebookId(), user.getUserName(), user.getUserId(), user.getProfileImage(), mstrPhotoUrl);
                     startActivity(intent);
                 }
@@ -209,6 +210,7 @@ public class LoginActivity extends BaseActivity implements
             // you don't have a valid sign in account. Eventually display the login page again
         }
     }
+
     @Override
     public void onClick(View v) {
 //        switch (v.getId()) {
@@ -240,5 +242,20 @@ public class LoginActivity extends BaseActivity implements
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    private void RegisterDevicetoUser(int UserId) {
+        RestClient client = new RestClient();
+        client.AuthService().RegisterDevice(UserId, getDeviceToken(), new Callback<User>() {
+            @Override
+            public void success(User user, Response response) {
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
     }
 }

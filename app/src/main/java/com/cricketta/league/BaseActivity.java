@@ -5,11 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
-
-import org.parceler.transfuse.annotations.OnCreate;
 
 /**
  * Created by rahul.sharma01 on 3/7/2017.
@@ -22,12 +21,14 @@ public class BaseActivity extends AppCompatActivity {
     public static final String FACEBOOK_ID = "FACEBOOK_ID";
     public static final String PROFILE_IMAGE = "PROFILE_IMAGE";
     public static final String PHOTO_URL = "PHOTO_URL";
+    public static final String FIREBASE_TOKEN = "FirebaseToken";
     public int mintUserId;
     public String mstrUserName;
     public String mstrThirdPartyId;
     public int ProfileImage;
     public String mstrPhotoUrl;
     public ProgressDialog mProgressDialog;
+    public String mFirebaseToken;
 
     public void showToast(String message) {
         Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
@@ -74,5 +75,11 @@ public class BaseActivity extends AppCompatActivity {
             //mProgressDialog.setMessage("");
             mProgressDialog.dismiss();
         }
+    }
+
+    public String getDeviceToken() {
+        SharedPreferences mySharedpreprence = PreferenceManager.getDefaultSharedPreferences(this);
+        mFirebaseToken = mySharedpreprence.getString(FIREBASE_TOKEN, "");
+        return mFirebaseToken;
     }
 }

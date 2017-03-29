@@ -32,7 +32,12 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Picasso;
 
+import REST.Model.User;
+import REST.RestClient;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class Main_Activity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -193,6 +198,7 @@ public class Main_Activity extends BaseActivity
 
     private void SignOutFaacebook() {
         LoginManager.getInstance().logOut();
+        UnRegisterDevicetoUser(mintUserId);
         Intent intent = new Intent(Main_Activity.this, LoginActivity.class);
         startActivity(intent);
         finish();
@@ -235,6 +241,20 @@ public class Main_Activity extends BaseActivity
 
     }
 
+    private void UnRegisterDevicetoUser(int UserId) {
+        RestClient client = new RestClient();
+        client.AuthService().UnRegisterDevice(UserId, getDeviceToken(), new Callback<User>() {
+            @Override
+            public void success(User user, Response response) {
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
 }
 
 

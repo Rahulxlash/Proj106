@@ -24,4 +24,12 @@ public interface AuthService {
     @POST("/user/")
     public void createUser(@Field("UserName") String UserName, @Field("FacebookId") String FacebookId, @Field("ProfileImage") int ProfileImage, Callback<User> callback);
 
+    @FormUrlEncoded
+    @POST("/user/{Id}/RegisterDevice")
+    public void RegisterDevice(@Field("UserId") int Id, @Field("DeviceToken") String token, Callback<User> callback);
+
+    @FormUrlEncoded
+    @POST("/user/{Id}/UnRegisterDevice/")
+    public void UnRegisterDevice(@Field("UserId") int Id, @Field("DeviceToken") String token, Callback<User> callback);
+
 }

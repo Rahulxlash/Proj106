@@ -24,7 +24,8 @@ public class MessagingService extends FirebaseMessagingService {
 
         if (CricApplication.isActivityVisible()) {
             Intent intent = new Intent(this, Main_Activity.class);
-            intent.putExtra("data", remoteMessage.getData().toString());
+            intent.putExtra("notData", remoteMessage.getData().toString());
+
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent resultIntent = PendingIntent.getActivity(this, 0, intent,
                     PendingIntent.FLAG_ONE_SHOT);

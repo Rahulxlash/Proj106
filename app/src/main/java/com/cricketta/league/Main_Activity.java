@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cricketta.league.fragment.Request_Toss_dlg;
 import com.cricketta.league.fragment.SelectCompetitor_frag;
 import com.cricketta.league.fragment.frag_league_list;
 import com.facebook.Profile;
@@ -31,6 +32,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import REST.Model.User;
 import REST.RestClient;
@@ -112,7 +116,6 @@ public class Main_Activity extends BaseActivity
             showFragment(fragLeagueList, "Home", false);
         }
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -125,13 +128,42 @@ public class Main_Activity extends BaseActivity
         getUserData();
         setProfileImage(navigationView.getHeaderView(0));
         hideDialog();
+
+        String obj = getIntent().getStringExtra("notData");
+        if (obj != null) {
+            handleNotification(obj);
+        }
+    }
+
+    private void handleNotification(String obj) {
+        try {
+            JSONObject requestData = new JSONObject(obj);
+            Bundle bundle = new Bundle();
+            for (int i = 0; i < requestData.names().length(); i++) {
+                bundle.putString(requestData.names().getString(i), requestData.getString(requestData.names().getString(i)));
+            }
+
+            switch (requestData.getString("Tag")) {
+                case "TOSS_REQUEST":
+                    Request_Toss_dlg frag = new Request_Toss_dlg();
+                    frag.setArguments(bundle);
+                    frag.show(fragmentManager, "Toss");
+                    break;
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public void showFragment(Fragment fragment, String tag, boolean addToStack) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.fragment_frag_league_list, fragment, tag);
         if (addToStack)
-        transaction.addToBackStack(tag);
+            transaction.addToBackStack(tag);
         transaction.commit();
     }
 

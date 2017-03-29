@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 
 import REST.Service.AuthService;
 import REST.Service.LeagueService;
+import REST.Service.MatchService;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
 
@@ -17,6 +18,7 @@ public class RestClient {
     //private static final String BASE_URL = "http://192.168.1.109/cricketta.api/api/";
     private AuthService authService;
     private LeagueService leagueService;
+    private MatchService matchService;
 
     public RestClient() {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
@@ -28,9 +30,18 @@ public class RestClient {
                 .build();
         authService = restAdapter.create(AuthService.class);
         leagueService = restAdapter.create(LeagueService.class);
+        matchService = restAdapter.create(MatchService.class);
     }
+
     public AuthService AuthService() {
         return authService;
     }
-    public LeagueService LeagueService(){return  leagueService;}
+
+    public LeagueService LeagueService() {
+        return leagueService;
+    }
+
+    public MatchService MatchService() {
+        return matchService;
+    }
 }

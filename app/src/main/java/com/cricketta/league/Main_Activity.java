@@ -21,7 +21,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cricketta.league.fragment.Request_Toss_dlg;
 import com.cricketta.league.fragment.SelectCompetitor_frag;
 import com.cricketta.league.fragment.frag_league_list;
 import com.facebook.Profile;
@@ -32,9 +31,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import REST.Model.User;
 import REST.RestClient;
@@ -133,31 +129,11 @@ public class Main_Activity extends BaseActivity
         if (obj != null) {
             handleNotification(obj);
         }
+        if (getIntent().getExtras() != null)
+            handleNotification(getIntent().getExtras());
     }
 
-    private void handleNotification(String obj) {
-        try {
-            JSONObject requestData = new JSONObject(obj);
-            Bundle bundle = new Bundle();
-            for (int i = 0; i < requestData.names().length(); i++) {
-                bundle.putString(requestData.names().getString(i), requestData.getString(requestData.names().getString(i)));
-            }
 
-            switch (requestData.getString("Tag")) {
-                case "TOSS_REQUEST":
-                    Request_Toss_dlg frag = new Request_Toss_dlg();
-                    frag.setArguments(bundle);
-                    frag.show(fragmentManager, "Toss");
-                    break;
-
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-    }
 
     public void showFragment(Fragment fragment, String tag, boolean addToStack) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();

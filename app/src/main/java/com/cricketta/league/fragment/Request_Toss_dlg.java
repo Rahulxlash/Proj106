@@ -9,11 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.cricketta.league.BaseActivity;
 import com.cricketta.league.Main_Activity;
 import com.cricketta.league.R;
 
 import REST.Model.LeagueMatch;
+import REST.Model.Toss;
 import REST.RestClient;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -29,6 +32,7 @@ public class Request_Toss_dlg extends DialogFragment {
     ObjectAnimator anim;
     Button btnToss, btnHead, btnTail;
     int matchId;
+    TextView txtResult;
     LeagueMatch match;
 
     public Request_Toss_dlg() {
@@ -51,6 +55,20 @@ public class Request_Toss_dlg extends DialogFragment {
         btnToss = (Button) rootView.findViewById(R.id.TossButton);
         btnHead = (Button) rootView.findViewById(R.id.Headbutton);
         btnTail = (Button) rootView.findViewById(R.id.Tailbutton);
+        txtResult = (TextView) rootView.findViewById(R.id.txtResult);
+
+        btnHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doToss(1);
+            }
+        });
+        btnTail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doToss(2);
+            }
+        });
         getMatch();
 
         btnToss.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +107,7 @@ public class Request_Toss_dlg extends DialogFragment {
                 } else if (match.toss == -1) {
                     anim.start();
                     btnToss.setVisibility(View.GONE);
-                    if (match.tossRequestedBy != ((Main_Activity) getActivity()).mintUserId) {
+                    if (match.tossRequestedBy != ((BaseActivity) getActivity()).mintUserId) {
                         btnHead.setVisibility(View.VISIBLE);
                         btnTail.setVisibility(View.VISIBLE);
                     }
@@ -99,6 +117,33 @@ public class Request_Toss_dlg extends DialogFragment {
             @Override
             public void failure(RetrofitError error) {
 
+            }
+        });
+    }
+
+    private void doToss(final int tossOption) {
+        btnHead.setEnabled(false);
+        btnTail.setEnabled(false);
+        ((BaseActivity) getActivity()).showDialog("Toss in progress....");
+        RestClient client = new RestClient();
+        client.MatchService().DoToss(matchId, tossOption, new Callback<Toss>() {
+            @Override
+            public void success(Toss toss, Response response) {
+                if (tossOption == toss.result)
+                    ((BaseActivity) getActivity()).showToast("Congrats!! You won the toss now select the team.");
+                else
+                    ((BaseActivity) getActivity()).showToast("Ohh!! You lost the toss, now select the team.");
+
+                txtResult.setText(toss.value);
+                txtResult.setVisibility(View.VISIBLE);
+                anim.end();
+                ((BaseActivity) getActivity()).hideDialog();
+                getDialog().dismiss();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ((BaseActivity) getActivity()).hideDialog();
             }
         });
     }

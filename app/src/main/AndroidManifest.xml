@@ -40,7 +40,10 @@
             android:name=".Main_Activity"
             android:label="@string/title_activity_main_"
             android:theme="@style/MaterialTheme">
-
+            <intent-filter>
+                <action android:name="MAIN_NOTIFICATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <service android:name=".Services.MessagingService">

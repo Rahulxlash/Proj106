@@ -46,6 +46,8 @@ public class LoginActivity extends BaseActivity implements
     private TextView info;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
+    private Bundle notBundle;
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -77,9 +79,12 @@ public class LoginActivity extends BaseActivity implements
         Typeface face = Typeface.createFromAsset(getAssets(), "waltographUI.ttf");
         tv1.setTypeface(face);
 
+        notBundle = getIntent().getExtras();
+
         if (Profile.getCurrentProfile() != null) {
             isUserRegistered(mstrThirdPartyId);
         }
+
 //        OptionalPendingResult<GoogleSignInResult> pendingResult = Auth.GoogleSignInApi.silentSignIn(Common.mGoogleApiClient);
 //        if (pendingResult != null) {
 //            handleGooglePendingResult(pendingResult);
@@ -104,6 +109,8 @@ public class LoginActivity extends BaseActivity implements
                             saveUserData(user.getFacebookId(), user.getUserName(), user.getUserId(), user.getProfileImage(), mstrPhotoUrl);
                             RegisterDevicetoUser(user.getUserId());
                             Intent intent = new Intent(mContext, Main_Activity.class);
+                            if (notBundle != null)
+                                intent.putExtras(notBundle);
                             startActivity(intent);
                         }
 
@@ -117,6 +124,8 @@ public class LoginActivity extends BaseActivity implements
                 } else {
                     hideDialog();
                     Intent intent = new Intent(mContext, Main_Activity.class);
+                    if (notBundle != null)
+                        intent.putExtras(notBundle);
                     RegisterDevicetoUser(user.getUserId());
                     saveUserData(user.getFacebookId(), user.getUserName(), user.getUserId(), user.getProfileImage(), mstrPhotoUrl);
                     startActivity(intent);

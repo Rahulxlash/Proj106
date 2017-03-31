@@ -1,0 +1,106 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cricketta.league.fragment.SelectTeam_frag">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/actionbar">
+
+        <TextView
+            android:id="@+id/Team_Mach_Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:text="KKR VS RCB"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:id="@+id/Date_venu_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Team_Mach_Text"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/Date_Of_Match"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:text="Date"
+                android:textColor="#fff"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity=""
+                android:layout_margin="5dp"
+                android:text="venue"
+                android:textColor="#fff"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/competitor_me_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Date_venu_layout"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="Me"
+                android:textColor="#fff"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:paddingRight="20dp"
+                android:text="Competitor"
+                android:textColor="#fff"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/competitor_me_layout"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</FrameLayout>

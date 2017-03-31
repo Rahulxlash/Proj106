@@ -18,4 +18,5 @@
     <color name="cardcolorWin">#94dc7c</color>
     <color name="cardcolorLoss">#fd9d88</color>
     <color name="DialogFragment">#698d9c</color>
+    <color name="PlussButton">#d74545</color>
 </resources>

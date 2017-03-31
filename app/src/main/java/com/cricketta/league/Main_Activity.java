@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.cricketta.league.fragment.Request_Toss_dlg;
 import com.cricketta.league.fragment.SelectCompetitor_frag;
+import com.cricketta.league.fragment.SelectTeam_frag;
 import com.cricketta.league.fragment.frag_league_list;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
@@ -81,8 +82,8 @@ public class Main_Activity extends BaseActivity
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
 
-                SelectCompetitor_frag frag = new SelectCompetitor_frag();
-                showFragment(frag, "CreateLeague", true);
+                SelectTeam_frag frag = new SelectTeam_frag();
+                showFragment(frag, "SelectTeam", true);
 
             }
         });

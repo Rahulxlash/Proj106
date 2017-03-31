@@ -18,7 +18,7 @@
         android:layout_alignParentTop="true"
         android:background="#3e4143"
         android:paddingTop="5dp"
-        android:text="Toss Pending"
+        android:text="Toss"
         android:textAlignment="center"
         android:textColor="#fff"
         android:textSize="20dp" />

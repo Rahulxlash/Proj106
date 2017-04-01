@@ -77,7 +77,7 @@ public class frag_league_list extends Fragment {
                             bundle.putInt("leagueId", league.getLeagueId());
                             LeagueDetails_frag frag = new LeagueDetails_frag();
                             frag.setArguments(bundle);
-                            ((Main_Activity) getActivity()).showFragment(frag, "LeagueDetail", true);
+                            ((Main_Activity) getActivity()).showFragment(frag, "LeagueDetail", true, false);
                         }
                     }
 

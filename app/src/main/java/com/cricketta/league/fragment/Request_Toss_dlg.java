@@ -75,16 +75,20 @@ public class Request_Toss_dlg extends DialogFragment {
                                        @Override
                                        public void onClick(View v) {
                                            RestClient client = new RestClient();
+                                           ((BaseActivity) getActivity()).showDialog("Requesting Toss....");
                                            client.MatchService().RequestToss(matchId, ((Main_Activity) getActivity()).mintUserId, new Callback<LeagueMatch>() {
                                                @Override
                                                public void success(LeagueMatch leagueMatch, Response response) {
                                                    btnToss.setVisibility(View.INVISIBLE);
-                                                   anim.start();
+                                                   ((BaseActivity) getActivity()).hideDialog();
+                                                   ((BaseActivity) getActivity()).showToast("Toss request sent.");
+                                                   getDialog().dismiss();
+                                                   // anim.start();
                                                }
 
                                                @Override
                                                public void failure(RetrofitError error) {
-
+                                                   ((BaseActivity) getActivity()).hideDialog();
                                                }
                                            });
                                        }
@@ -139,6 +143,8 @@ public class Request_Toss_dlg extends DialogFragment {
                 anim.end();
                 ((BaseActivity) getActivity()).hideDialog();
                 getDialog().dismiss();
+                SelectTeam_frag frag = new SelectTeam_frag();
+                ((Main_Activity) getActivity()).showFragment(frag, "SelectTeam", true, false);
             }
 
             @Override

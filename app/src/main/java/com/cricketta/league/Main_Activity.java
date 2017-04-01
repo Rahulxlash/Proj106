@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cricketta.league.fragment.SelectCompetitor_frag;
-import com.cricketta.league.fragment.SelectTeam_frag;
 import com.cricketta.league.fragment.frag_league_list;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
@@ -77,9 +76,8 @@ public class Main_Activity extends BaseActivity
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-
-                SelectTeam_frag frag = new SelectTeam_frag();
-                showFragment(frag, "SelectTeam", true);
+                SelectCompetitor_frag frag = new SelectCompetitor_frag();
+                showFragment(frag, "CreateLeague", true, false);
 
             }
         });
@@ -110,7 +108,7 @@ public class Main_Activity extends BaseActivity
         if (savedInstanceState == null) {
             //do your stuff
             frag_league_list fragLeagueList = new frag_league_list();
-            showFragment(fragLeagueList, "Home", false);
+            showFragment(fragLeagueList, "Home", false, false);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -135,10 +133,12 @@ public class Main_Activity extends BaseActivity
     }
 
 
-
-    public void showFragment(Fragment fragment, String tag, boolean addToStack) {
+    public void showFragment(Fragment fragment, String tag, boolean addToStack, boolean replace) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.fragment_frag_league_list, fragment, tag);
+        if (replace)
+            transaction.replace(R.id.fragment_frag_league_list, fragment, tag);
+        else
+            transaction.add(R.id.fragment_frag_league_list, fragment, tag);
         if (addToStack)
             transaction.addToBackStack(tag);
         transaction.commit();

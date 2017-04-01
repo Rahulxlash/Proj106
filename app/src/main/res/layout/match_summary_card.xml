@@ -45,15 +45,18 @@
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <ImageView
                     android:id="@+id/SummarymatchTeam"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="@{String.valueOf(match.getTeams())}"
-                    android:textAlignment="center"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="60dp"
+                    android:src="@drawable/trophy" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/trophy" />
 
                 <TextView
                     android:id="@+id/txtPoints"

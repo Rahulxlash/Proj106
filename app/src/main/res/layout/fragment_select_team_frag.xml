@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -51,35 +52,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/competitor_me_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/Date_venu_layout"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:paddingLeft="20dp"
-                android:text="Me"
-                android:textColor="#fff"
-                android:textSize="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:paddingRight="20dp"
-                android:text="Competitor"
-                android:textColor="#fff"
-                android:textSize="20dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/competitor_me_layout"
@@ -100,6 +72,56 @@
             </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/competitor_me_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/Date_venu_layout"
+            android:layout_marginTop="18dp"
+            android:weightSum="1">
+
+
+            <TextView
+                android:id="@+id/me_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/textView2"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="5dp"
+                android:paddingLeft="20dp"
+                android:text="Me"
+                android:textColor="#fff"
+                android:textSize="20dp" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/me_text"
+                android:background="@color/actionbar"
+                app:srcCompat="@drawable/plus_outline">
+
+            </ImageButton>
+
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp"
+                android:paddingRight="20dp"
+                android:text="Competitor"
+                android:textColor="#fff"
+                android:textSize="20dp" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
 

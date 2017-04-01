@@ -42,7 +42,6 @@ public class MatchViewAdapter extends RecyclerView.Adapter<MatchViewHolder> {
         ImageView img2 = (ImageView) holder.itemView.findViewById(R.id.team2Logo);
         Picasso.with(context).load("http://api.cricketta.com/images/" + status.teamName1.trim() + "Logo.png").into(img);
         Picasso.with(context).load("http://api.cricketta.com/images/" + status.teamName2.trim() + "Logo.png").into(img2);
-
         holder.bind(status);
     }
 

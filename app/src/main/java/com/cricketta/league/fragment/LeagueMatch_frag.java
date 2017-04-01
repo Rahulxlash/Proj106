@@ -54,7 +54,15 @@ public class LeagueMatch_frag extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         LeagueMatch leagueMatch = matches.get(position);
-                        if (!leagueMatch.tossDone) {
+                        if (leagueMatch.tossDone == true) {
+
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("leagueMatch", leagueMatch);
+                            SelectTeam_frag fragment = new SelectTeam_frag();
+                            fragment.setArguments(bundle);
+                            ((Main_Activity) getActivity()).showFragment(fragment, "player", true, false);
+
+                        } else {
                             Bundle bundle = new Bundle();
                             bundle.putInt("matchId", leagueMatch.leagueMatchId);
                             FragmentManager fm = getFragmentManager();

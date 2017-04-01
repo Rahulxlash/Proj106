@@ -117,7 +117,8 @@ public class BaseActivity extends AppCompatActivity {
             } else {
                 bundle = (Bundle) obj;
             }
-
+            if (!bundle.keySet().contains("Tag"))
+                return;
             switch (bundle.getString("Tag")) {
                 case "TOSS_REQUEST":
                     Request_Toss_dlg frag = new Request_Toss_dlg();

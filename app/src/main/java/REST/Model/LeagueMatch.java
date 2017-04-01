@@ -2,6 +2,7 @@ package REST.Model;
 
 import org.parceler.Parcel;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,7 +10,8 @@ import java.util.Date;
  * Created by rahul.sharma01 on 3/23/2017.
  */
 @Parcel
-public class LeagueMatch {
+
+public class LeagueMatch implements Serializable {
     public int leagueMatchId;
     public int matchId;
     public int leagueId;

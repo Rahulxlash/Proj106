@@ -89,7 +89,7 @@ public class LeagueMatch_frag extends Fragment {
             }
         });
         getLeagueMatches();
-
+        ((Main_Activity) getActivity()).showToast("yo yo");
         return rootView;
 
     }

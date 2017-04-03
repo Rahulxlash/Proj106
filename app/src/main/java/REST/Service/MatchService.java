@@ -13,7 +13,7 @@ import retrofit.http.Path;
 
 public interface MatchService {
 
-    @GET("/LeagueMatch/{matchId}")
+    @GET("/LeagueMatch/{matchId}/Get")
     public void getMatch(@Path("matchId") int matchId, Callback<LeagueMatch> callback);
 
     @POST("/LeagueMatch/{MatchId}/RequestToss/{UserId}")

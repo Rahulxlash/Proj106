@@ -142,9 +142,14 @@ public class Request_Toss_dlg extends DialogFragment {
                 txtResult.setVisibility(View.VISIBLE);
                 anim.end();
                 ((BaseActivity) getActivity()).hideDialog();
-                getDialog().dismiss();
+
                 SelectTeam_frag frag = new SelectTeam_frag();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("leagueMatch", match);
+                frag.setArguments(bundle);
                 ((Main_Activity) getActivity()).showFragment(frag, "SelectTeam", true, false);
+                getDialog().dismiss();
             }
 
             @Override

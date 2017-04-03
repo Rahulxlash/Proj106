@@ -117,9 +117,6 @@ public class LeagueMatch_frag extends Fragment {
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
-    public void AcceptChallange() {
 
-
-    }
 }
 

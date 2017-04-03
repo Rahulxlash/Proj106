@@ -21,7 +21,7 @@ public interface AuthService {
     public void getUserByUserName(@Path("value") String UserName, Callback<User> callback);
 
     @FormUrlEncoded
-    @POST("/user/")
+    @POST("/user/1/RegisterUser")
     public void createUser(@Field("UserName") String UserName, @Field("FacebookId") String FacebookId, @Field("ProfileImage") int ProfileImage, Callback<User> callback);
 
     @FormUrlEncoded

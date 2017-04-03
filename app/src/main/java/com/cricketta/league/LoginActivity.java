@@ -102,7 +102,7 @@ public class LoginActivity extends BaseActivity implements
                 if (user == null) {
                     getUserData();
                     RestClient client = new RestClient();
-                    client.AuthService().createUser(mstrUserName, mstrThirdPartyId, ProfileImage, new Callback<User>() {
+                    client.AuthService().createUser(Profile.getCurrentProfile().getName(), Profile.getCurrentProfile().getId(), ProfileImage, new Callback<User>() {
                         @Override
                         public void success(User user, Response response) {
                             hideDialog();

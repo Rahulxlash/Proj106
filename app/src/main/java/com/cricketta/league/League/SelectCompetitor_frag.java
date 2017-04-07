@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cricketta.league.BaseFragment;
 import com.cricketta.league.R;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -24,12 +25,11 @@ import java.util.Set;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SelectCompetitor_frag extends Fragment {
+public class SelectCompetitor_frag extends BaseFragment {
     private RecyclerView recyclerView;
     private FBUserAdapter adapter;
 
     public SelectCompetitor_frag() {
-        // Required empty public constructor
     }
 
     @Override
@@ -39,8 +39,7 @@ public class SelectCompetitor_frag extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.fb_user_recycler);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
-
-//        ((BaseActivity) getActivity()).showDialog("Loading");
+        showProgress("Loading Friends....");
         GraphRequest request = GraphRequest.newMyFriendsRequest(
                 AccessToken.getCurrentAccessToken(),
                 new GraphRequest.GraphJSONArrayCallback() {
@@ -49,8 +48,7 @@ public class SelectCompetitor_frag extends Fragment {
                         // Insert your code here
                         adapter = new FBUserAdapter(array);
                         recyclerView.setAdapter(adapter);
-//                        ((BaseActivity) getActivity()).hideDialog();
-//                        Log.d("retro", response.getJSONObject().toString());
+                        hideProgress();
                     }
                 });
         Set<String> fields = new HashSet<String>();

@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.cricketta.league.Main.Main_Activity;
 import com.cricketta.league.R;
-import com.cricketta.league.fragment.CreateLeague_dlg;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;

@@ -13,6 +13,15 @@ import REST.ViewModel.LeagueMatch;
  */
 
 public interface LeagueContract {
+
+    public interface CreateLeaguePresenter extends BasePresenter {
+        void CreateLeague(String name, String competitor);
+    }
+
+    public interface CreateLeagueView extends BaseView {
+        void leagueCreated(League league);
+    }
+
     public interface ListPresenter extends BasePresenter {
         void loadLeagues();
 

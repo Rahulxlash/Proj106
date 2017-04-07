@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cricketta.league.fragment.AcceptChallengeFrag_dlg">
+    tools:context="com.cricketta.league.League.AcceptChallengeFrag_dlg">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout

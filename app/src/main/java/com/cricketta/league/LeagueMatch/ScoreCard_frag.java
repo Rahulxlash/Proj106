@@ -1,4 +1,4 @@
-package com.cricketta.league.fragment;
+package com.cricketta.league.LeagueMatch;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.cricketta.league.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LeagueSetting_frag extends Fragment {
+public class ScoreCard_frag extends Fragment {
 
 
-    public LeagueSetting_frag() {
+    public ScoreCard_frag() {
         // Required empty public constructor
     }
 
@@ -23,8 +23,8 @@ public class LeagueSetting_frag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_league_setting_frag, container, false);
-        return rootView;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_score_card_frag, container, false);
     }
 
 }

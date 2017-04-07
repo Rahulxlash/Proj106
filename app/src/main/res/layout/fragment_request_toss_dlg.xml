@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/windowBackground"
-    tools:context="com.cricketta.league.fragment.Request_Toss_dlg">
+    tools:context="com.cricketta.league.LeagueMatch.Request_Toss_dlg">
 
     <RelativeLayout
         android:layout_width="wrap_content"

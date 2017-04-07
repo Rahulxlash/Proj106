@@ -16,8 +16,6 @@ import com.cricketta.league.BaseFragment;
 import com.cricketta.league.Listener.LeagueListener;
 import com.cricketta.league.Main.Main_Activity;
 import com.cricketta.league.R;
-import com.cricketta.league.fragment.AcceptChallengeFrag_dlg;
-import com.cricketta.league.fragment.LeagueDetails_frag;
 
 import java.util.ArrayList;
 
@@ -35,7 +33,7 @@ public class frag_league_list extends BaseFragment implements LeagueContract.Lis
     @InjectView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private LeagueListPresenter presenter;
+    LeagueListPresenter presenter;
     private ArrayList<League> leagues;
     private LeagueViewAdapter adapter;
 

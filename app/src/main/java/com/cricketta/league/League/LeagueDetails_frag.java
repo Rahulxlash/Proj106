@@ -1,4 +1,4 @@
-package com.cricketta.league.fragment;
+package com.cricketta.league.League;
 
 
 import android.os.Bundle;
@@ -11,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cricketta.league.League.LeagueMatch_frag;
-import com.cricketta.league.League.LeagueSummary_frag;
 import com.cricketta.league.R;
 
 import java.util.ArrayList;

@@ -3,7 +3,7 @@
 
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context="com.cricketta.league.fragment.CreateLeague_dlg">
+    tools:context="com.cricketta.league.League.CreateLeague_dlg">
 
     <LinearLayout
         android:layout_width="350dp"

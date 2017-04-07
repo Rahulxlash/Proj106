@@ -11,11 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cricketta.league.BaseFragment;
+import com.cricketta.league.LeagueMatch.PlayerList_dlg;
+import com.cricketta.league.LeagueMatch.Request_Toss_dlg;
+import com.cricketta.league.LeagueMatch.SelectTeam_frag;
 import com.cricketta.league.Listener.LeagueListener;
 import com.cricketta.league.Main.Main_Activity;
 import com.cricketta.league.R;
-import com.cricketta.league.fragment.Request_Toss_dlg;
-import com.cricketta.league.fragment.SelectTeam_frag;
 
 import java.util.ArrayList;
 
@@ -89,6 +90,11 @@ public class LeagueMatch_frag extends BaseFragment implements LeagueContract.Mat
 
     @Override
     public void showSelectPlayer(LeagueMatch match) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("leagueMatch", match);
+        PlayerList_dlg fragment = new PlayerList_dlg();
+        fragment.setArguments(bundle);
+        ((Main_Activity) getActivity()).showFragment(fragment, "player", true, true);
     }
 
     @Override

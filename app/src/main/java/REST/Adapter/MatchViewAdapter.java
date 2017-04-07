@@ -12,8 +12,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import REST.Model.LeagueMatch;
 import REST.ViewHolder.MatchViewHolder;
+import REST.ViewModel.LeagueMatch;
 
 /**
  * Created by rahul.sharma01 on 3/23/2017.

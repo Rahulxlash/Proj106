@@ -6,7 +6,7 @@
     android:background="#22353e"
     android:orientation="vertical"
 
-    tools:context="com.cricketta.league.fragment.LeagueSummary_frag">
+    tools:context="com.cricketta.league.League.LeagueSummary_frag">
 
     <RelativeLayout
         android:layout_width="match_parent"

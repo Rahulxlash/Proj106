@@ -1,4 +1,4 @@
-package REST.Model;
+package REST.ViewModel;
 
 import org.parceler.Parcel;
 

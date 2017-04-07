@@ -9,7 +9,7 @@
 
         <variable
             name="match"
-            type="REST.Model.LeagueMatch" />
+            type="REST.ViewModel.LeagueMatch" />
     </data>
 
     <android.support.v7.widget.CardView

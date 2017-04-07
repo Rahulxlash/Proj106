@@ -1,4 +1,4 @@
-package REST.Adapter;
+package com.cricketta.league.League;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cricketta.league.Main_Activity;
+import com.cricketta.league.Main.Main_Activity;
 import com.cricketta.league.R;
 import com.cricketta.league.fragment.CreateLeague_dlg;
 import com.squareup.picasso.Picasso;

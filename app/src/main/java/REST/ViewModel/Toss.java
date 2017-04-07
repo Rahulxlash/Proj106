@@ -1,4 +1,4 @@
-package REST.Model;
+package REST.ViewModel;
 
 /**
  * Created by rahul.sharma01 on 3/30/2017.

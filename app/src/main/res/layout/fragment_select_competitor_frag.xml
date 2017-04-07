@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#22353e"
-    tools:context="com.cricketta.league.fragment.SelectCompetitor_frag">
+    tools:context="com.cricketta.league.League.SelectCompetitor_frag">
 
     <RelativeLayout
         android:layout_width="match_parent"

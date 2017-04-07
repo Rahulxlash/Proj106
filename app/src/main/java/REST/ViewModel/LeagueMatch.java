@@ -1,4 +1,4 @@
-package REST.Model;
+package REST.ViewModel;
 
 import org.parceler.Parcel;
 
@@ -30,6 +30,7 @@ public class LeagueMatch implements Serializable {
     public int competitorRun;
     public int competitorWicket;
     public int tossRequestedBy;
+    public boolean teamSelected;
 
     public String getTeams() {
         return teamName1.trim() + "-" + teamName2.trim();

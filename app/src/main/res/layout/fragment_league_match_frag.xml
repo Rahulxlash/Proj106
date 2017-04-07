@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#22353e"
-    tools:context="com.cricketta.league.fragment.LeagueMatch_frag">
+    tools:context="com.cricketta.league.League.LeagueMatch_frag">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout_match"

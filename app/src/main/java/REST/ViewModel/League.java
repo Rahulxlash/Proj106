@@ -1,4 +1,4 @@
-package REST.Model;
+package REST.ViewModel;
 
 import android.databinding.BindingAdapter;
 import android.view.View;
@@ -7,6 +7,7 @@ import com.cricketta.league.R;
 
 import org.parceler.Parcel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,7 +15,7 @@ import java.util.Date;
  * Created by Anuj on 3/10/2017.
  */
 @Parcel
-public class League {
+public class League implements Serializable {
     public int leagueId;
     public String name;
     public int competitor;

@@ -11,12 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cricketta.league.League.LeagueMatch_frag;
+import com.cricketta.league.League.LeagueSummary_frag;
 import com.cricketta.league.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import REST.Model.League;
+import REST.ViewModel.League;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,7 +55,7 @@ public class LeagueDetails_frag extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         Bundle bundle = new Bundle();
-        bundle.putInt("leagueId", getArguments().getInt("leagueId"));
+        bundle.putSerializable("league", getArguments().getSerializable("league"));
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
 

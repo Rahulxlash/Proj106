@@ -4,11 +4,9 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.cricketta.league.databinding.MatchSummaryCardBinding;
 import com.cricketta.league.databinding.SelectPlayerBinding;
 
-import REST.Model.LeagueMatch;
-import REST.Model.Player;
+import REST.ViewModel.Player;
 
 /**
  * Created by Anuj on 4/4/2017.

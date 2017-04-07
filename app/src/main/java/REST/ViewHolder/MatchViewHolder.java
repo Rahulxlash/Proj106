@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.cricketta.league.databinding.MatchSummaryCardBinding;
 
-import REST.Model.LeagueMatch;
+import REST.ViewModel.LeagueMatch;
 
 /**
  * Created by rahul.sharma01 on 3/23/2017.

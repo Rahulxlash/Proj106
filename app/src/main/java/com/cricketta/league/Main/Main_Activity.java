@@ -1,9 +1,8 @@
-package com.cricketta.league;
+package com.cricketta.league.Main;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,73 +13,76 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cricketta.league.fragment.SelectCompetitor_frag;
-import com.cricketta.league.fragment.frag_league_list;
-import com.facebook.Profile;
-import com.facebook.login.LoginManager;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
+import com.cricketta.league.BaseActivity;
+import com.cricketta.league.CricApplication;
+import com.cricketta.league.League.SelectCompetitor_frag;
+import com.cricketta.league.League.frag_league_list;
+import com.cricketta.league.Login.LoginActivity;
+import com.cricketta.league.R;
+import com.cricketta.league.events.LoginEvent;
 import com.squareup.picasso.Picasso;
 
-import REST.Model.User;
-import REST.RestClient;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import javax.inject.Inject;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 public class Main_Activity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        GoogleApiClient.OnConnectionFailedListener {
+        implements MainContract.View, NavigationView.OnNavigationItemSelectedListener {
     public ActionBar actionBar;
+    //@Inject
+    MainPresenter presenter;
+    @Inject
+    EventBus eventBus;
+    @Inject
+    Picasso picasso;
+    @InjectView(R.id.fab)
+    FloatingActionButton fab;
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
+    @InjectView(R.id.drawer_layout)
+    DrawerLayout drawer;
+    @InjectView(R.id.nav_view)
+    NavigationView navigationView;
     private TextView user_information;
     private ImageView ImgVwProfileImage;
-    private ImageView img_user;
     private FragmentManager fragmentManager;
-    private FloatingActionButton fab;
 
     @Override
     protected void onStart() {
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestEmail()
-//                .build();
-//        Common.mGoogleApiClient = new GoogleApiClient.Builder(this)
-//                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-//                .build();
-//        Common.mGoogleApiClient.connect();
         super.onStart();
+        CricApplication.getAppComponent().inject(this);
+        if (!eventBus.getDefault().isRegistered(this)) {
+            eventBus.getDefault().register(this);
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.inject(this);
+        presenter = new MainPresenter(this);
+
+
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        //fab.setImageResource(R.drawable.plus_outline);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-                SelectCompetitor_frag frag = new SelectCompetitor_frag();
-                showFragment(frag, "CreateLeague", true, false);
-
+                openCreateLeague();
             }
         });
-
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
@@ -88,7 +90,6 @@ public class Main_Activity extends BaseActivity
             public void onBackStackChanged() {
                 Fragment fr = fragmentManager.findFragmentById(R.id.fragment_frag_league_list);
                 if (fr != null) {
-                    Log.e("fragment=", fr.getClass().getSimpleName());
                     fab.setVisibility(View.INVISIBLE);
                     switch (fr.getClass().getSimpleName()) {
                         case "frag_league_list":
@@ -104,31 +105,24 @@ public class Main_Activity extends BaseActivity
                 }
             }
         });
-        if (savedInstanceState == null) {
-            //do your stuff
-            frag_league_list fragLeagueList = new frag_league_list();
-            showFragment(fragLeagueList, "Home", false, false);
-        }
+//        if (savedInstanceState == null) {
+//            showLeagueList();
+//        }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        showDialog("Loading");
-        getUserData();
-        setProfileImage(navigationView.getHeaderView(0));
-        hideDialog();
+        presenter.checkLoginStatus();
 
-        String obj = getIntent().getStringExtra("notData");
-        if (obj != null) {
-            handleNotification(obj);
-        }
-        if (getIntent().getExtras() != null)
-            handleNotification(getIntent().getExtras());
+//        String obj = getIntent().getStringExtra("notData");
+//        if (obj != null) {
+//            handleNotification(obj);
+//        }
+//        if (getIntent().getExtras() != null)
+//            handleNotification(getIntent().getExtras());
     }
 
 
@@ -194,54 +188,20 @@ public class Main_Activity extends BaseActivity
         } else if (id == R.id.settings) {
 
         } else if (id == R.id.logout) {
-            if (ProfileImage == 0)
-                SignOutFaacebook();
-            else
-                signOutGoogle();
+            presenter.Logout();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    private void SignOutFaacebook() {
-        LoginManager.getInstance().logOut();
-        UnRegisterDevicetoUser(mintUserId);
-        Intent intent = new Intent(Main_Activity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    private void signOutGoogle() {
-
-        Auth.GoogleSignInApi.signOut(Common.mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-                        //Common.mGoogleApiClient.disconnect();
-                        Intent intent = new Intent(Main_Activity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-    }
-
-    private void setProfileImage(View view) {
+    public void setProfileImage(Uri imageUri, String UserName) {
+        View view = navigationView.getHeaderView(0);
         ImgVwProfileImage = (ImageView) view.findViewById(R.id.profileImage);
-        if (ProfileImage == 0) {//Facebook Id
-            Uri imageUri = Profile.getCurrentProfile().getProfilePictureUri(200, 200);
-            Picasso.with(this).load(imageUri).transform(new CropCircleTransformation()).into(ImgVwProfileImage);
-        } else { //Google Id
-            if (mstrPhotoUrl != "")
-                Picasso.with(this).load(mstrPhotoUrl).transform(new CropCircleTransformation()).into(ImgVwProfileImage);
-        }
+        //Uri imageUri = Profile.getCurrentProfile().getProfilePictureUri(200, 200);
+        Picasso.with(this).load(imageUri).transform(new CropCircleTransformation()).into(ImgVwProfileImage);
         user_information = (TextView) view.findViewById(R.id.txtUserName);
-        user_information.setText(mstrUserName.trim());
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        user_information.setText(UserName);
     }
 
     public void setActionBarTitle(String title) {
@@ -249,20 +209,38 @@ public class Main_Activity extends BaseActivity
 
     }
 
-    private void UnRegisterDevicetoUser(int UserId) {
-        RestClient client = new RestClient();
-        client.AuthService().UnRegisterDevice(UserId, getDeviceToken(), new Callback<User>() {
-            @Override
-            public void success(User user, Response response) {
-
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-        });
+    @Override
+    public void goToLogin() {
+        Intent intent = new Intent(Main_Activity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
+
+    @Override
+    public void showLeagueList() {
+        frag_league_list fragLeagueList = new frag_league_list();
+        showFragment(fragLeagueList, "Home", false, false);
+    }
+
+    @Override
+    public void showSnackBar() {
+
+    }
+
+    @Override
+    public void showNotification() {
+
+    }
+
+    private void openCreateLeague() {
+        SelectCompetitor_frag frag = new SelectCompetitor_frag();
+        showFragment(frag, "CreateLeague", true, false);
+    }
+
+    @Subscribe
+    public void onMessageEvent(LoginEvent event) {/* Do something */}
+
+    ;
 }
 
 

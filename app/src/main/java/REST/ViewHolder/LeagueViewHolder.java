@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.cricketta.league.databinding.ItemLeagueListBinding;
 
-import REST.Model.League;
+import REST.ViewModel.League;
 
 /**
  * Created by Anuj on 3/10/2017.

@@ -1,17 +1,15 @@
-package com.cricketta.league.fragment;
+package com.cricketta.league.League;
 
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cricketta.league.BaseActivity;
 import com.cricketta.league.R;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -22,8 +20,6 @@ import org.json.JSONArray;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-import REST.Adapter.FBUserAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,7 +40,7 @@ public class SelectCompetitor_frag extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
 
-        ((BaseActivity) getActivity()).showDialog("Loading");
+//        ((BaseActivity) getActivity()).showDialog("Loading");
         GraphRequest request = GraphRequest.newMyFriendsRequest(
                 AccessToken.getCurrentAccessToken(),
                 new GraphRequest.GraphJSONArrayCallback() {
@@ -53,8 +49,8 @@ public class SelectCompetitor_frag extends Fragment {
                         // Insert your code here
                         adapter = new FBUserAdapter(array);
                         recyclerView.setAdapter(adapter);
-                        ((BaseActivity) getActivity()).hideDialog();
-                        Log.d("retro", response.getJSONObject().toString());
+//                        ((BaseActivity) getActivity()).hideDialog();
+//                        Log.d("retro", response.getJSONObject().toString());
                     }
                 });
         Set<String> fields = new HashSet<String>();

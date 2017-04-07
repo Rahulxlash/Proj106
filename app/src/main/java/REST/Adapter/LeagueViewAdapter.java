@@ -5,14 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.cricketta.league.R;
 
 import java.util.List;
 
-import REST.Model.League;
 import REST.ViewHolder.LeagueViewHolder;
+import REST.ViewModel.League;
 
 /**
  * Created by Anuj on 3/10/2017.

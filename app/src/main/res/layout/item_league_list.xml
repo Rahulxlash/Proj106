@@ -9,7 +9,7 @@
 
         <variable
             name="league"
-            type="REST.Model.League" />
+            type="REST.ViewModel.League" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -36,7 +36,6 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:paddingTop="5dp"
-                android:text="@{String.valueOf(league.getLeagueTitle())}"
                 android:textColor="#fff"
                 android:textSize="50sp" />
 

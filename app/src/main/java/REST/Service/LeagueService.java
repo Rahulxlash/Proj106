@@ -2,36 +2,36 @@ package REST.Service;
 
 import java.util.ArrayList;
 
-import REST.Model.League;
-import REST.Model.LeagueMatch;
-import retrofit.Callback;
-import retrofit.http.Field;
-import retrofit.http.FormUrlEncoded;
-import retrofit.http.GET;
-import retrofit.http.POST;
-import retrofit.http.Path;
+import REST.ViewModel.League;
+import REST.ViewModel.LeagueMatch;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import rx.Observable;
 
 /**
  * Created by Anuj on 3/10/2017.
  */
 
 public interface LeagueService {
-    @GET("/user/{value}/league")
-    public void getUserLeague(@Path("value") int userId, Callback<ArrayList<League>> callback);
+    @GET("user/{value}/league")
+    Observable<ArrayList<League>> getUserLeague(@Path("value") int userId);
 
-    @GET("/league/{value}/summary/{userId}")
-    public void getLeagueSummary(@Path("value") int leagueId, @Path("userId") int userId, Callback<League> callback);
+    @GET("league/{value}/summary/{userId}")
+    Observable<League> getLeagueSummary(@Path("value") int leagueId, @Path("userId") int userId);
 
-    @GET("/league/{value}/matches/{userId}")
-    public void getLeagueMatches(@Path("value") int leagueId, @Path("userId") int userId, Callback<ArrayList<LeagueMatch>> callback);
+    @GET("league/{value}/matches/{userId}")
+    Observable<ArrayList<LeagueMatch>> getLeagueMatches(@Path("value") int leagueId, @Path("userId") int userId);
 
     @FormUrlEncoded
-    @POST("/league/")
-    public void createLeague(@Field("Name") String Name, @Field("Creator") int CreatorId, @Field("Competitor") String CompetitorId, Callback<League> callback);
+    @POST("league/")
+    Observable<League> createLeague(@Field("Name") String Name, @Field("Creator") int CreatorId, @Field("Competitor") String CompetitorId);
 
-    @POST("/league/{leagueId}/Accept")
-    public void AcceptChallange(@Path("leagueId") int LeagueId, Callback<League> callback);
+    @POST("league/{leagueId}/Accept")
+    Observable<League> AcceptChallange(@Path("leagueId") int LeagueId);
 
-    @POST("/league/{leagueId}/Reject")
-    public void RejectChallange(@Path("leagueId") int LeagueId, Callback<League> callback);
+    @POST("league/{leagueId}/Reject")
+    Observable<League> RejectChallange(@Path("leagueId") int LeagueId);
 }

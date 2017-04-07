@@ -1,12 +1,12 @@
 package REST.Service;
 
-import REST.Model.User;
-import retrofit.Callback;
-import retrofit.http.Field;
-import retrofit.http.FormUrlEncoded;
-import retrofit.http.GET;
-import retrofit.http.POST;
-import retrofit.http.Path;
+import REST.ViewModel.User;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import rx.Observable;
 
 /**
  * Created by rahul.sharma01 on 3/6/2017.
@@ -14,22 +14,22 @@ import retrofit.http.Path;
 
 public interface AuthService {
 
-    @GET("/user/{value}/getByFBId")
-    public void getUserByFBId(@Path("value") String FbId, Callback<User> callback);
+    @GET("user/{value}/getByFBId")
+    Observable<User> getUserByFBId(@Path("value") String FbId);
 
-    @GET("/user/{value}/getByUserName")
-    public void getUserByUserName(@Path("value") String UserName, Callback<User> callback);
-
-    @FormUrlEncoded
-    @POST("/user/1/RegisterUser")
-    public void createUser(@Field("UserName") String UserName, @Field("FacebookId") String FacebookId, @Field("ProfileImage") int ProfileImage, Callback<User> callback);
+    @GET("user/{value}/getByUserName")
+    Observable<User> getUserByUserName(@Path("value") String UserName);
 
     @FormUrlEncoded
-    @POST("/user/{Id}/RegisterDevice")
-    public void RegisterDevice(@Field("UserId") int Id, @Field("DeviceToken") String token, Callback<User> callback);
+    @POST("user/1/RegisterUser")
+    Observable<User> createUser(@Field("UserName") String UserName, @Field("FacebookId") String FacebookId);
 
     @FormUrlEncoded
-    @POST("/user/{Id}/UnRegisterDevice/")
-    public void UnRegisterDevice(@Field("UserId") int Id, @Field("DeviceToken") String token, Callback<User> callback);
+    @POST("user/{Id}/RegisterDevice")
+    Observable<User> RegisterDevice(@Field("UserId") int Id, @Field("DeviceToken") String token);
+
+    @FormUrlEncoded
+    @POST("user/{Id}/UnRegisterDevice/")
+    Observable<User> UnRegisterDevice(@Field("UserId") int Id, @Field("DeviceToken") String token);
 
 }

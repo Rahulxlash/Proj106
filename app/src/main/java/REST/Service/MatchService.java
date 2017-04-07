@@ -1,14 +1,10 @@
 package REST.Service;
 
-import java.util.ArrayList;
-
-import REST.Model.LeagueMatch;
-import REST.Model.Player;
-import REST.Model.Toss;
-import retrofit.Callback;
-import retrofit.http.GET;
-import retrofit.http.POST;
-import retrofit.http.Path;
+import REST.ViewModel.LeagueMatch;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import rx.Observable;
 
 /**
  * Created by rahul.sharma01 on 3/29/2017.
@@ -17,14 +13,11 @@ import retrofit.http.Path;
 public interface MatchService {
 
     @GET("/LeagueMatch/{matchId}/Get")
-    public void getMatch(@Path("matchId") int matchId, Callback<LeagueMatch> callback);
+    Observable<LeagueMatch> getMatch(@Path("matchId") int matchId);
 
     @POST("/LeagueMatch/{MatchId}/RequestToss/{UserId}")
-    public void RequestToss(@Path("MatchId") int MatchId, @Path("UserId") int UserId, Callback<LeagueMatch> callback);
+    Observable<LeagueMatch> RequestToss(@Path("MatchId") int MatchId, @Path("UserId") int UserId);
 
     @POST("/LeagueMatch/{MatchId}/DoToss/{Toss}")
-    public void DoToss(@Path("MatchId") int MatchId, @Path("Toss") int Toss, Callback<Toss> callback);
-
-    @GET("/LeagueMatch/{matchId}/GetAllPlayers")
-    public void getAllPlayer(@Path("matchId") int MatchId, Callback<ArrayList<Player>> callback);
+    Observable<LeagueMatch> DoToss(@Path("MatchId") int MatchId, @Path("Toss") int Toss);
 }

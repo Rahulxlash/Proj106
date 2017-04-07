@@ -8,9 +8,9 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.cricketta.league.Main_Activity;
+import com.cricketta.league.CricApplication;
+import com.cricketta.league.Main.Main_Activity;
 import com.cricketta.league.R;
-import com.cricketta.league.Utils.CricApplication;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 

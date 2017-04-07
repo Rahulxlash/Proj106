@@ -39,7 +39,6 @@ public class SelectCompetitor_frag extends BaseFragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.fb_user_recycler);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
-        showProgress("Loading Friends....");
         GraphRequest request = GraphRequest.newMyFriendsRequest(
                 AccessToken.getCurrentAccessToken(),
                 new GraphRequest.GraphJSONArrayCallback() {
@@ -48,7 +47,6 @@ public class SelectCompetitor_frag extends BaseFragment {
                         // Insert your code here
                         adapter = new FBUserAdapter(array);
                         recyclerView.setAdapter(adapter);
-                        hideProgress();
                     }
                 });
         Set<String> fields = new HashSet<String>();

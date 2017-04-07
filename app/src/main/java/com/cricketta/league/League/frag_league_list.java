@@ -11,11 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.cricketta.league.BaseFragment;
 import com.cricketta.league.Listener.LeagueListener;
 import com.cricketta.league.Main.Main_Activity;
 import com.cricketta.league.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,10 @@ import REST.Adapter.LeagueViewAdapter;
 import REST.ViewModel.League;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
+import static com.cricketta.league.BR.league;
+import static com.cricketta.league.R.id.img_user;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +38,6 @@ public class frag_league_list extends BaseFragment implements LeagueContract.Lis
     RecyclerView recyclerView;
     @InjectView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-
     LeagueListPresenter presenter;
     private ArrayList<League> leagues;
     private LeagueViewAdapter adapter;
@@ -90,6 +95,7 @@ public class frag_league_list extends BaseFragment implements LeagueContract.Lis
 
     @Override
     public void showList(ArrayList<League> leagues) {
+
         adapter = new LeagueViewAdapter(leagues);
         recyclerView.setAdapter(adapter);
         mSwipeRefreshLayout.setRefreshing(false);

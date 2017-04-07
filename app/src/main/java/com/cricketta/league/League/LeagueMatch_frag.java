@@ -100,20 +100,20 @@ public class LeagueMatch_frag extends BaseFragment implements LeagueContract.Mat
     @Override
     public void showToss(LeagueMatch match) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("leagueMatch", match);
-        SelectTeam_frag fragment = new SelectTeam_frag();
-        fragment.setArguments(bundle);
-        ((Main_Activity) getActivity()).showFragment(fragment, "player", true, true);
-    }
-
-    @Override
-    public void showScoreCard(LeagueMatch match) {
-        Bundle bundle = new Bundle();
         bundle.putInt("matchId", match.leagueMatchId);
         FragmentManager fm = getFragmentManager();
         Request_Toss_dlg dialogFragment = new Request_Toss_dlg();
         dialogFragment.setArguments(bundle);
         dialogFragment.show(fm, "Toss Pending");
+    }
+
+    @Override
+    public void showScoreCard(LeagueMatch match) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("leagueMatch", match);
+        SelectTeam_frag fragment = new SelectTeam_frag();
+        fragment.setArguments(bundle);
+        ((Main_Activity) getActivity()).showFragment(fragment, "player", true, true);
     }
 }
 

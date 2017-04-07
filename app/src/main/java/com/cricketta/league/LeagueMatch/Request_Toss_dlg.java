@@ -3,7 +3,6 @@ package com.cricketta.league.LeagueMatch;
 import android.animation.AnimatorInflater;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,22 +10,32 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cricketta.league.BaseDialogFragment;
 import com.cricketta.league.R;
 
+import REST.Model.AuthModel;
 import REST.ViewModel.LeagueMatch;
+import butterknife.InjectView;
 
 
 /**
  * Created by Anuj on 3/29/2017.
  */
 
-public class Request_Toss_dlg extends DialogFragment {
+public class Request_Toss_dlg extends BaseDialogFragment {
 
     String Title;
     ObjectAnimator anim;
-    Button btnToss, btnHead, btnTail;
-    int matchId;
+    @InjectView(R.id.TossButton)
+    Button btnToss;
+    @InjectView(R.id.Headbutton)
+    Button btnHead;
+    @InjectView(R.id.Tailbutton)
+    Button btnTail;
+    @InjectView(R.id.txtResult)
     TextView txtResult;
+    int matchId;
+
     LeagueMatch match;
 
     public Request_Toss_dlg() {
@@ -37,19 +46,12 @@ public class Request_Toss_dlg extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_request_toss_dlg, container, false);
-        matchId = getArguments().getInt("matchId");
-        if (matchId == 0)
-            matchId = Integer.parseInt(getArguments().getString("matchId"));
+        match = (LeagueMatch) getArguments().getSerializable("match");
 
         anim = (ObjectAnimator) AnimatorInflater.loadAnimator(this.getContext(), R.animator.fliping);
         anim.setTarget(rootView.findViewById(R.id.coin));
         anim.setDuration(300);
         anim.setRepeatCount(Animation.INFINITE);
-
-        btnToss = (Button) rootView.findViewById(R.id.TossButton);
-        btnHead = (Button) rootView.findViewById(R.id.Headbutton);
-        btnTail = (Button) rootView.findViewById(R.id.Tailbutton);
-        txtResult = (TextView) rootView.findViewById(R.id.txtResult);
 
         btnHead.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +65,7 @@ public class Request_Toss_dlg extends DialogFragment {
                 doToss(2);
             }
         });
-        getMatch();
+        setUI();
 
         btnToss.setOnClickListener(new View.OnClickListener() {
                                        @Override
@@ -92,31 +94,20 @@ public class Request_Toss_dlg extends DialogFragment {
         return rootView;
     }
 
-    private void getMatch() {
-//        RestClient client = new RestClient();
-//        client.MatchService().getMatch(matchId, new Callback<LeagueMatch>() {
-//            @Override
-//            public void success(LeagueMatch leagueMatch, Response response) {
-//                match = leagueMatch;
-//                if (match.toss == 0) {
-//                    btnToss.setVisibility(View.VISIBLE);
-//                    btnHead.setVisibility(View.GONE);
-//                    btnTail.setVisibility(View.GONE);
-//                } else if (match.toss == -1) {
-//                    anim.start();
-//                    btnToss.setVisibility(View.GONE);
-//                    if (match.tossRequestedBy != ((BaseActivity) getActivity()).mintUserId) {
-//                        btnHead.setVisibility(View.VISIBLE);
-//                        btnTail.setVisibility(View.VISIBLE);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void failure(RetrofitError error) {
-//
-//            }
-//        });
+    private void setUI() {
+
+        if (match.toss == 0) {
+            btnToss.setVisibility(View.VISIBLE);
+            btnHead.setVisibility(View.GONE);
+            btnTail.setVisibility(View.GONE);
+        } else if (match.toss == -1) {
+            anim.start();
+            btnToss.setVisibility(View.GONE);
+            if (match.tossRequestedBy != AuthModel.UserId) {
+                btnHead.setVisibility(View.VISIBLE);
+                btnTail.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     private void doToss(final int tossOption) {

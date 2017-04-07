@@ -12,6 +12,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -79,6 +80,7 @@ public class AppModule {
                         return response;
                     }
                 })
+                .connectTimeout(10000, TimeUnit.MILLISECONDS)
                 .cache(cache)
                 .build();
 

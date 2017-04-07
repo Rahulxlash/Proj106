@@ -1,6 +1,9 @@
 package REST.Service;
 
+import java.util.ArrayList;
+
 import REST.ViewModel.LeagueMatch;
+import REST.ViewModel.Player;
 import REST.ViewModel.Toss;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -21,4 +24,7 @@ public interface MatchService {
 
     @POST("LeagueMatch/{MatchId}/DoToss/{Toss}")
     Observable<Toss> DoToss(@Path("MatchId") int MatchId, @Path("Toss") int Toss);
+
+    @GET("LeagueMatch/{MatchId}/getAllPlayers")
+    Observable<ArrayList<Player>> getAllPlayers(@Path("MatchId") int MatchId);
 }

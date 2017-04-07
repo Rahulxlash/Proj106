@@ -15,7 +15,6 @@ import com.cricketta.league.R;
 import java.util.ArrayList;
 
 import REST.Adapter.PlayerViewAdapter;
-import REST.RestClient;
 import REST.ViewModel.Player;
 
 /**
@@ -35,7 +34,6 @@ public class PlayerList_dlg extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_player_list_dlg, container, false);
         playerList = (RecyclerView) rootView.findViewById(R.id.playerList_recyclerView);
         playerList.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -54,24 +52,13 @@ public class PlayerList_dlg extends DialogFragment {
                 })
         );
         matchId = getArguments().getInt("matchId");
-        getplayerList();
+        ArrayList<Player> players = (ArrayList<Player>) getArguments().getSerializable("players");
+        setplayerList(players);
         return rootView;
     }
 
-    public void getplayerList() {
-        RestClient client = new RestClient();
-//        client.MatchService().getAllPlayer(matchId, new Callback<ArrayList<Player>>() {
-//            @Override
-//            public void success(ArrayList<Player> player, Response response) {
-//                players = player;
-//                adapter = new PlayerViewAdapter(players);
-//                playerList.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void failure(RetrofitError error) {
-//
-//            }
-//        });
+    public void setplayerList(ArrayList<Player> players) {
+        adapter = new PlayerViewAdapter(players);
+        playerList.setAdapter(adapter);
     }
 }

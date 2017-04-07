@@ -23,10 +23,18 @@ public interface MatchContract {
     }
 
     public interface TeamSelectPresenter extends BasePresenter {
+        void addPlayer(int matchId, int playerId);
 
+        void onAddClick();
+
+        void getTeam(int matchId);
+
+        void getAllPlayers(int matchId);
     }
 
     public interface TeamSelectView extends BaseView {
+        void showPlayerList();
 
+        void showTeam();
     }
 }

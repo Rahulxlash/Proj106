@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ import butterknife.InjectView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SelectTeam_frag extends BaseFragment {
+public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamSelectView {
     @InjectView(R.id.Date_Of_Match)
     TextView txtMatchDate;
     @InjectView(R.id.venu_of_match)
@@ -31,6 +32,9 @@ public class SelectTeam_frag extends BaseFragment {
     ImageView img4;
     @InjectView(R.id.text_competitor)
     TextView txt_CompetitorName;
+    @InjectView(R.id.btnAdd)
+    ImageButton btnAdd;
+    SelectTeamPresenter presenter;
     private LeagueMatch leagueMatch;
 
     public SelectTeam_frag() {
@@ -43,12 +47,35 @@ public class SelectTeam_frag extends BaseFragment {
         View rootView = inflater.inflate(R.layout.fragment_select_team_frag, container, false);
         leagueMatch = (LeagueMatch) getArguments().getSerializable("match");
         ButterKnife.inject(this, rootView);
+        presenter = new SelectTeamPresenter(this);
+        presenter.getAllPlayers(leagueMatch.leagueMatchId);
+
         txtMatchDate.setText(leagueMatch.getMatchDate());
         txtVenue.setText(leagueMatch.venue.toString());
-
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onAddClick();
+            }
+        });
         Picasso.with(getContext()).load("http://api.cricketta.com/images/" + leagueMatch.teamName1.trim() + "Logo.png").into(img3);
         Picasso.with(getContext()).load("http://api.cricketta.com/images/" + leagueMatch.teamName2.trim() + "Logo.png").into(img4);
         return rootView;
+    }
+
+    @Override
+    public void showPlayerList() {
+        PlayerList_dlg fragment = new PlayerList_dlg();
+        Bundle bundle = new Bundle();
+        bundle.putInt("matchId", leagueMatch.leagueMatchId);
+        bundle.putSerializable("players", presenter.players);
+        fragment.setArguments(bundle);
+        fragment.show(getFragmentManager(), "selectPlayer");
+    }
+
+    @Override
+    public void showTeam() {
+
     }
 }
 

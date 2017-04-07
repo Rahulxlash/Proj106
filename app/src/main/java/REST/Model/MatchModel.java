@@ -3,10 +3,13 @@ package REST.Model;
 import com.cricketta.league.CricApplication;
 import com.cricketta.league.ModelCallback;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import REST.Service.MatchService;
 import REST.ViewModel.LeagueMatch;
+import REST.ViewModel.Player;
 import REST.ViewModel.Toss;
 import rx.Subscriber;
 import rx.Subscription;
@@ -66,6 +69,28 @@ public class MatchModel {
                     @Override
                     public void onNext(Toss leagueMatch) {
                         callback.onSuccess(leagueMatch);
+                    }
+                });
+    }
+
+    public Subscription getAllPlayers(int matchId, final ModelCallback<ArrayList<Player>> callback) {
+        return matchService.getAllPlayers(matchId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArrayList<Player>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(ArrayList<Player> players) {
+                        callback.onSuccess(players);
                     }
                 });
     }

@@ -7,6 +7,7 @@ import com.cricketta.league.League.LeagueMatchesPresenter;
 import com.cricketta.league.League.LeagueSummaryPresenter;
 import com.cricketta.league.League.frag_league_list;
 import com.cricketta.league.LeagueMatch.MatchTossPresenter;
+import com.cricketta.league.LeagueMatch.SelectTeamPresenter;
 import com.cricketta.league.Login.LoginPresenter;
 import com.cricketta.league.Main.MainPresenter;
 import com.cricketta.league.Main.Main_Activity;
@@ -46,6 +47,8 @@ public interface AppComponent {
     void inject(CreateLeaguePresenter createLeaguePresenter);
 
     void inject(MatchTossPresenter matchTossPresenter);
+
+    void inject(SelectTeamPresenter selectTeamPresenter);
 
     //Models
     void inject(LeagueModel leagueModel);

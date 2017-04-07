@@ -1,6 +1,5 @@
 package com.cricketta.league.League;
 
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cricketta.league.BaseFragment;
-import com.cricketta.league.LeagueMatch.PlayerList_dlg;
 import com.cricketta.league.LeagueMatch.Request_Toss_dlg;
 import com.cricketta.league.LeagueMatch.SelectTeam_frag;
 import com.cricketta.league.Listener.LeagueListener;
@@ -92,9 +90,9 @@ public class LeagueMatch_frag extends BaseFragment implements LeagueContract.Mat
     public void showSelectPlayer(LeagueMatch match) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("match", match);
-        PlayerList_dlg fragment = new PlayerList_dlg();
+        SelectTeam_frag fragment = new SelectTeam_frag();
         fragment.setArguments(bundle);
-        ((Main_Activity) getActivity()).showFragment(fragment, "player", true, true);
+        ((Main_Activity) getActivity()).showFragment(fragment, "selectTeam", true, true);
     }
 
     @Override
@@ -115,5 +113,6 @@ public class LeagueMatch_frag extends BaseFragment implements LeagueContract.Mat
         fragment.setArguments(bundle);
         ((Main_Activity) getActivity()).showFragment(fragment, "player", true, true);
     }
+
 }
 

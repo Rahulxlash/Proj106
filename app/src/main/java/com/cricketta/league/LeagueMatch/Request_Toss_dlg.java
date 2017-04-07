@@ -127,7 +127,6 @@ public class Request_Toss_dlg extends BaseDialogFragment implements MatchContrac
         anim.end();
 
         SelectTeam_frag frag = new SelectTeam_frag();
-
         Bundle bundle = new Bundle();
         bundle.putSerializable("match", match);
         frag.setArguments(bundle);

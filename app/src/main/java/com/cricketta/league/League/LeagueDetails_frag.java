@@ -28,9 +28,7 @@ public class LeagueDetails_frag extends Fragment {
     private ViewPager viewPager;
     private ArrayList<League> leagues;
     public LeagueDetails_frag() {
-        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,15 +45,13 @@ public class LeagueDetails_frag extends Fragment {
         tabLayout.getTabAt(1).setIcon(R.drawable.league_matches);
         tabLayout.getTabAt(2).setIcon(R.drawable.league_setting);
         return view;
-
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("league", getArguments().getSerializable("league"));
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
         LeagueSummary_frag fragSum = new LeagueSummary_frag();
         fragSum.setArguments(bundle);

@@ -21,4 +21,12 @@ public interface MatchContract {
 
         void tossDone(Toss toss);
     }
+
+    public interface TeamSelectPresenter extends BasePresenter {
+
+    }
+
+    public interface TeamSelectView extends BaseView {
+
+    }
 }

@@ -18,6 +18,7 @@ import javax.inject.Singleton;
 
 import REST.Model.AuthModel;
 import REST.Model.LeagueModel;
+import REST.Model.MatchModel;
 import REST.Service.AuthService;
 import REST.Service.LeagueService;
 import REST.Service.MatchService;
@@ -140,5 +141,11 @@ public class AppModule {
     @Singleton
     LeagueModel providesLeagueModel() {
         return new LeagueModel();
+    }
+
+    @Provides
+    @Inject
+    MatchModel providesMatchModel() {
+        return new MatchModel();
     }
 }

@@ -1,6 +1,7 @@
 package REST.Service;
 
 import REST.ViewModel.LeagueMatch;
+import REST.ViewModel.Toss;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -12,12 +13,12 @@ import rx.Observable;
 
 public interface MatchService {
 
-    @GET("/LeagueMatch/{matchId}/Get")
+    @GET("LeagueMatch/{matchId}/Get")
     Observable<LeagueMatch> getMatch(@Path("matchId") int matchId);
 
-    @POST("/LeagueMatch/{MatchId}/RequestToss/{UserId}")
+    @POST("LeagueMatch/{MatchId}/RequestToss/{UserId}")
     Observable<LeagueMatch> RequestToss(@Path("MatchId") int MatchId, @Path("UserId") int UserId);
 
-    @POST("/LeagueMatch/{MatchId}/DoToss/{Toss}")
-    Observable<LeagueMatch> DoToss(@Path("MatchId") int MatchId, @Path("Toss") int Toss);
+    @POST("LeagueMatch/{MatchId}/DoToss/{Toss}")
+    Observable<Toss> DoToss(@Path("MatchId") int MatchId, @Path("Toss") int Toss);
 }

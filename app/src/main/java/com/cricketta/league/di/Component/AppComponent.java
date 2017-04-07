@@ -6,6 +6,7 @@ import com.cricketta.league.League.LeagueListPresenter;
 import com.cricketta.league.League.LeagueMatchesPresenter;
 import com.cricketta.league.League.LeagueSummaryPresenter;
 import com.cricketta.league.League.frag_league_list;
+import com.cricketta.league.LeagueMatch.MatchTossPresenter;
 import com.cricketta.league.Login.LoginPresenter;
 import com.cricketta.league.Main.MainPresenter;
 import com.cricketta.league.Main.Main_Activity;
@@ -15,6 +16,7 @@ import javax.inject.Singleton;
 
 import REST.Model.AuthModel;
 import REST.Model.LeagueModel;
+import REST.Model.MatchModel;
 import dagger.Component;
 
 /**
@@ -43,8 +45,14 @@ public interface AppComponent {
 
     void inject(CreateLeaguePresenter createLeaguePresenter);
 
+    void inject(MatchTossPresenter matchTossPresenter);
+
     //Models
     void inject(LeagueModel leagueModel);
 
     void inject(AuthModel authModel);
+
+    void inject(MatchModel matchModel);
+
+
 }

@@ -10,11 +10,15 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cricketta.league.BaseActivity;
 import com.cricketta.league.BaseDialogFragment;
+import com.cricketta.league.Main.Main_Activity;
 import com.cricketta.league.R;
 
 import REST.Model.AuthModel;
 import REST.ViewModel.LeagueMatch;
+import REST.ViewModel.Toss;
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
@@ -22,7 +26,7 @@ import butterknife.InjectView;
  * Created by Anuj on 3/29/2017.
  */
 
-public class Request_Toss_dlg extends BaseDialogFragment {
+public class Request_Toss_dlg extends BaseDialogFragment implements MatchContract.TossView {
 
     String Title;
     ObjectAnimator anim;
@@ -34,9 +38,10 @@ public class Request_Toss_dlg extends BaseDialogFragment {
     Button btnTail;
     @InjectView(R.id.txtResult)
     TextView txtResult;
-    int matchId;
 
     LeagueMatch match;
+    MatchTossPresenter presenter;
+    int tossOption;
 
     public Request_Toss_dlg() {
         // Required empty public constructor
@@ -47,6 +52,8 @@ public class Request_Toss_dlg extends BaseDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_request_toss_dlg, container, false);
         match = (LeagueMatch) getArguments().getSerializable("match");
+        ButterKnife.inject(this, rootView);
+        presenter = new MatchTossPresenter(this);
 
         anim = (ObjectAnimator) AnimatorInflater.loadAnimator(this.getContext(), R.animator.fliping);
         anim.setTarget(rootView.findViewById(R.id.coin));
@@ -70,23 +77,7 @@ public class Request_Toss_dlg extends BaseDialogFragment {
         btnToss.setOnClickListener(new View.OnClickListener() {
                                        @Override
                                        public void onClick(View v) {
-//                                           RestClient client = new RestClient();
-//                                           ((BaseActivity) getActivity()).showDialog("Requesting Toss....");
-//                                           client.MatchService().RequestToss(matchId, ((Main_Activity) getActivity()).mintUserId, new Callback<LeagueMatch>() {
-//                                               @Override
-//                                               public void success(LeagueMatch leagueMatch, Response response) {
-//                                                   btnToss.setVisibility(View.INVISIBLE);
-//                                                   ((BaseActivity) getActivity()).hideDialog();
-//                                                   ((BaseActivity) getActivity()).showToast("Toss request sent.");
-//                                                   getDialog().dismiss();
-//                                                   // anim.start();
-//                                               }
-//
-//                                               @Override
-//                                               public void failure(RetrofitError error) {
-//                                                   ((BaseActivity) getActivity()).hideDialog();
-//                                               }
-//                                           });
+                                           presenter.RequestToss(match.leagueMatchId);
                                        }
                                    }
         );
@@ -113,34 +104,34 @@ public class Request_Toss_dlg extends BaseDialogFragment {
     private void doToss(final int tossOption) {
         btnHead.setEnabled(false);
         btnTail.setEnabled(false);
-//        ((BaseActivity) getActivity()).showDialog("Toss in progress....");
-//        RestClient client = new RestClient();
-//        client.MatchService().DoToss(matchId, tossOption, new Callback<Toss>() {
-//            @Override
-//            public void success(Toss toss, Response response) {
-//                if (tossOption == toss.result)
-//                    ((BaseActivity) getActivity()).showToast("Congrats!! You won the toss now select the team.");
-//                else
-//                    ((BaseActivity) getActivity()).showToast("Ohh!! You lost the toss, now select the team.");
-//
-//                txtResult.setText(toss.value);
-//                txtResult.setVisibility(View.VISIBLE);
-//                anim.end();
-//                ((BaseActivity) getActivity()).hideDialog();
-//
-//                SelectTeam_frag frag = new SelectTeam_frag();
-//
-//                Bundle bundle = new Bundle();
-//                bundle.putSerializable("leagueMatch", match);
-//                frag.setArguments(bundle);
-//                ((Main_Activity) getActivity()).showFragment(frag, "SelectTeam", true, false);
-//                getDialog().dismiss();
-//            }
-//
-//            @Override
-//            public void failure(RetrofitError error) {
-//                ((BaseActivity) getActivity()).hideDialog();
-//            }
-//        });
+        this.tossOption = tossOption;
+        presenter.doToss(match.matchId, tossOption);
+    }
+
+    @Override
+    public void tossSubmitted() {
+        btnToss.setVisibility(View.INVISIBLE);
+        ((BaseActivity) getActivity()).showToast("Toss request sent.");
+        getDialog().dismiss();
+    }
+
+    @Override
+    public void tossDone(Toss toss) {
+        if (tossOption == toss.result)
+            ((BaseActivity) getActivity()).showToast("Congrats!! You won the toss now select the team.");
+        else
+            ((BaseActivity) getActivity()).showToast("Ohh!! You lost the toss, now select the team.");
+
+        txtResult.setText(toss.value);
+        txtResult.setVisibility(View.VISIBLE);
+        anim.end();
+
+        SelectTeam_frag frag = new SelectTeam_frag();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("match", match);
+        frag.setArguments(bundle);
+        ((Main_Activity) getActivity()).showFragment(frag, "SelectTeam", true, false);
+        getDialog().dismiss();
     }
 }

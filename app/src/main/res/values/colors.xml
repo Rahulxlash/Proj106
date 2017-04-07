@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#527586</color>
-    <color name="colorPrimaryDark">#455A64</color>
-    <color name="colorAccent">#be0d7b</color>
+    <color name="colorPrimary">#870d4c</color>
+    <color name="colorPrimaryDark">#debfe8</color>
+    <color name="colorAccent">#870d4c</color>
     <color name="textColorPrimary">#27eaf1</color>
     <color name="textColor">#fff</color>
-    <color name="windowBackground">#22353e</color>
+    <color name="windowBackground">#e6f0f4</color>
     <color name="labelColor">#f1eeee</color>
     <color name="inputtext">#ffffff</color>
     <color name="blue">#659edf</color>
     <color name="transparent">#f2ecec</color>
     <color name="button">#5c6e74</color>
-    <color name="actionbar">#01181c</color>
+    <color name="actionbar">#870d4c</color>
     <color name="matchCardColor">#7aa8bf</color>
-    <color name="cardcolor">#fade29</color>
-    <color name="cardcolorReject">#8edbff</color>
-    <color name="cardcolorWin">#94dc7c</color>
-    <color name="cardcolorLoss">#fd9d88</color>
+    <color name="cardcolor">#bee0e6</color>
+    <color name="cardcolorReject">#bee0e6</color>
+    <color name="cardcolorWin">#bee0e6</color>
+    <color name="cardcolorLoss">#bee0e6</color>
     <color name="DialogFragment">#698d9c</color>
     <color name="PlussButton">#d74545</color>
 </resources>

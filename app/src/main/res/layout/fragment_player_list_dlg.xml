@@ -1,0 +1,72 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cricketta.league.fragment.PlayerList_dlg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/windowBackground">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignEnd="@+id/playerList_recyclerView"
+            android:layout_alignParentTop="true"
+            android:background="@color/windowBackground"
+            android:weightSum="4">
+
+            <ImageButton
+                android:id="@+id/wicketYellow_imagebutton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/capYellow_imagebutton"
+                android:layout_marginStart="42dp"
+                android:layout_weight="1"
+                android:background="@drawable/wricket_yellow" />
+
+            <ImageButton
+                android:id="@+id/capYellow_imagebutton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="35dp"
+                android:layout_toEndOf="@+id/wicketYellow_imagebutton"
+                android:layout_weight="1"
+                android:background="@drawable/cap_yellow" />
+
+            <ImageButton
+                android:id="@+id/batYellow_imagebutton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/ballyellow_imagebutton"
+                android:layout_marginEnd="41dp"
+                android:layout_weight="1"
+                android:background="@drawable/bat_yellow" />
+
+            <ImageButton
+                android:id="@+id/ballyellow_imagebutton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignTop="@+id/capYellow_imagebutton"
+                android:layout_marginEnd="35dp"
+                android:layout_toStartOf="@+id/batYellow_imagebutton"
+                android:layout_weight="1"
+                android:background="@drawable/tennisball_yellow" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/playerList_recyclerView"
+            android:layout_width="380dp"
+            android:layout_height="500dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/windowBackground">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+</FrameLayout>

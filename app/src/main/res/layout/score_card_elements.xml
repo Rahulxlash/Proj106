@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/score_element_relativelayout"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_score_elments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:text="player"
+        android:textColor="#fff"
+        android:textSize="20dp">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/bat_score_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ball_score_text"
+        android:layout_alignBottom="@+id/ball_score_text"
+        android:layout_alignStart="@+id/ball_score_text"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="50dp"
+        android:text="bat"
+        android:textColor="#fff"
+        android:textSize="15dp">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/points_score_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bat_score_text"
+        android:layout_alignBottom="@+id/bat_score_text"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="23dp"
+        android:layout_toEndOf="@+id/bat_score_text"
+        android:text="points"
+        android:textColor="#fff"
+        android:textSize="15dp">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/ball_score_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_score_elments"
+        android:layout_alignBottom="@+id/text_score_elments"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="150dp"
+        android:layout_marginLeft="15dp"
+        android:text="ball"
+        android:textColor="#fff"
+        android:textSize="15dp">
+
+    </TextView>
+</RelativeLayout>

@@ -45,6 +45,7 @@ public class Main_Activity extends BaseActivity
     public ActionBar actionBar;
     private TextView user_information;
     private ImageView ImgVwProfileImage;
+    private ImageView img_user;
     private FragmentManager fragmentManager;
     private FloatingActionButton fab;
 
@@ -64,8 +65,6 @@ public class Main_Activity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_);
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();

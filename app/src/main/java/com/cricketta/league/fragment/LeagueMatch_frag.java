@@ -58,9 +58,14 @@ public class LeagueMatch_frag extends Fragment {
 
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("leagueMatch", leagueMatch);
-                            SelectTeam_frag fragment = new SelectTeam_frag();
-                            fragment.setArguments(bundle);
-                            ((Main_Activity) getActivity()).showFragment(fragment, "player", true, false);
+//                            SelectTeam_frag fragment = new SelectTeam_frag();
+//                            fragment.setArguments(bundle);
+//                            ((Main_Activity) getActivity()).showFragment(fragment, "select player", true,false);
+                            FragmentManager fm = getFragmentManager();
+                            SelectTeam_frag dialogFragment = new SelectTeam_frag();
+
+                            dialogFragment.setArguments(bundle);
+                            dialogFragment.show(fm, "Sample Fragment");
 
                         } else {
                             Bundle bundle = new Bundle();

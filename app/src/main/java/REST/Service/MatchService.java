@@ -1,6 +1,9 @@
 package REST.Service;
 
+import java.util.ArrayList;
+
 import REST.Model.LeagueMatch;
+import REST.Model.Player;
 import REST.Model.Toss;
 import retrofit.Callback;
 import retrofit.http.GET;
@@ -21,4 +24,7 @@ public interface MatchService {
 
     @POST("/LeagueMatch/{MatchId}/DoToss/{Toss}")
     public void DoToss(@Path("MatchId") int MatchId, @Path("Toss") int Toss, Callback<Toss> callback);
+
+    @GET("/LeagueMatch/{matchId}/GetAllPlayers")
+    public void getAllPlayer(@Path("matchId") int MatchId, Callback<ArrayList<Player>> callback);
 }

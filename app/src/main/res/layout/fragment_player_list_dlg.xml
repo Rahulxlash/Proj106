@@ -17,6 +17,11 @@
             android:background="@color/windowBackground"
             android:gravity="center"
             android:padding="5dp">
+            <ImageButton
+                android:id="@+id/imagebutton_me"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="40dp" />
 
             <ImageButton
                 android:id="@+id/wicketYellow_imagebutton"
@@ -45,6 +50,14 @@
                 android:layout_height="25dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/tennisball_yellow" />
+
+            <ImageButton
+                android:id="@+id/imagebutton_competitor"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="40dp">
+
+            </ImageButton>
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView

@@ -48,7 +48,7 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
         leagueMatch = (LeagueMatch) getArguments().getSerializable("match");
         ButterKnife.inject(this, rootView);
         presenter = new SelectTeamPresenter(this);
-        presenter.getAllPlayers(leagueMatch.leagueMatchId);
+        presenter.getAllPlayers(leagueMatch.matchId);
 
         txtMatchDate.setText(leagueMatch.getMatchDate());
         txtVenue.setText(leagueMatch.venue.toString());
@@ -67,7 +67,8 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
     public void showPlayerList() {
         PlayerList_dlg fragment = new PlayerList_dlg();
         Bundle bundle = new Bundle();
-        bundle.putInt("matchId", leagueMatch.leagueMatchId);
+        bundle.putInt("matchid", leagueMatch.matchId);
+        bundle.putSerializable("leaguematch", leagueMatch);
         bundle.putSerializable("players", presenter.players);
         fragment.setArguments(bundle);
         fragment.show(getFragmentManager(), "selectPlayer");

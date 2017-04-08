@@ -19,4 +19,5 @@
     <color name="cardcolorLoss">#bee0e6</color>
     <color name="DialogFragment">#698d9c</color>
     <color name="PlussButton">#d74545</color>
+    <color name="tabcolor">#ffff</color>
 </resources>

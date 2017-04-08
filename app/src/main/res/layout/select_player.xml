@@ -14,16 +14,16 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardview"
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_margin="5dp"
+        android:layout_height="50dp"
+        android:layout_margin="2dp"
 
         card_view:cardBackgroundColor="@color/matchCardColor">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:padding="3dp">
+            android:layout_marginTop="5dp"
+            android:padding="2dp">
 
             <ImageView
                 android:id="@+id/img_user_team_select"

@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="380dp"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:background="@color/matchCardColor">
 
         <LinearLayout
             android:id="@+id/Date_venu_layout"
@@ -105,12 +105,12 @@
 
             <ImageButton
                 android:id="@+id/btnAdd"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/me_text"
-                android:background="@color/colorPrimary"
+                android:background="@color/matchCardColor"
                 app:srcCompat="@drawable/plus_outline">
 
             </ImageButton>

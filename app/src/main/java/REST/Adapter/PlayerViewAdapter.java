@@ -41,6 +41,7 @@ public class PlayerViewAdapter extends RecyclerView.Adapter<PlayerViewHolder> {
         Player status = players.get(position);
         ImageView img = (ImageView) holder.itemView.findViewById(R.id.img_user_team_select);
         Picasso.with(context).load("http://api.cricketta.com/images/" + status.photo.trim() + "Logo.png").into(img);
+
         holder.bind(status);
     }
 

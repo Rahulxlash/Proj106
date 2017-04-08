@@ -3,6 +3,7 @@ package com.cricketta.league.LeagueMatch;
 import com.cricketta.league.BasePresenter;
 import com.cricketta.league.BaseView;
 
+import REST.ViewModel.ScoreCard;
 import REST.ViewModel.Toss;
 
 /**
@@ -36,5 +37,14 @@ public interface MatchContract {
         void showPlayerList();
 
         void showTeam();
+    }
+
+    public interface PlayerSelectPresenter extends BasePresenter {
+        void selectPlayer(int PlayerId, int MatchId);
+    }
+
+    public interface PlayerSelectView extends BaseView {
+        void closeView(ScoreCard card);
+
     }
 }

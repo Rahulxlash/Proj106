@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import REST.Service.MatchService;
 import REST.ViewModel.LeagueMatch;
 import REST.ViewModel.Player;
+import REST.ViewModel.ScoreCard;
 import REST.ViewModel.Toss;
 import rx.Subscriber;
 import rx.Subscription;
@@ -91,6 +92,28 @@ public class MatchModel {
                     @Override
                     public void onNext(ArrayList<Player> players) {
                         callback.onSuccess(players);
+                    }
+                });
+    }
+
+    public Subscription addPlayer(int matchId, int playerId, final ModelCallback<ScoreCard> callback) {
+        return matchService.addPlayer(matchId, AuthModel.UserId, playerId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ScoreCard>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(ScoreCard scoreCard) {
+                        callback.onSuccess(scoreCard);
                     }
                 });
     }

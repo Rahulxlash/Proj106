@@ -28,6 +28,7 @@ public class SelectTeamPresenter implements MatchContract.TeamSelectPresenter {
         subscriptions = new CompositeSubscription();
     }
 
+
     @Override
     public void onStop() {
 

@@ -65,6 +65,7 @@ public class PlayerList_dlg extends BaseDialogFragment implements MatchContract.
                     }
                 })
         );
+
         leagueMatch = (LeagueMatch) getArguments().getSerializable("leaguematch");
         matchId = getArguments().getInt("matchId");
         ArrayList<Player> players = (ArrayList<Player>) getArguments().getSerializable("players");

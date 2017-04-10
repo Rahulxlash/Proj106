@@ -152,8 +152,10 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
     public void onMessageEvent(PlayerSelectedEvent event) {
         if (event.matchId == leagueMatch.leagueMatchId) {
             ScoreCard carx = updatePlayerList(event.playerId, event.userId);
-            showToast(carx.name + " added to team by competitor.");
-            //showTeam();
+            if (event.userId == AuthModel.UserId)
+                showToast(carx.name.trim() + " added to team.");
+            else
+                showToast(carx.name.trim() + " choosen by competitor.");
         }
     }
 

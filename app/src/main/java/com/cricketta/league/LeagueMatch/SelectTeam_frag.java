@@ -108,7 +108,7 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
         fragment.show(getFragmentManager(), "selectPlayer");
     }
 
-    public void updatePlayerList(int PlayerId, int userId) {
+    public ScoreCard updatePlayerList(int PlayerId, int userId) {
         Iterator<Player> it = presenter.players.iterator();
         while (it.hasNext()) {
             Player pl = it.next();
@@ -122,14 +122,18 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
                 card.captain = pl.captain;
                 card.photo = pl.photo;
                 card.userId = userId;
-                if (userId == AuthModel.UserId)
-                presenter.myTeamPlayers.add(card);
-                else
+                if (userId == AuthModel.UserId) {
+                    presenter.myTeamPlayers.add(card);
+                    myTeamAdapter.notifyItemInserted(presenter.myTeamPlayers.size() - 1);
+                } else {
                     presenter.compTeamPlayers.add(card);
+                    compTeamAdapter.notifyItemInserted(presenter.compTeamPlayers.size() - 1);
+                }
                 it.remove();
-                break;
+                return card;
             }
         }
+        return null;
     }
 
     @Override
@@ -147,8 +151,9 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
     @Subscribe
     public void onMessageEvent(PlayerSelectedEvent event) {
         if (event.matchId == leagueMatch.leagueMatchId) {
-            updatePlayerList(event.playerId, event.userId);
-            showTeam();
+            ScoreCard carx = updatePlayerList(event.playerId, event.userId);
+            showToast(carx.name + " added to team by competitor.");
+            //showTeam();
         }
     }
 

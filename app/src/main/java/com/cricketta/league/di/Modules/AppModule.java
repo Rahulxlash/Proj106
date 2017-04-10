@@ -39,10 +39,11 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  */
 @Module
 public class AppModule {
+
+    //private static final String BASE_URL = "http://192.168.1.111/cricketta.api/api/";
     private static final String BASE_URL = "http://api.cricketta.com/api/";
     private Context context;
     private File cachefile;
-    //private static final String BASE_URL = "http://192.168.1.109/cricketta.api/api/";
 
     public AppModule(Context context) {
         this.context = context;

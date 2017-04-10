@@ -11,18 +11,24 @@ import android.util.Log;
 import com.cricketta.league.CricApplication;
 import com.cricketta.league.Main.Main_Activity;
 import com.cricketta.league.R;
+import com.cricketta.league.events.PlayerSelectedEvent;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by rahul.sharma01 on 3/27/2017.
  */
 
 public class MessagingService extends FirebaseMessagingService {
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-        if (CricApplication.isActivityVisible()) {
+        if (CricApplication.isActivityVisible() && remoteMessage.getNotification() != null) {
             Intent intent = new Intent(this, Main_Activity.class);
             intent.putExtra("notData", remoteMessage.getData().toString());
 
@@ -43,24 +49,36 @@ public class MessagingService extends FirebaseMessagingService {
                     (NotificationManager) getSystemService(getBaseContext().NOTIFICATION_SERVICE);
 
             notificationManager.notify(0, mNotificationBuilder.build());
-
         }
-        // TODO(developer): Handle FCM messages here.
-        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d("retro", "From: " + remoteMessage.getFrom());
-
-        // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d("retro", "Message data payload: " + remoteMessage.getData());
         }
-
-        // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d("retro", "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
+        if (remoteMessage.getNotification() == null)
+            processData(remoteMessage.getData().toString());
 
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated. See sendNotification method below.
+    }
+
+    private void processData(String data) {
+        try {
+            JSONObject requestData = new JSONObject(data);
+
+            if (requestData.getString("Tag").equals("PLAYER_SELECTED")) {
+                int playerId = requestData.getInt("playerId");
+                int leagueMatchId = requestData.getInt("leagueMatchId");
+                int userId = requestData.getInt("userId");
+
+                EventBus.getDefault().post(new PlayerSelectedEvent(playerId, leagueMatchId, 0, userId));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }

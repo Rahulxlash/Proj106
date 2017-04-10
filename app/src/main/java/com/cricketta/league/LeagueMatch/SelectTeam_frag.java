@@ -80,7 +80,7 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
         leagueMatch = (LeagueMatch) getArguments().getSerializable("match");
         ButterKnife.inject(this, rootView);
         presenter = new SelectTeamPresenter(this);
-        presenter.getAllPlayers(leagueMatch.matchId);
+        presenter.getAllPlayers(leagueMatch.leagueMatchId);
 
         txtMatchDate.setText(leagueMatch.getMatchDate());
         txtVenue.setText(leagueMatch.venue);
@@ -101,14 +101,14 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
     public void showPlayerList() {
         PlayerList_dlg fragment = new PlayerList_dlg();
         Bundle bundle = new Bundle();
-        bundle.putInt("matchId", leagueMatch.matchId);
+        bundle.putInt("matchId", leagueMatch.leagueMatchId);
         bundle.putSerializable("leaguematch", leagueMatch);
         bundle.putSerializable("players", presenter.players);
         fragment.setArguments(bundle);
         fragment.show(getFragmentManager(), "selectPlayer");
     }
 
-    public void updatePlayerList(int PlayerId) {
+    public void updatePlayerList(int PlayerId, int userId) {
         Iterator<Player> it = presenter.players.iterator();
         while (it.hasNext()) {
             Player pl = it.next();
@@ -121,8 +121,11 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
                 card.keeper = pl.keeper;
                 card.captain = pl.captain;
                 card.photo = pl.photo;
-                card.userId = AuthModel.UserId;
+                card.userId = userId;
+                if (userId == AuthModel.UserId)
                 presenter.myTeamPlayers.add(card);
+                else
+                    presenter.compTeamPlayers.add(card);
                 it.remove();
                 break;
             }
@@ -143,8 +146,10 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
 
     @Subscribe
     public void onMessageEvent(PlayerSelectedEvent event) {
-        updatePlayerList(event.playerId);
-        showTeam();
+        if (event.matchId == leagueMatch.leagueMatchId) {
+            updatePlayerList(event.playerId, event.userId);
+            showTeam();
+        }
     }
 
     @Override

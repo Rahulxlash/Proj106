@@ -6,32 +6,67 @@
     tools:context="com.cricketta.league.LeagueMatch.SelectTeam_frag">
 
     <RelativeLayout
+        android:id="@+id/linearLayout_selectTeam"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/matchCardColor">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/teamProfile_Image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/competitor_me_layout"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/my_team"
+            <ImageView
+                android:id="@+id/imageView_team1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@+id/imageView_team2"
+                android:layout_marginEnd="28dp"
+                android:layout_marginRight="28dp"
+                android:layout_toLeftOf="@+id/imageView_team2"
+                android:layout_toStartOf="@+id/imageView_team2"
+                android:paddingTop="10dp"
+                android:src="@drawable/thumbs_down" />
+
+            <ImageView
+                android:id="@+id/imageView_team2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="253dp"
+                android:layout_marginRight="253dp"
+                android:layout_marginTop="22dp"
+                android:paddingTop="10dp"
+                app:srcCompat="@drawable/coin" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/Date_venu_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/teamProfile_Image">
+
+            <TextView
+                android:id="@+id/Date_Of_Match"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.92">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Date"
+                android:textColor="#fff"
+                android:textSize="20sp" />
 
-            </android.support.v7.widget.RecyclerView>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/comp_team"
+            <TextView
+                android:id="@+id/venu_of_match"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-            </android.support.v7.widget.RecyclerView>
-
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="90dp"
+                android:text="Venu"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <RelativeLayout
@@ -83,73 +118,33 @@
             </ImageButton>
 
         </RelativeLayout>
-
-        <ImageView
-            android:id="@+id/imageView_team1"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignTop="@+id/imageView_team2"
-            android:layout_marginEnd="28dp"
-            android:layout_marginRight="28dp"
-            android:layout_toLeftOf="@+id/imageView_team2"
-            android:layout_toStartOf="@+id/imageView_team2"
-            android:paddingTop="10dp"
-            android:src="@drawable/thumbs_down" />
-
-        <ImageView
-            android:id="@+id/imageView_team2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="253dp"
-            android:layout_marginRight="253dp"
-            android:layout_marginTop="22dp"
-            android:paddingTop="10dp"
-            app:srcCompat="@drawable/coin" />
-
-        <RelativeLayout
-            android:id="@+id/Date_venu_layout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/imageView_team1"
-            android:layout_marginTop="38dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/competitor_me_layout"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/Date_Of_Match"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="6dp"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/my_team"
+                android:layout_width="0dp"
 
-                android:paddingLeft="13dp"
-                android:text="Date"
-                android:textColor="#fff"
-                android:textSize="20dp" />
+                android:layout_height="match_parent"
+                android:layout_weight="0.92">
 
-            <TextView
-                android:id="@+id/venu_of_match"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+            </android.support.v7.widget.RecyclerView>
 
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/Date_Of_Match"
-                android:layout_gravity="right"
-                android:layout_marginEnd="22dp"
-                android:layout_marginRight="22dp"
-                android:paddingLeft="25dp"
-                android:paddingTop="2dp"
-                android:text="venue"
-                android:textColor="#fff"
-                android:textSize="20dp" />
-        </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/comp_team"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+
+
     </RelativeLayout>
 
 

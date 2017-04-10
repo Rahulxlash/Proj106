@@ -4,9 +4,11 @@ import com.cricketta.league.CricApplication;
 import com.cricketta.league.ModelCallback;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.inject.Inject;
 
+import REST.Model.AuthModel;
 import REST.Model.MatchModel;
 import REST.ViewModel.Player;
 import REST.ViewModel.ScoreCard;
@@ -23,7 +25,8 @@ public class SelectTeamPresenter implements MatchContract.TeamSelectPresenter {
     MatchModel matchModel;
     CompositeSubscription subscriptions;
     ArrayList<Player> players;
-    ArrayList<ScoreCard> teamPlayers;
+    ArrayList<ScoreCard> myTeamPlayers;
+    ArrayList<ScoreCard> compTeamPlayers;
 
     SelectTeamPresenter(SelectTeam_frag view) {
         CricApplication.getAppComponent().inject(this);
@@ -75,7 +78,16 @@ public class SelectTeamPresenter implements MatchContract.TeamSelectPresenter {
             public void onSuccess(TeamPlayersModel response) {
                 view.hideProgress();
                 players = response.remain;
-                teamPlayers = response.selected;
+                myTeamPlayers = new ArrayList<ScoreCard>();
+                compTeamPlayers = new ArrayList<ScoreCard>();
+                Iterator<ScoreCard> it = response.selected.iterator();
+                while (it.hasNext()) {
+                    ScoreCard card = it.next();
+                    if (card.userId == AuthModel.UserId)
+                        myTeamPlayers.add(card);
+                    else
+                        compTeamPlayers.add(card);
+                }
                 view.showTeam();
             }
 

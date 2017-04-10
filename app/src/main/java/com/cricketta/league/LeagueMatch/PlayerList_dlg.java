@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.cricketta.league.BaseDialogFragment;
-import com.cricketta.league.CricApplication;
 import com.cricketta.league.Listener.LeagueListener;
 import com.cricketta.league.R;
 import com.squareup.picasso.Picasso;
@@ -86,7 +85,7 @@ public class PlayerList_dlg extends BaseDialogFragment implements MatchContract.
     @Override
     public void closeView(ScoreCard card) {
         SelectTeam_frag frag = (SelectTeam_frag) getFragmentManager().findFragmentByTag("selectTeam");
-        frag.presenter.getAllPlayers(matchId);
+        //frag.presenter.getAllPlayers(matchId);
         getDialog().dismiss();
     }
 }

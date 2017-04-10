@@ -122,7 +122,7 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
                 card.captain = pl.captain;
                 card.photo = pl.photo;
                 card.userId = AuthModel.UserId;
-                presenter.teamPlayers.add(card);
+                presenter.myTeamPlayers.add(card);
                 it.remove();
                 break;
             }
@@ -131,10 +131,12 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
 
     @Override
     public void showTeam() {
-        if (!presenter.teamPlayers.isEmpty()) {
-            myTeamAdapter = new ScoreCardViewAdapter(presenter.teamPlayers);
-            compTeamAdapter = new ScoreCardViewAdapter(presenter.teamPlayers);
+        if (!presenter.myTeamPlayers.isEmpty()) {
+            myTeamAdapter = new ScoreCardViewAdapter(presenter.myTeamPlayers);
             recyclerMyTeam.setAdapter(myTeamAdapter);
+        }
+        if (!presenter.compTeamPlayers.isEmpty()) {
+            compTeamAdapter = new ScoreCardViewAdapter(presenter.compTeamPlayers);
             recyclerCompTeam.setAdapter(compTeamAdapter);
         }
     }

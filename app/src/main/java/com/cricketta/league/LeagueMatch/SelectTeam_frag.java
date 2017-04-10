@@ -21,12 +21,12 @@ import com.squareup.picasso.Picasso;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.inject.Inject;
 
-import REST.Adapter.PlayerViewAdapter;
+import REST.Adapter.ScoreCardViewAdapter;
+import REST.Model.AuthModel;
 import REST.ViewModel.LeagueMatch;
 import REST.ViewModel.Player;
 import REST.ViewModel.ScoreCard;
@@ -57,8 +57,8 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
     @Inject
     EventBus eventBus;
 
-    PlayerViewAdapter myTeamAdapter;
-    PlayerViewAdapter compTeamAdapter;
+    ScoreCardViewAdapter myTeamAdapter;
+    ScoreCardViewAdapter compTeamAdapter;
     SelectTeamPresenter presenter;
     private LeagueMatch leagueMatch;
 
@@ -113,7 +113,16 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
         while (it.hasNext()) {
             Player pl = it.next();
             if (pl.playerId == PlayerId) {
-                presenter.teamPlayers.add(pl);
+                ScoreCard card = new ScoreCard();
+                card.playerId = pl.playerId;
+                card.name = pl.name;
+                card.bat = pl.bat;
+                card.bowl = pl.bowl;
+                card.keeper = pl.keeper;
+                card.captain = pl.captain;
+                card.photo = pl.photo;
+                card.userId = AuthModel.UserId;
+                presenter.teamPlayers.add(card);
                 it.remove();
                 break;
             }
@@ -123,8 +132,8 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
     @Override
     public void showTeam() {
         if (!presenter.teamPlayers.isEmpty()) {
-            myTeamAdapter = new PlayerViewAdapter(presenter.teamPlayers);
-            compTeamAdapter = new PlayerViewAdapter(presenter.teamPlayers);
+            myTeamAdapter = new ScoreCardViewAdapter(presenter.teamPlayers);
+            compTeamAdapter = new ScoreCardViewAdapter(presenter.teamPlayers);
             recyclerMyTeam.setAdapter(myTeamAdapter);
             recyclerCompTeam.setAdapter(compTeamAdapter);
         }

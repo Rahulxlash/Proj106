@@ -5,14 +5,22 @@ package REST.ViewModel;
  */
 
 public class ScoreCard {
-    public int RecordId;
-    public int LeagueId;
-    public int TournamentId;
-    public int MatchId;
-    public int UserId;
-    public int PlayerId;
-    public Boolean Extra;
-    public int Run;
-    public int Wicket;
+    public int recordId;
+    public int leagueId;
+    public int tournamentId;
+    public int matchId;
+    public int userId;
+
+    public int playerId;
+    public String name;
+    public Boolean isExtra;
+    public boolean bat;
+    public boolean bowl;
+    public boolean captain;
+    public boolean keeper;
+    public String photo;
+
+    public int run;
+    public int wicket;
     public boolean isPlaying;
 }

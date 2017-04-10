@@ -8,6 +8,6 @@ import java.util.ArrayList;
 
 public class TeamPlayersModel {
     public int matchId;
-    public ArrayList<Player> selected;
+    public ArrayList<ScoreCard> selected;
     public ArrayList<Player> remain;
 }

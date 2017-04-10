@@ -23,7 +23,7 @@ public class SelectTeamPresenter implements MatchContract.TeamSelectPresenter {
     MatchModel matchModel;
     CompositeSubscription subscriptions;
     ArrayList<Player> players;
-    ArrayList<Player> teamPlayers;
+    ArrayList<ScoreCard> teamPlayers;
 
     SelectTeamPresenter(SelectTeam_frag view) {
         CricApplication.getAppComponent().inject(this);
@@ -76,6 +76,7 @@ public class SelectTeamPresenter implements MatchContract.TeamSelectPresenter {
                 view.hideProgress();
                 players = response.remain;
                 teamPlayers = response.selected;
+                view.showTeam();
             }
 
             @Override

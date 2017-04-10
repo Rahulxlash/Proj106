@@ -6,46 +6,9 @@
     tools:context="com.cricketta.league.LeagueMatch.SelectTeam_frag">
 
     <RelativeLayout
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/matchCardColor">
-
-        <LinearLayout
-            android:id="@+id/Date_venu_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView_team1"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:id="@+id/Date_Of_Match"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="6dp"
-                android:layout_weight="1"
-                android:paddingLeft="13dp"
-                android:text="Date"
-                android:textColor="#fff"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/venu_of_match"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity=""
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:paddingLeft="25dp"
-                android:paddingTop="2dp"
-                android:text="venue"
-                android:textColor="#fff"
-                android:textSize="20dp" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +20,7 @@
                 android:id="@+id/my_team"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="0.92">
 
             </android.support.v7.widget.RecyclerView>
 
@@ -71,50 +34,12 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView_team2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:paddingTop="10dp"
-            app:srcCompat="@drawable/coin" />
-
-        <ImageView
-            android:id="@+id/imageView_team1"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="14dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_toStartOf="@+id/imageView_team2"
-            android:paddingTop="10dp"
-            android:src="@drawable/thumbs_down" />
-
         <RelativeLayout
             android:id="@+id/competitor_me_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_below="@+id/Date_venu_layout"
-            android:layout_marginTop="19dp"
-            android:weightSum="1">
-
-
-            <ImageButton
-                android:id="@+id/btnAdd"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_toEndOf="@+id/me_text"
-                android:background="@color/matchCardColor"
-                app:srcCompat="@drawable/plus_outline">
-
-            </ImageButton>
+            android:layout_marginTop="19dp">
 
 
             <TextView
@@ -122,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="80dp"
                 android:layout_marginTop="5dp"
                 android:paddingBottom="2dp"
                 android:paddingRight="20dp"
@@ -134,14 +59,96 @@
                 android:id="@+id/me_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/text_competitor"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="62dp"
+                android:layout_marginStart="62dp"
                 android:paddingLeft="15dp"
                 android:text="Me"
                 android:textColor="#fff"
                 android:textSize="20dp" />
 
+            <ImageButton
+                android:id="@+id/btnAdd"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignTop="@+id/me_text"
+                android:layout_marginTop="2dp"
+                android:layout_toEndOf="@+id/me_text"
+                android:layout_toRightOf="@+id/me_text"
+                android:background="@color/matchCardColor"
+                app:srcCompat="@drawable/plus_outline">
+
+            </ImageButton>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imageView_team1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/imageView_team2"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
+            android:layout_toLeftOf="@+id/imageView_team2"
+            android:layout_toStartOf="@+id/imageView_team2"
+            android:paddingTop="10dp"
+            android:src="@drawable/thumbs_down" />
+
+        <ImageView
+            android:id="@+id/imageView_team2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="253dp"
+            android:layout_marginRight="253dp"
+            android:layout_marginTop="22dp"
+            android:paddingTop="10dp"
+            app:srcCompat="@drawable/coin" />
+
+        <RelativeLayout
+            android:id="@+id/Date_venu_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/imageView_team1"
+            android:layout_marginTop="38dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Date_Of_Match"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="6dp"
+
+                android:paddingLeft="13dp"
+                android:text="Date"
+                android:textColor="#fff"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/venu_of_match"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/Date_Of_Match"
+                android:layout_gravity="right"
+                android:layout_marginEnd="22dp"
+                android:layout_marginRight="22dp"
+                android:paddingLeft="25dp"
+                android:paddingTop="2dp"
+                android:text="venue"
+                android:textColor="#fff"
+                android:textSize="20dp" />
         </RelativeLayout>
     </RelativeLayout>
 

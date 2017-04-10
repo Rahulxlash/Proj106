@@ -118,7 +118,7 @@ public class AppModule {
     @Provides
     @Singleton
     EventBus providesEventBus() {
-        return new EventBus();
+        return EventBus.getDefault();
     }
 
     @Provides

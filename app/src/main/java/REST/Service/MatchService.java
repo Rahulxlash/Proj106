@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import REST.ViewModel.LeagueMatch;
 import REST.ViewModel.Player;
 import REST.ViewModel.ScoreCard;
+import REST.ViewModel.TeamPlayersModel;
 import REST.ViewModel.Toss;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -29,9 +30,12 @@ public interface MatchService {
     Observable<Toss> DoToss(@Path("MatchId") int MatchId, @Path("Toss") int Toss);
 
     @GET("LeagueMatch/{MatchId}/getAllPlayers")
-    Observable<ArrayList<Player>> getAllPlayers(@Path("MatchId") int MatchId);
+    Observable<TeamPlayersModel> getAllPlayers(@Path("MatchId") int MatchId);
 
     @POST("LeagueMatch/{MatchId}/addTeamPlayer")
     @FormUrlEncoded
     Observable<ScoreCard> addPlayer(@Path("MatchId") int MatchId, @Field("UserId") int UserId, @Field("PlayerId") int PlayerId);
+
+    @GET("LeagueMatch/{MatchId}/getScoreCard/{UserId}")
+    Observable<ArrayList<ScoreCard>> getScoreCard(@Path("MatchId") int MatchId, @Path("UserId") int UserId);
 }

@@ -6,10 +6,10 @@ package com.cricketta.league.events;
 
 public class PlayerSelectedEvent {
 
-    int playerId;
-    int matchId;
-    int leagueId;
-    int userId;
+    public int playerId;
+    public int matchId;
+    public int leagueId;
+    public int userId;
 
     public PlayerSelectedEvent(int PlayerId, int MatchId, int LeagueId, int UserId) {
         this.playerId = PlayerId;

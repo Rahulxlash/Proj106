@@ -3,6 +3,8 @@ package com.cricketta.league.LeagueMatch;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +13,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cricketta.league.BaseFragment;
+import com.cricketta.league.CricApplication;
 import com.cricketta.league.R;
+import com.cricketta.league.events.PlayerSelectedEvent;
 import com.squareup.picasso.Picasso;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import javax.inject.Inject;
+
+import REST.Adapter.PlayerViewAdapter;
 import REST.ViewModel.LeagueMatch;
+import REST.ViewModel.Player;
+import REST.ViewModel.ScoreCard;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -34,11 +49,28 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
     TextView txt_CompetitorName;
     @InjectView(R.id.btnAdd)
     ImageButton btnAdd;
+    @InjectView(R.id.my_team)
+    RecyclerView recyclerMyTeam;
+    @InjectView(R.id.comp_team)
+    RecyclerView recyclerCompTeam;
+
+    @Inject
+    EventBus eventBus;
+
+    PlayerViewAdapter myTeamAdapter;
+    PlayerViewAdapter compTeamAdapter;
     SelectTeamPresenter presenter;
     private LeagueMatch leagueMatch;
 
     public SelectTeam_frag() {
         // Required empty public constructor
+        CricApplication.getAppComponent().inject(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -51,7 +83,9 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
         presenter.getAllPlayers(leagueMatch.matchId);
 
         txtMatchDate.setText(leagueMatch.getMatchDate());
-        txtVenue.setText(leagueMatch.venue.toString());
+        txtVenue.setText(leagueMatch.venue);
+        recyclerMyTeam.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
+        recyclerCompTeam.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,16 +101,45 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
     public void showPlayerList() {
         PlayerList_dlg fragment = new PlayerList_dlg();
         Bundle bundle = new Bundle();
-        bundle.putInt("matchid", leagueMatch.matchId);
+        bundle.putInt("matchId", leagueMatch.matchId);
         bundle.putSerializable("leaguematch", leagueMatch);
         bundle.putSerializable("players", presenter.players);
         fragment.setArguments(bundle);
         fragment.show(getFragmentManager(), "selectPlayer");
     }
 
+    public void updatePlayerList(int PlayerId) {
+        Iterator<Player> it = presenter.players.iterator();
+        while (it.hasNext()) {
+            Player pl = it.next();
+            if (pl.playerId == PlayerId) {
+                presenter.teamPlayers.add(pl);
+                it.remove();
+                break;
+            }
+        }
+    }
+
     @Override
     public void showTeam() {
+        if (!presenter.teamPlayers.isEmpty()) {
+            myTeamAdapter = new PlayerViewAdapter(presenter.teamPlayers);
+            compTeamAdapter = new PlayerViewAdapter(presenter.teamPlayers);
+            recyclerMyTeam.setAdapter(myTeamAdapter);
+            recyclerCompTeam.setAdapter(compTeamAdapter);
+        }
+    }
 
+    @Subscribe
+    public void onMessageEvent(PlayerSelectedEvent event) {
+        updatePlayerList(event.playerId);
+        showTeam();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 }
 

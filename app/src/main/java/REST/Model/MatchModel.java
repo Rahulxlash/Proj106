@@ -11,6 +11,7 @@ import REST.Service.MatchService;
 import REST.ViewModel.LeagueMatch;
 import REST.ViewModel.Player;
 import REST.ViewModel.ScoreCard;
+import REST.ViewModel.TeamPlayersModel;
 import REST.ViewModel.Toss;
 import rx.Subscriber;
 import rx.Subscription;
@@ -74,11 +75,11 @@ public class MatchModel {
                 });
     }
 
-    public Subscription getAllPlayers(int matchId, final ModelCallback<ArrayList<Player>> callback) {
+    public Subscription getAllPlayers(int matchId, final ModelCallback<TeamPlayersModel> callback) {
         return matchService.getAllPlayers(matchId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ArrayList<Player>>() {
+                .subscribe(new Subscriber<TeamPlayersModel>() {
                     @Override
                     public void onCompleted() {
 
@@ -90,7 +91,7 @@ public class MatchModel {
                     }
 
                     @Override
-                    public void onNext(ArrayList<Player> players) {
+                    public void onNext(TeamPlayersModel players) {
                         callback.onSuccess(players);
                     }
                 });
@@ -114,6 +115,27 @@ public class MatchModel {
                     @Override
                     public void onNext(ScoreCard scoreCard) {
                         callback.onSuccess(scoreCard);
+                    }
+                });
+    }
+
+    public Subscription getTeam(int matchId, final ModelCallback<ArrayList<ScoreCard>> callback) {
+        return matchService.getScoreCard(matchId, AuthModel.UserId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArrayList<ScoreCard>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(ArrayList<ScoreCard> scoreCards) {
+                        callback.onSuccess(scoreCards);
                     }
                 });
     }

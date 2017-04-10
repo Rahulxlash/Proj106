@@ -9,6 +9,8 @@ import javax.inject.Inject;
 
 import REST.Model.MatchModel;
 import REST.ViewModel.Player;
+import REST.ViewModel.ScoreCard;
+import REST.ViewModel.TeamPlayersModel;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -21,6 +23,7 @@ public class SelectTeamPresenter implements MatchContract.TeamSelectPresenter {
     MatchModel matchModel;
     CompositeSubscription subscriptions;
     ArrayList<Player> players;
+    ArrayList<Player> teamPlayers;
 
     SelectTeamPresenter(SelectTeam_frag view) {
         CricApplication.getAppComponent().inject(this);
@@ -46,17 +49,33 @@ public class SelectTeamPresenter implements MatchContract.TeamSelectPresenter {
 
     @Override
     public void getTeam(int matchId) {
+        view.showProgress("Getting team....");
+        subscriptions.add(
+                matchModel.getTeam(matchId, new ModelCallback<ArrayList<ScoreCard>>() {
+                    @Override
+                    public void onSuccess(ArrayList<ScoreCard> response) {
+                        view.hideProgress();
+                        view.showTeam();
+                    }
 
+                    @Override
+                    public void onError(String networkError) {
+                        view.hideProgress();
+                        view.onError(networkError);
+                    }
+                })
+        );
     }
 
     @Override
     public void getAllPlayers(int matchId) {
         view.showProgress("Loading players....");
-        subscriptions.add(matchModel.getAllPlayers(matchId, new ModelCallback<ArrayList<Player>>() {
+        subscriptions.add(matchModel.getAllPlayers(matchId, new ModelCallback<TeamPlayersModel>() {
             @Override
-            public void onSuccess(ArrayList<Player> response) {
+            public void onSuccess(TeamPlayersModel response) {
                 view.hideProgress();
-                players = response;
+                players = response.remain;
+                teamPlayers = response.selected;
             }
 
             @Override

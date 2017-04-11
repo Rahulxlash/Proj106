@@ -11,13 +11,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.cricketta.league.BaseFragment;
 import com.cricketta.league.Listener.LeagueListener;
 import com.cricketta.league.Main.Main_Activity;
 import com.cricketta.league.R;
-import com.squareup.picasso.Picasso;
+import com.cricketta.league.events.LeagueChangeEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -25,10 +28,6 @@ import REST.Adapter.LeagueViewAdapter;
 import REST.ViewModel.League;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
-
-import static com.cricketta.league.BR.league;
-import static com.cricketta.league.R.id.img_user;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +48,7 @@ public class frag_league_list extends BaseFragment implements LeagueContract.Lis
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -124,6 +124,12 @@ public class frag_league_list extends BaseFragment implements LeagueContract.Lis
     public void onStop() {
         super.onStop();
         presenter.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(LeagueChangeEvent event) {
+        presenter.loadLeagues();
     }
 }
 

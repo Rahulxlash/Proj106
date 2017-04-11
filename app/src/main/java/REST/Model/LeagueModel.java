@@ -123,4 +123,47 @@ public class LeagueModel {
                 });
     }
 
+    public Subscription AcceptLeague(int LeagueId, final ModelCallback<League> callback) {
+        return leagueService.AcceptChallange(LeagueId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<League>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(League league) {
+                        callback.onSuccess(league);
+                    }
+                });
+    }
+
+    public Subscription RejectLeague(int LeagueId, final ModelCallback<League> callback) {
+        return leagueService.RejectChallange(LeagueId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<League>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(League league) {
+                        callback.onSuccess(league);
+                    }
+                });
+    }
 }

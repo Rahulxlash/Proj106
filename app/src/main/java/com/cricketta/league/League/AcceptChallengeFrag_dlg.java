@@ -2,7 +2,6 @@ package com.cricketta.league.League;
 
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,21 +9,31 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cricketta.league.BaseDialogFragment;
 import com.cricketta.league.R;
+import com.cricketta.league.events.LeagueChangeEvent;
+
+import org.greenrobot.eventbus.EventBus;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AcceptChallengeFrag_dlg extends DialogFragment {
+public class AcceptChallengeFrag_dlg extends BaseDialogFragment implements LeagueContract.ChallangeView {
 
     String Title;
     int LeagueId;
-    private Button btnAccept, btnReject;
+    @InjectView(R.id.btnAcceptChallange)
+    Button btnAccept;
+    @InjectView(R.id.btnDeclineChallange)
+    Button btnReject;
+    LeagueChallangePresenter presenter;
 
     public AcceptChallengeFrag_dlg() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,51 +41,20 @@ public class AcceptChallengeFrag_dlg extends DialogFragment {
         Title = getArguments().getString("name");
         LeagueId = getArguments().getInt("id");
         View rootView = inflater.inflate(R.layout.fragment_accept_challenge_frag_dlg, container, false);
-        btnAccept = (Button) rootView.findViewById(R.id.btnAcceptChallange);
-        btnReject = (Button) rootView.findViewById(R.id.btnDeclineChallange);
+        ButterKnife.inject(this, rootView);
+        presenter = new LeagueChallangePresenter(this);
 
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                RestClient client = new RestClient();
-//                client.LeagueService().AcceptChallange(LeagueId, new Callback<League>() {
-//                    @Override
-//                    public void success(League league, Response response) {
-//                        FragmentManager manager = getFragmentManager();
-//                        frag_league_list frag = (frag_league_list) getFragmentManager().findFragmentByTag("Home");
-//                        frag.getUserLeagues(true);
-//                        getDialog().dismiss();
-//                        ((Main_Activity) getActivity()).showToast("League Accepted.");
-//                    }
-//
-//                    @Override
-//                    public void failure(RetrofitError error) {
-//                        ((Main_Activity) getActivity()).showToast("Error occured.");
-//                    }
-//                });
-
+                presenter.AccpetChallange(LeagueId);
             }
         });
 
         btnReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                RestClient client = new RestClient();
-//                client.LeagueService().RejectChallange(LeagueId, new Callback<League>() {
-//                    @Override
-//                    public void success(League league, Response response) {
-//                        FragmentManager manager = getFragmentManager();
-//                        frag_league_list frag = (frag_league_list) getFragmentManager().findFragmentByTag("Home");
-//                        frag.getUserLeagues(true);
-//                        getDialog().dismiss();
-//                        ((Main_Activity) getActivity()).showToast("League Rejected.");
-//                    }
-//
-//                    @Override
-//                    public void failure(RetrofitError error) {
-//                        ((Main_Activity) getActivity()).showToast("Error occured.");
-//                    }
-//                });
+                presenter.RejectChallange(LeagueId);
             }
         });
         TextView textView = (TextView) rootView.findViewById(R.id.title_accept_league);
@@ -85,4 +63,15 @@ public class AcceptChallengeFrag_dlg extends DialogFragment {
         return rootView;
     }
 
+    @Override
+    public void hideView() {
+        getDialog().dismiss();
+        EventBus.getDefault().post(new LeagueChangeEvent());
+    }
+
+    @Override
+    public void onError(String message) {
+        super.onError(message);
+        showToast("An Error occured..");
+    }
 }

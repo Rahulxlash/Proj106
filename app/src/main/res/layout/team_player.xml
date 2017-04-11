@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
-
-
     <data>
-
         <import type="android.view.View" />
-
         <variable
             name="player"
             type="REST.ViewModel.ScoreCard" />
@@ -17,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-
         card_view:cardBackgroundColor="#913a67">
 
         <RelativeLayout
@@ -28,7 +23,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true">
 
@@ -36,6 +31,7 @@
                     android:id="@+id/player_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:text="@{String.valueOf(player.name)}"
                     android:textColor="#ffff"
                     android:textSize="15sp">
@@ -48,6 +44,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/prof_ico_1">
 
             </ImageView>
@@ -68,7 +65,7 @@
                     android:id="@+id/wicket_player"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginTop="0dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/cricket_wicket_white"
                     android:visibility="@{player.keeper ? View.VISIBLE: View.GONE}" />
 
@@ -77,7 +74,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="0dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/cap"
                     android:visibility="@{player.captain ? View.VISIBLE: View.GONE}" />
 
@@ -85,7 +82,7 @@
                     android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_marginTop="00dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/tennis_ball"
                     android:visibility="@{player.bowl ? View.VISIBLE: View.GONE}" />
 
@@ -93,7 +90,7 @@
                     android:id="@+id/bat_player"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginTop="00dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/cricket_bat_white2"
                     android:visibility="@{player.bat ? View.VISIBLE: View.GONE}" />
             </LinearLayout>

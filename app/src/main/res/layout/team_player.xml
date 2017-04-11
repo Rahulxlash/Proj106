@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
 
-        card_view:cardBackgroundColor="@color/matchCardColor">
+        card_view:cardBackgroundColor="#913a67">
 
         <RelativeLayout
             android:layout_width="match_parent"

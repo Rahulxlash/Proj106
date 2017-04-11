@@ -6,8 +6,9 @@
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
+        android:id="@+id/relativeLayout_Respond_request"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="90dp"
         android:background="@color/windowBackground">
 
 
@@ -16,48 +17,40 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_alignParentTop="true"
-            android:background="#3e4143"
+            android:background="@color/colorAccent"
             android:paddingLeft="10dp"
             android:textColor="#27eaf1"
             android:textSize="20dp" />
 
-        <Button
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+
+            <Button
             android:id="@+id/btnAcceptChallange"
-            android:layout_width="wrap_content"
+                android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="27dp"
-            android:layout_marginEnd="26dp"
-            android:layout_toStartOf="@+id/btnDeclineChallange"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
             android:background="#3884cf"
             android:drawableLeft="@drawable/thumbs_up"
             android:text="Accept" />
 
-        <Button
-            android:id="@+id/btnDeclineChallange"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_alignBottom="@+id/btnAcceptChallange"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/btnAcceptChallange"
-            android:layout_marginEnd="50dp"
-            android:layout_marginLeft="10dp"
-            android:background="#3884cf"
-            android:drawableLeft="@drawable/thumbs_down"
-            android:text="Decline" />
-
-        <TextView
-            android:id="@+id/respondrequest"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/title_accept_league"
-            android:background="@color/windowBackground"
-            android:text="Respond Request"
-            android:textAlignment="center"
-            android:textColor="#ffff"
-            android:textSize="15dp" />
-
-
+            <Button
+                android:id="@+id/btnDeclineChallange"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="#3884cf"
+                android:drawableLeft="@drawable/thumbs_down"
+                android:text="Decline" />
+        </LinearLayout>
     </RelativeLayout>
 </FrameLayout>

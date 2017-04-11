@@ -13,12 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        card_view:cardBackgroundColor="#e97bb4">
+        card_view:cardBackgroundColor="#d25e9a">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="2dp"
             android:padding="2dp">
 
             <LinearLayout
@@ -48,7 +47,6 @@
                 android:src="@drawable/prof_ico_1">
 
             </ImageView>
-
 
             <LinearLayout
                 android:id="@+id/linearLayout"

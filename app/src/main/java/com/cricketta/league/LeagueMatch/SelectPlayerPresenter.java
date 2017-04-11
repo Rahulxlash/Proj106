@@ -36,7 +36,7 @@ public class SelectPlayerPresenter implements MatchContract.PlayerSelectPresente
         subscription.add(matchModel.addPlayer(MatchId, PlayerId, new ModelCallback<ScoreCard>() {
             @Override
             public void onSuccess(ScoreCard response) {
-                EventBus.getDefault().post(new PlayerSelectedEvent(PlayerId, MatchId, 0, AuthModel.UserId));
+                EventBus.getDefault().post(new PlayerSelectedEvent(PlayerId, MatchId, 0, AuthModel.UserId, response));
                 view.closeView(response);
             }
 

@@ -87,7 +87,7 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
         presenter.getAllPlayers(leagueMatch.leagueMatchId);
 
         txtMatchDate.setText(leagueMatch.getMatchDate());
-        txtVenue.setText(leagueMatch.venue);
+        txtVenue.setText(leagueMatch.venue.trim());
         recyclerMyTeam.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerCompTeam.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +113,7 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
     }
 
     @UiThread
-    public ScoreCard updatePlayerList(int PlayerId, int userId) {
+    public ScoreCard updatePlayerList(int PlayerId, int userId, ScoreCard scoreCard) {
         Iterator<Player> it = presenter.players.iterator();
         while (it.hasNext()) {
             Player pl = it.next();
@@ -127,6 +127,7 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
                 card.captain = pl.captain;
                 card.photo = pl.photo;
                 card.userId = userId;
+                card.isExtra = scoreCard.isExtra;
                 if (userId == AuthModel.UserId) {
                     myTeamcount++;
                     presenter.myTeamPlayers.add(card);
@@ -149,6 +150,13 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
                     btnAdd.setEnabled(true);
                 else
                     btnAdd.setEnabled(false);
+                if (leagueMatch.toss == AuthModel.UserId && compTeamCount == myTeamcount)
+                    btnAdd.setEnabled(true);
+                if (myTeamcount == 7 && compTeamCount == 7) {
+                    showToast("Team selection done...");
+                    btnAdd.setEnabled(false);
+                }
+
                 return card;
             }
         }
@@ -171,7 +179,10 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
             btnAdd.setEnabled(true);
         else
             btnAdd.setEnabled(false);
-
+        if (myTeamcount == 7 && compTeamCount == 7) {
+            showToast("Team selection done...");
+            btnAdd.setEnabled(false);
+        }
         if (leagueMatch.toss == AuthModel.UserId && compTeamCount == myTeamcount)
             btnAdd.setEnabled(true);
     }
@@ -179,7 +190,7 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(PlayerSelectedEvent event) {
         if (event.matchId == leagueMatch.leagueMatchId) {
-            ScoreCard card = updatePlayerList(event.playerId, event.userId);
+            ScoreCard card = updatePlayerList(event.playerId, event.userId, event.card);
             if (event.userId == AuthModel.UserId)
                 showToast(card.name.trim() + " added to team.");
             else

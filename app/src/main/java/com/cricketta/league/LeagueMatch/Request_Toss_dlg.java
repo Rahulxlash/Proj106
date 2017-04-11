@@ -12,8 +12,10 @@ import android.widget.TextView;
 
 import com.cricketta.league.BaseActivity;
 import com.cricketta.league.BaseDialogFragment;
-import com.cricketta.league.Main.Main_Activity;
 import com.cricketta.league.R;
+import com.cricketta.league.events.TossEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import REST.Model.AuthModel;
 import REST.ViewModel.LeagueMatch;
@@ -105,7 +107,7 @@ public class Request_Toss_dlg extends BaseDialogFragment implements MatchContrac
         btnHead.setEnabled(false);
         btnTail.setEnabled(false);
         this.tossOption = tossOption;
-        presenter.doToss(match.matchId, tossOption);
+        presenter.doToss(match.leagueMatchId, tossOption);
     }
 
     @Override
@@ -126,11 +128,6 @@ public class Request_Toss_dlg extends BaseDialogFragment implements MatchContrac
         txtResult.setVisibility(View.VISIBLE);
         anim.end();
 
-        SelectTeam_frag frag = new SelectTeam_frag();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("match", match);
-        frag.setArguments(bundle);
-        ((Main_Activity) getActivity()).showFragment(frag, "SelectTeam", true, false);
-        getDialog().dismiss();
+        EventBus.getDefault().post(new TossEvent(match.leagueMatchId));
     }
 }

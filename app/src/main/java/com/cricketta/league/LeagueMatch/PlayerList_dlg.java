@@ -41,6 +41,7 @@ public class PlayerList_dlg extends BaseDialogFragment implements MatchContract.
 
     public PlayerList_dlg() {
         // Required empty public constructor
+        this.setStyle(STYLE_NO_TITLE, 0);
     }
 
     @Override
@@ -85,7 +86,7 @@ public class PlayerList_dlg extends BaseDialogFragment implements MatchContract.
 
     @Override
     public void closeView(ScoreCard card) {
-        SelectTeam_frag frag = (SelectTeam_frag) getFragmentManager().findFragmentByTag("selectTeam");
+        //SelectTeam_frag frag = (SelectTeam_frag) getFragmentManager().findFragmentByTag("selectTeam");
         //frag.presenter.getAllPlayers(matchId);
         getDialog().dismiss();
     }

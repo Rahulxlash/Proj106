@@ -21,8 +21,7 @@
             <ImageButton
                 android:id="@+id/imagebutton_me"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="160dp" />
+                android:layout_height="wrap_content" />
 
             <ImageButton
                 android:id="@+id/wicketYellow_imagebutton"
@@ -55,8 +54,7 @@
             <ImageButton
                 android:id="@+id/imagebutton_competitor"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="160dp">
+                android:layout_height="wrap_content">
 
             </ImageButton>
         </LinearLayout>
@@ -65,7 +63,6 @@
             android:id="@+id/playerList_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_weight="1"
             android:background="@color/windowBackground">
 

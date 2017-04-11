@@ -33,6 +33,7 @@ public class AcceptChallengeFrag_dlg extends BaseDialogFragment implements Leagu
 
     public AcceptChallengeFrag_dlg() {
         // Required empty public constructor
+        this.setStyle(STYLE_NO_TITLE, 0);
     }
 
     @Override

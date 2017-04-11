@@ -5,144 +5,126 @@
     android:layout_height="match_parent"
     tools:context="com.cricketta.league.LeagueMatch.SelectTeam_frag">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/linearLayout_selectTeam"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/matchCardColor">
+        android:background="@color/matchCardColor"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/teamProfile_Image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/imageView_team1"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignTop="@+id/imageView_team2"
-                android:layout_marginEnd="28dp"
-                android:layout_marginRight="28dp"
-                android:layout_toLeftOf="@+id/imageView_team2"
-                android:layout_toStartOf="@+id/imageView_team2"
-                android:paddingTop="10dp"
-                android:src="@drawable/thumbs_down" />
-
-            <ImageView
-                android:id="@+id/imageView_team2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="253dp"
-                android:layout_marginRight="253dp"
-                android:layout_marginTop="22dp"
-                android:paddingTop="10dp"
-                app:srcCompat="@drawable/coin" />
-        </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/Date_venu_layout"
+            android:id="@+id/teamProfile_Image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/teamProfile_Image">
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
             <TextView
                 android:id="@+id/Date_Of_Match"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:text="Date"
+                android:textAlignment="center"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView_team1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/thumbs_down" />
+
+                <ImageView
+                    android:id="@+id/imageView_team2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_toRightOf="@+id/imageView_team1"
+                    app:srcCompat="@drawable/coin" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/venu_of_match"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:paddingLeft="90dp"
-                android:text="Venu"
+                android:ellipsize="end"
+                android:text="Venusdkfasdasfsdfsdfsdfsdfb sdjf jsdfh "
                 android:textAlignment="center"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
+
         </LinearLayout>
-
-        <RelativeLayout
-            android:id="@+id/competitor_me_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/Date_venu_layout"
-            android:layout_marginTop="19dp">
-
-
-            <TextView
-                android:id="@+id/text_competitor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="80dp"
-                android:layout_marginTop="5dp"
-                android:paddingBottom="2dp"
-                android:paddingRight="20dp"
-                android:text="Competitor"
-                android:textColor="#fff"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/me_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="62dp"
-                android:layout_marginStart="62dp"
-                android:paddingLeft="15dp"
-                android:text="Me"
-                android:textColor="#fff"
-                android:textSize="20dp" />
-
-            <ImageButton
-                android:id="@+id/btnAdd"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignTop="@+id/me_text"
-                android:layout_marginTop="2dp"
-                android:layout_toEndOf="@+id/me_text"
-                android:layout_toRightOf="@+id/me_text"
-                android:background="@color/matchCardColor"
-                app:srcCompat="@drawable/plus_outline">
-
-            </ImageButton>
-
-        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/competitor_me_layout"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/teamProfile_Image"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/my_team"
+            <LinearLayout
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                android:layout_height="match_parent"
-                android:layout_weight="0.92">
+                <TextView
+                    android:id="@+id/me_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Me"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="15dp" />
 
-            </android.support.v7.widget.RecyclerView>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/my_team"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/comp_team"
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            </android.support.v7.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/text_competitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Competitor"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="15dp" />
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/comp_team"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+            </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
 
-    </RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/plus_outline" />
 </FrameLayout>

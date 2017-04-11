@@ -4,6 +4,7 @@ import com.cricketta.league.CricApplication;
 import com.cricketta.league.ModelCallback;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.inject.Inject;
 
@@ -36,6 +37,30 @@ public class LeagueMatchesPresenter implements LeagueContract.MatchListPresenter
             public void onSuccess(ArrayList<LeagueMatch> response) {
                 view.hideProgress();
                 view.showMatches(response);
+            }
+
+            @Override
+            public void onError(String networkError) {
+                view.onError(networkError);
+            }
+        });
+        subscriptions.add(s);
+    }
+
+    public void loadLeagueMatchesGoTeamSelection(int LeagueId, final int LeagueMatchId) {
+        view.showProgress("Loading....");
+        Subscription s = leagueModel.getLeagueMatches(LeagueId, new ModelCallback<ArrayList<LeagueMatch>>() {
+            @Override
+            public void onSuccess(ArrayList<LeagueMatch> response) {
+                view.hideProgress();
+                view.showMatches(response);
+                Iterator<LeagueMatch> it = response.iterator();
+                while (it.hasNext()) {
+                    LeagueMatch match = it.next();
+                    if (match.leagueMatchId == LeagueMatchId) {
+                        view.showSelectPlayer(match);
+                    }
+                }
             }
 
             @Override

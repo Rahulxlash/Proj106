@@ -19,6 +19,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import REST.ViewModel.ScoreCard;
+
 /**
  * Created by rahul.sharma01 on 3/27/2017.
  */
@@ -70,8 +72,11 @@ public class MessagingService extends FirebaseMessagingService {
                 int playerId = requestData.getInt("playerId");
                 int leagueMatchId = requestData.getInt("leagueMatchId");
                 int userId = requestData.getInt("userId");
+                boolean extra = requestData.getBoolean("isExtra");
+                ScoreCard card = new ScoreCard();
+                card.isExtra = extra;
 
-                EventBus.getDefault().post(new PlayerSelectedEvent(playerId, leagueMatchId, 0, userId));
+                EventBus.getDefault().post(new PlayerSelectedEvent(playerId, leagueMatchId, 0, userId, card));
             }
 
         } catch (JSONException e) {

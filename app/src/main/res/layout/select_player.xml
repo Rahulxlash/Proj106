@@ -14,7 +14,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardview"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_margin="2dp"
         card_view:cardBackgroundColor="@color/matchCardColor">
 
@@ -26,8 +26,8 @@
 
             <ImageView
                 android:id="@+id/img_user_team_select"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/prof_ico_1">
 
             </ImageView>
@@ -55,43 +55,39 @@
                 android:layout_height="40dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:gravity="right"
+                android:gravity="end"
                 android:orientation="horizontal"
-                android:paddingLeft="25dp"
-                android:weightSum="4">
+                android:paddingLeft="25dp">
 
                 <ImageView
                     android:id="@+id/wicket_player"
-                    android:layout_width="0dp"
+                    android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
+                    android:layout_margin="10dp"
                     android:src="@drawable/cricket_wicket_white"
                     android:visibility="@{player.keeper ? View.VISIBLE: View.GONE}" />
 
                 <ImageView
                     android:id="@+id/cap_image"
-                    android:layout_width="0dp"
+                    android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
+                    android:layout_margin="10dp"
                     android:src="@drawable/cap"
                     android:visibility="@{player.captain ? View.VISIBLE: View.GONE}" />
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_margin="10dp"
                     android:src="@drawable/tennis_ball"
                     android:visibility="@{player.bowl ? View.VISIBLE: View.GONE}" />
 
                 <ImageView
                     android:id="@+id/bat_player"
-                    android:layout_width="0dp"
+                    android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
+                    android:layout_margin="10dp"
                     android:src="@drawable/cricket_bat_white2"
                     android:visibility="@{player.bat ? View.VISIBLE: View.GONE}" />
             </LinearLayout>

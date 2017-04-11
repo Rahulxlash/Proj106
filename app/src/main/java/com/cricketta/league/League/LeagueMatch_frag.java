@@ -15,6 +15,11 @@ import com.cricketta.league.LeagueMatch.SelectTeam_frag;
 import com.cricketta.league.Listener.LeagueListener;
 import com.cricketta.league.Main.Main_Activity;
 import com.cricketta.league.R;
+import com.cricketta.league.events.TossEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -36,6 +41,7 @@ public class LeagueMatch_frag extends BaseFragment implements LeagueContract.Mat
     private LeagueMatchesPresenter presenter;
 
     public LeagueMatch_frag() {
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -112,5 +118,15 @@ public class LeagueMatch_frag extends BaseFragment implements LeagueContract.Mat
         ((Main_Activity) getActivity()).showFragment(fragment, "player", true, true);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(TossEvent event) {
+        presenter.loadLeagueMatchesGoTeamSelection(league.leagueId, event.LeagueMatchId);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().unregister(this);
+    }
 }
 

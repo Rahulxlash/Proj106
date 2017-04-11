@@ -69,9 +69,7 @@ public class LeagueMatch_frag extends BaseFragment implements LeagueContract.Mat
             }
         });
         presenter.loadLeagueMatches(league.leagueId);
-        ((Main_Activity) getActivity()).showToast("yo yo");
         return rootView;
-
     }
 
     private void onItemsLoadComplete() {

@@ -240,7 +240,6 @@ public class Main_Activity extends BaseActivity
     @Subscribe
     public void onMessageEvent(LoginEvent event) {/* Do something */}
 
-    ;
 }
 
 

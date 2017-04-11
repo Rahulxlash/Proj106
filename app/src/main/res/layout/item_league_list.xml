@@ -77,9 +77,8 @@
 
                     <TextView
                         android:id="@+id/matchTeam"
-                        android:layout_width="60dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0"
                         android:text="KKR-KXIP"
                         android:textAlignment="center"
                         android:textSize="12sp"

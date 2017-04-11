@@ -2,9 +2,11 @@ package com.cricketta.league.LeagueMatch;
 
 
 import android.os.Bundle;
+import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Iterator;
 
@@ -60,6 +63,7 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
     ScoreCardViewAdapter myTeamAdapter;
     ScoreCardViewAdapter compTeamAdapter;
     SelectTeamPresenter presenter;
+    int myTeamcount = 0, compTeamCount = 0;
     private LeagueMatch leagueMatch;
 
     public SelectTeam_frag() {
@@ -108,6 +112,7 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
         fragment.show(getFragmentManager(), "selectPlayer");
     }
 
+    @UiThread
     public ScoreCard updatePlayerList(int PlayerId, int userId) {
         Iterator<Player> it = presenter.players.iterator();
         while (it.hasNext()) {
@@ -123,13 +128,27 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
                 card.photo = pl.photo;
                 card.userId = userId;
                 if (userId == AuthModel.UserId) {
+                    myTeamcount++;
                     presenter.myTeamPlayers.add(card);
+                    if (myTeamAdapter == null) {
+                        myTeamAdapter = new ScoreCardViewAdapter(presenter.myTeamPlayers);
+                        recyclerMyTeam.setAdapter(myTeamAdapter);
+                    }
                     myTeamAdapter.notifyItemInserted(presenter.myTeamPlayers.size() - 1);
                 } else {
+                    compTeamCount++;
                     presenter.compTeamPlayers.add(card);
+                    if (compTeamAdapter == null) {
+                        compTeamAdapter = new ScoreCardViewAdapter(presenter.compTeamPlayers);
+                        recyclerCompTeam.setAdapter(compTeamAdapter);
+                    }
                     compTeamAdapter.notifyItemInserted(presenter.compTeamPlayers.size() - 1);
                 }
                 it.remove();
+                if (compTeamCount > myTeamcount)
+                    btnAdd.setEnabled(true);
+                else
+                    btnAdd.setEnabled(false);
                 return card;
             }
         }
@@ -139,23 +158,33 @@ public class SelectTeam_frag extends BaseFragment implements MatchContract.TeamS
     @Override
     public void showTeam() {
         if (!presenter.myTeamPlayers.isEmpty()) {
+            myTeamcount = presenter.myTeamPlayers.size();
             myTeamAdapter = new ScoreCardViewAdapter(presenter.myTeamPlayers);
             recyclerMyTeam.setAdapter(myTeamAdapter);
         }
         if (!presenter.compTeamPlayers.isEmpty()) {
+            compTeamCount = presenter.compTeamPlayers.size();
             compTeamAdapter = new ScoreCardViewAdapter(presenter.compTeamPlayers);
             recyclerCompTeam.setAdapter(compTeamAdapter);
         }
+        if (compTeamCount > myTeamcount)
+            btnAdd.setEnabled(true);
+        else
+            btnAdd.setEnabled(false);
+
+        if (leagueMatch.toss == AuthModel.UserId && compTeamCount == myTeamcount)
+            btnAdd.setEnabled(true);
     }
 
-    @Subscribe
-    public void onMessageEvent(PlayerSelectedEvent event) {
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(PlayerSelectedEvent event) {
         if (event.matchId == leagueMatch.leagueMatchId) {
-            ScoreCard carx = updatePlayerList(event.playerId, event.userId);
+            ScoreCard card = updatePlayerList(event.playerId, event.userId);
             if (event.userId == AuthModel.UserId)
-                showToast(carx.name.trim() + " added to team.");
+                showToast(card.name.trim() + " added to team.");
             else
-                showToast(carx.name.trim() + " choosen by competitor.");
+                showToast(card.name.trim() + " choosen by competitor.");
+            Log.d("retro", "Added " + event.playerId);
         }
     }
 

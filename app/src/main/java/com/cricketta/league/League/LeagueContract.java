@@ -60,4 +60,14 @@ public interface LeagueContract {
         void showScoreCard(LeagueMatch match);
     }
 
+    public interface ChallangeView extends BaseView {
+        void hideView();
+    }
+
+    public interface ChallangePresenter extends BasePresenter {
+        void AccpetChallange(int LeagueId);
+
+        void RejectChallange(int LeagueId);
+    }
+
 }

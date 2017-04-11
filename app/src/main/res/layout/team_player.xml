@@ -13,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        card_view:cardBackgroundColor="#913a67">
+        card_view:cardBackgroundColor="#e97bb4">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:padding="2dp">
 
             <LinearLayout
